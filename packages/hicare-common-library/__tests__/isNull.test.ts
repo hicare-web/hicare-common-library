@@ -1,4 +1,4 @@
-import { isNull as _isNull } from 'lib/utility/internal/isNull';
+import { isNull as _isNull } from 'lib/utility/isNull';
 import { describe, expect, it } from 'vitest';
 
 describe('isNull', () => {
