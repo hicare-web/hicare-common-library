@@ -1,6 +1,5 @@
 import { isNull as _isNull } from 'lib/utility/internal/isNull';
-import { describe, it } from 'node:test';
-import { expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 describe('isNull', () => {
     it('should return true if the value is null', () => {

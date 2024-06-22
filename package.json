@@ -9,10 +9,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start:vite-common": "lerna run --scope vite-common storybook --stream",
-        "build:vite-common": "lerna run --scope vite-common build --stream",
-        "test:vite-common": "lerna run --scope vite-common test --stream",
-        "start:vite-body": "lerna run --scope vite-body storybook --stream",
+        "test": "lerna run test --stream",
         "build": "lerna run build --stream",
         "gen": "node ./bin/create.js"
     },
