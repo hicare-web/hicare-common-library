@@ -10,3 +10,5 @@ pw : hicare228@@
 
 ## 확인
 pnpm whoami 입력 후 hicare 가 나오면 로그인 성공
+
+
