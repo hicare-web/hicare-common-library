@@ -134,3 +134,15 @@ dist
 build/
 coverage/
 .DS_Store
+/.idea/.gitignore
+/.idea/codeStyles/codeStyleConfig.xml
+/packages/hicare-common-library/.nx/workspace-data/file-map.json
+/.idea/git_toolbox_prj.xml
+/.idea/modules.xml
+/packages/hicare-napi/.idea/napi.iml
+/pnpm-lock.yaml
+/.idea/codeStyles/Project.xml
+/packages/hicare-common-library/.nx/workspace-data/project-graph.json
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/rpm-package-library.iml
+/.idea/vcs.xml

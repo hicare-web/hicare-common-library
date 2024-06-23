@@ -17,6 +17,6 @@
   },
   "publishConfig": {
     "registry": "https://hub.docker.rpm.hicare.net/npm",
-    "access": "restricted"
+    "access": "public"
   }
 }
