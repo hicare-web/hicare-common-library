@@ -1,11 +1,11 @@
-# `@packages/hicare-common-library`
+# `@hicare/hicare-common-library`
 
 > TODO: description
 
 ## Usage
 
 ```
-const hicareCommonLibrary = require('@packages/hicare-common-library');
+const hicareCommonLibrary = require('@hicare/hicare-common-library');
 
 // TODO: DEMONSTRATE API
 ```

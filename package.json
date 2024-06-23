@@ -10,14 +10,16 @@
     "type": "module",
     "scripts": {
         "test": "lerna run test --stream",
-        "build": "lerna run build --stream",
+        "build": "lerna run build",
         "gen": "node ./bin/create.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
+    "packageManager": "pnpm@9.1.0",
     "publishConfig": {
-
+        "registry": "https://hub.docker.rpm.hicare.net/npm",
+        "access": "restricted"
     },
     "devDependencies": {
         "commander": "12.1.0",

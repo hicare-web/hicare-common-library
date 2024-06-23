@@ -1,0 +1,41 @@
+[package]
+edition = "2021"
+name = "hicare-napi_backend_napi"
+version = "0.0.1"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
+napi = { version = "2.16.6", default-features = false, features = ["napi9", "serde", "serde-json", "serde_json"] }
+napi-derive = { version = "2.16.5" }
+
+# pbkdf2
+pbkdf2 = { version = "0.13.0-pre.0", features = ["sha1", "simple"] }
+sha1 = { version = "0.11.0-pre.3" }
+# pbkdf2
+
+# aes256cbc
+cbc = { version = "0.1.2", features = ["block-padding"] }
+aes = { version = "0.8.4" }
+md5 = { version = "0.7.0" }
+block-padding = { version = "0.3.3" }
+# aes256cbc
+
+#base64
+base64-simd = { version = "0.8.0" }
+#base64
+
+#json
+serde = { version = "1.0.203", features = ['derive'] }
+serde_json = { version = "1.0.117" }
+once_cell = "1.19.0"
+#json
+
+[build-dependencies]
+napi-build = { version = "2.1.3" }
+
+[profile.release]
+lto = true
+strip = "symbols"

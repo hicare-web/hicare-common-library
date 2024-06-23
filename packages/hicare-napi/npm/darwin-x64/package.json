@@ -1,0 +1,22 @@
+{
+  "name": "@hicare/backend_napi-darwin-x64",
+  "version": "0.0.1",
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "backend_napi.darwin-x64.node",
+  "files": [
+    "backend_napi.darwin-x64.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "publishConfig": {
+    "registry": "https://hub.docker.rpm.hicare.net/npm",
+    "access": "restricted"
+  }
+}
