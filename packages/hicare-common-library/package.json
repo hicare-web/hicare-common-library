@@ -43,5 +43,6 @@
   "types": "./dist/hicare-common-library.d.ts",
   "devDependencies": {
     "root": "file:../../"
-  }
+  },
+  "gitHead": "9fd8744fe649d56d998ac87abd7592b14cbf86de"
 }
