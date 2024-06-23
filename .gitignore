@@ -140,7 +140,6 @@ coverage/
 /.idea/git_toolbox_prj.xml
 /.idea/modules.xml
 /packages/hicare-napi/.idea/napi.iml
-/pnpm-lock.yaml
 /.idea/codeStyles/Project.xml
 /packages/hicare-common-library/.nx/workspace-data/project-graph.json
 /.idea/inspectionProfiles/Project_Default.xml
