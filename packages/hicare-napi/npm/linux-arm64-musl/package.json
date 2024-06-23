@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi-linux-arm64-gnu",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "os": [
     "linux"
   ],
@@ -20,6 +20,6 @@
   ],
   "publishConfig": {
     "registry": "https://hub.docker.rpm.hicare.net/npm",
-    "access": "public"
+    "access": "restricted"
   }
 }

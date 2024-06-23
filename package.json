@@ -19,7 +19,7 @@
     "packageManager": "pnpm@9.1.0",
     "publishConfig": {
         "registry": "https://hub.docker.rpm.hicare.net/npm",
-        "access": "public"
+        "access": "restricted"
     },
     "devDependencies": {
         "commander": "12.1.0",
