@@ -1,15 +1,15 @@
 {
-  "name": "@hicare/backend_napi-linux-arm64-gnu",
-  "version": "0.0.2",
+  "name": "@hicare/backend_napi-linux-arm64-musl",
+  "version": "0.0.8",
   "os": [
     "linux"
   ],
   "cpu": [
     "arm64"
   ],
-  "main": "backend_napi.linux-arm64-gnu.node",
+  "main": "backend_napi.linux-arm64-musl.node",
   "files": [
-    "backend_napi.linux-arm64-gnu.node"
+    "backend_napi.linux-arm64-musl.node"
   ],
   "license": "MIT",
   "engines": {
@@ -20,6 +20,6 @@
   ],
   "publishConfig": {
     "registry": "https://hub.docker.rpm.hicare.net/npm",
-    "access": "public"
+    "access": "restricted"
   }
 }

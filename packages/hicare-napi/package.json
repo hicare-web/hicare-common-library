@@ -1,11 +1,12 @@
 {
   "name": "@hicare/backend_napi",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typings": "./dist/index.d.ts",
   "files": [
-    "dist/**/*"
+    "index.js",
+    "index.d.ts"
   ],
   "napi": {
     "binaryName": "hicare_napi",
@@ -21,7 +22,7 @@
   },
   "publishConfig": {
     "registry": "https://hub.docker.rpm.hicare.net/npm",
-    "access": "public"
+    "access": "restricted"
   },
   "license": "MIT",
   "devDependencies": {
@@ -39,18 +40,19 @@
     "artifacts": "napi artifacts",
     "build": "node bin/napiBuild.mjs",
     "build:debug": "napi build --platform",
-    "prepublishOnly": "napi prepublish -t npm",
+    "prepublishOnly": "napi prepublish",
     "test": "ava",
     "universal": "napi universal",
     "version": "napi version"
   },
   "optionalDependencies": {
-    "@hicare/backend_napi-darwin-arm64": "0.0.1",
-    "@hicare/backend_napi-darwin-x64": "0.0.1",
-    "@hicare/backend_napi-linux-arm64-gnu": "0.0.1",
-    "@hicare/backend_napi-linux-arm64-musl": "0.0.1",
-    "@hicare/backend_napi-linux-x64-gnu": "0.0.1",
-    "@hicare/backend_napi-linux-x64-musl": "0.0.1",
-    "@hicare/backend_napi-win32-x64-msvc": "0.0.1"
-  }
+    "@hicare/backend_napi-darwin-arm64": "0.0.7",
+    "@hicare/backend_napi-darwin-x64": "0.0.7",
+    "@hicare/backend_napi-linux-arm64-gnu": "0.0.7",
+    "@hicare/backend_napi-linux-arm64-musl": "0.0.7",
+    "@hicare/backend_napi-linux-x64-gnu": "0.0.7",
+    "@hicare/backend_napi-linux-x64-musl": "0.0.7",
+    "@hicare/backend_napi-win32-x64-msvc": "0.0.7"
+  },
+  "gitHead": "fceeb335dbb8b842f8c0da3be464024506932791"
 }

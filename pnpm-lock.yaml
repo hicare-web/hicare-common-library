@@ -79,6 +79,16 @@ importers:
         version: 'file:'
 
   packages/hicare-napi:
+    optionalDependencies:
+      '@hicare/backend_napi-linux-arm64-gnu':
+        specifier: 0.0.7
+        version: 0.0.7
+      '@hicare/backend_napi-linux-x64-gnu':
+        specifier: 0.0.7
+        version: 0.0.7
+      '@hicare/backend_napi-linux-x64-musl':
+        specifier: 0.0.7
+        version: 0.0.7
     devDependencies:
       '@napi-rs/cli':
         specifier: 3.0.0-alpha.55
@@ -328,6 +338,24 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@hicare/backend_napi-linux-arm64-gnu@0.0.7':
+    resolution: {integrity: sha512-hVnzDnqeP/5agiJkKP8LgggkLe+hYZ8b5tlRoSlaS+DvWBACgAmcfpEUJu1DYLUd47qYD33PYqRsDm7lNUaJeQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@hicare/backend_napi-linux-x64-gnu@0.0.7':
+    resolution: {integrity: sha512-8X46WpdyP3VIQbCf/0dc4UNMYFns3RgpeaXnLW7E0J6jUAxJ5h/AvzmfySxlF0iJQi8tjRztY+P1D4+W64mtBg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@hicare/backend_napi-linux-x64-musl@0.0.7':
+    resolution: {integrity: sha512-JwGYBJu6PwIIOdvqm5XWA2rbQVV24nJ8d/Ri2LeWh3JnPsKuZ68adltWpjCoCv9EebVmYphxSHrVGLu0sQpE8g==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -5153,6 +5181,15 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@hicare/backend_napi-linux-arm64-gnu@0.0.7':
+    optional: true
+
+  '@hicare/backend_napi-linux-x64-gnu@0.0.7':
+    optional: true
+
+  '@hicare/backend_napi-linux-x64-musl@0.0.7':
+    optional: true
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:

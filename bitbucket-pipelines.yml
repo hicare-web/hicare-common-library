@@ -9,3 +9,11 @@ definitions:
         node: node_modules
     steps:
         - step: &napi_build
+
+pipelines:
+    branches:
+        none:
+            - step:
+                  name: branch
+                  script:
+                      - echo 'branch section'

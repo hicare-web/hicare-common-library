@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi-win32-x64-msvc",
-  "version": "0.0.2",
+  "version": "0.0.8",
   "os": [
     "win32"
   ],
@@ -17,6 +17,6 @@
   },
   "publishConfig": {
     "registry": "https://hub.docker.rpm.hicare.net/npm",
-    "access": "public"
+    "access": "restricted"
   }
 }
