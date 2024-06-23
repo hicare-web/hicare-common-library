@@ -1,11 +1,11 @@
-image: hub.docker.rpm.hicare.net/napi-builder
-
-clone:
-    depth: full
-
-definitions:
-    caches:
-        pnpm: $BITBUCKET_CLONE_DIR/.pnpm-store
-        node: node_modules
-    steps:
-        - step: &napi_build
+#image: hub.docker.rpm.hicare.net/napi-builder
+#
+#clone:
+#    depth: full
+#
+#definitions:
+#    caches:
+#        pnpm: $BITBUCKET_CLONE_DIR/.pnpm-store
+#        node: node_modules
+#    steps:
+#        - step: &napi_build

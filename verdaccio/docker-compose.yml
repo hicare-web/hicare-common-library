@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+    verdaccio:
+        image: hub.docker.rpm.hicare.net/verdaccio
+        container_name: verdaccio
+        restart: always
+        environment:
+            - VERDACCIO_PORT=4873
+        ports:
+            - "15001:4873"
+        volumes:
+            - storage:/verdaccio/storage
+        networks:
+            - verdaccio_bridge
+
+volumes:
+    storage:
+
+networks:
+    verdaccio_bridge:
+        driver: bridge
