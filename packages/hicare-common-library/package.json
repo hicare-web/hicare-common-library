@@ -14,11 +14,11 @@
         "lib"
     ],
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
+        "registry":"https://npm.pkg.github.com/"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library"
+        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library.git"
     },
     "scripts": {
         "dev": "vite --host",
@@ -44,5 +44,5 @@
     "devDependencies": {
         "root": "file:../../"
     },
-    "gitHead": "20a15d3b0c3a3de65bfa830b9a26c95e577e15ef"
+    "gitHead": "a752450a1c1e77e9a29a184af714179fb7cf7cce"
 }

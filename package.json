@@ -17,12 +17,13 @@
     "license": "ISC",
     "packageManager": "pnpm@9.1.0",
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
+        "registry":"https://npm.pkg.github.com/"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library"
+        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library.git"
     },
+    "homepage": "git+https://bitbucket.org/hicarenet/rpm-package-library#readme",
     "devDependencies": {
         "commander": "12.1.0",
         "degit": "^2.8.4",

@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi-darwin-arm64",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "os": [
     "darwin"
   ],
@@ -16,10 +16,11 @@
     "node": ">= 10"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry":"https://npm.pkg.github.com/"
   },
+    "homepage": "git+https://bitbucket.org/hicarenet/rpm-package-library#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/hicarenet/rpm-package-library"
+    "url": "git+https://bitbucket.org/hicarenet/rpm-package-library.git"
   }
 }
