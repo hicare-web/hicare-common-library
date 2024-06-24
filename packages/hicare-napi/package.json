@@ -1,9 +1,9 @@
 {
   "name": "@hicare-web/backend_napi",
   "version": "0.0.34",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "typings": "./dist/index.d.ts",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "typings": "./index.d.ts",
   "files": [
     "index.js",
     "index.d.ts"
