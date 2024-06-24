@@ -45,13 +45,13 @@
     "version": "napi version"
   },
   "optionalDependencies": {
-    "@hicare/backend_napi-darwin-arm64": "0.0.9",
-    "@hicare/backend_napi-darwin-x64": "0.0.9",
-    "@hicare/backend_napi-linux-arm64-gnu": "0.0.9",
-    "@hicare/backend_napi-linux-arm64-musl": "0.0.9",
-    "@hicare/backend_napi-linux-x64-gnu": "0.0.9",
-    "@hicare/backend_napi-linux-x64-musl": "0.0.9",
-    "@hicare/backend_napi-win32-x64-msvc": "0.0.9"
+    "@hicare/backend_napi-linux-x64-gnu": "0.0.10",
+    "@hicare/backend_napi-linux-x64-musl": "0.0.10",
+    "@hicare/backend_napi-linux-arm64-gnu": "0.0.10",
+    "@hicare/backend_napi-linux-arm64-musl": "0.0.10",
+    "@hicare/backend_napi-win32-x64-msvc": "0.0.10",
+    "@hicare/backend_napi-darwin-x64": "0.0.10",
+    "@hicare/backend_napi-darwin-arm64": "0.0.10"
   },
-  "gitHead": "f871b24c96bd88ae880361c72cd51c52392bd64b"
+  "gitHead": "3a9fd821343f9638f650495ed248b8e7677c4a23"
 }
