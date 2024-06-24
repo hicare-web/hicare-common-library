@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typings": "./dist/index.d.ts",
@@ -45,13 +45,13 @@
     "version": "napi version"
   },
   "optionalDependencies": {
-    "@hicare/backend_napi-linux-x64-gnu": "0.0.14",
-    "@hicare/backend_napi-linux-x64-musl": "0.0.14",
+    "@hicare/backend_napi-darwin-arm64": "0.0.14",
+    "@hicare/backend_napi-darwin-x64": "0.0.14",
     "@hicare/backend_napi-linux-arm64-gnu": "0.0.14",
     "@hicare/backend_napi-linux-arm64-musl": "0.0.14",
-    "@hicare/backend_napi-win32-x64-msvc": "0.0.14",
-    "@hicare/backend_napi-darwin-x64": "0.0.14",
-    "@hicare/backend_napi-darwin-arm64": "0.0.14"
+    "@hicare/backend_napi-linux-x64-gnu": "0.0.14",
+    "@hicare/backend_napi-linux-x64-musl": "0.0.14",
+    "@hicare/backend_napi-win32-x64-msvc": "0.0.14"
   },
   "gitHead": "1187f97b745774de4e70e3241a8316984d5556f0"
 }
