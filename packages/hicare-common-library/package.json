@@ -18,7 +18,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://bitbucket.org/hicarenet/rpm-package-library"
+        "url": "https://github.com/hicare-web/hicare-common-library"
     },
     "scripts": {
         "dev": "vite --host",
@@ -44,5 +44,5 @@
     "devDependencies": {
         "root": "file:../../"
     },
-    "gitHead": "8decfe9578c8506ecb179ea13edc9be24ab5217d"
+    "gitHead": "7a665f6c8d924a2e546465dd77b16a0e27371790"
 }

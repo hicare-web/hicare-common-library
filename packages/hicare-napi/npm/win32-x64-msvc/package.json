@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi-win32-x64-msvc",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "os": [
     "win32"
   ],
@@ -20,6 +20,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/hicarenet/rpm-package-library"
+    "url": "https://github.com/hicare-web/hicare-common-library"
   }
 }

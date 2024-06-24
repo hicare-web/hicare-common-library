@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi-linux-arm64-musl",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "os": [
     "linux"
   ],
@@ -23,6 +23,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/hicarenet/rpm-package-library"
+    "url": "https://github.com/hicare-web/hicare-common-library"
   }
 }
