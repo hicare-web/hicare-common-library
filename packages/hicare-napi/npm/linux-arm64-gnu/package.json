@@ -1,25 +1,28 @@
 {
-  "name": "@hicare/backend_napi-linux-arm64-gnu",
-  "version": "0.0.8",
-  "os": [
-    "linux"
-  ],
-  "cpu": [
-    "arm64"
-  ],
-  "main": "backend_napi.linux-arm64-gnu.node",
-  "files": [
-    "backend_napi.linux-arm64-gnu.node"
-  ],
-  "license": "MIT",
-  "engines": {
-    "node": ">= 10"
-  },
-  "libc": [
-    "glibc"
-  ],
-  "publishConfig": {
-    "registry": "https://hub.docker.rpm.hicare.net/npm",
-    "access": "restricted"
-  }
+    "name": "@hicare/backend_napi-linux-arm64-gnu",
+    "version": "0.0.8",
+    "os": [
+        "linux"
+    ],
+    "cpu": [
+        "arm64"
+    ],
+    "main": "backend_napi.linux-arm64-gnu.node",
+    "files": [
+        "backend_napi.linux-arm64-gnu.node"
+    ],
+    "license": "MIT",
+    "engines": {
+        "node": ">= 10"
+    },
+    "libc": [
+        "glibc"
+    ],
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://bitbucket.org/hicarenet/rpm-package-library"
+    }
 }

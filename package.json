@@ -1,6 +1,5 @@
 {
     "name": "root",
-    "private": true,
     "workspaces": [
         "packages/*"
     ],
@@ -14,12 +13,15 @@
         "gen": "node ./bin/create.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "leebu18@hicare.net",
     "license": "ISC",
     "packageManager": "pnpm@9.1.0",
     "publishConfig": {
-        "registry": "https://hub.docker.rpm.hicare.net/npm",
-        "access": "restricted"
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://bitbucket.org/hicarenet/rpm-package-library"
     },
     "devDependencies": {
         "commander": "12.1.0",

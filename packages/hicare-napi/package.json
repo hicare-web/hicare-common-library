@@ -21,8 +21,7 @@
     ]
   },
   "publishConfig": {
-    "registry": "https://hub.docker.rpm.hicare.net/npm",
-    "access": "restricted"
+      "registry": "https://npm.pkg.github.com/"
   },
   "license": "MIT",
   "devDependencies": {
