@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi-linux-x64-gnu",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "os": [
     "linux"
   ],
@@ -19,7 +19,7 @@
     "glibc"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/hicare-web"
+    "registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",

@@ -14,7 +14,7 @@
         "lib"
     ],
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com/hicare-web"
+        "registry": "https://npm.pkg.github.com"
     },
     "repository": {
         "type": "git",
@@ -44,5 +44,5 @@
     "devDependencies": {
         "root": "file:../../"
     },
-    "gitHead": "26d235c4dff51ae14e3f946dfa85064ab73936e3"
+    "gitHead": "63f3465b844091549b15619f40319a4fc9fd9acf"
 }
