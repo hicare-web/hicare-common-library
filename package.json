@@ -21,9 +21,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/buYoung/hicare-test.git"
+        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library.git"
     },
-    "homepage": "git+https://bitbucket.org/hicarenet/rpm-package-library#readme",
+    "homepage": "https://bitbucket.org/hicarenet/rpm-package-library#readme",
     "devDependencies": {
         "commander": "12.1.0",
         "degit": "^2.8.4",

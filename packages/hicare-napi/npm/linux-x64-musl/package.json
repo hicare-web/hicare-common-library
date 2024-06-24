@@ -1,6 +1,6 @@
 {
-  "name": "@hicare/backend_napi-linux-x64-musl",
-  "version": "0.0.32",
+  "name": "@hicare-web/backend_napi-linux-x64-musl",
+  "version": "0.0.33",
   "os": [
     "linux"
   ],
@@ -21,9 +21,9 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "homepage": "git+https://bitbucket.org/hicarenet/rpm-package-library#readme",
+  "homepage": "https://bitbucket.org/hicarenet/rpm-package-library#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buYoung/hicare-test.git"
+    "url": "git+https://bitbucket.org/hicarenet/rpm-package-library.git"
   }
 }

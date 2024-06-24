@@ -1,5 +1,5 @@
 {
-  "name": "@hicare/backend_napi",
+  "name": "@hicare-web/backend_napi",
   "version": "0.0.33",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -35,7 +35,7 @@
   "engines": {
     "node": ">= 10"
   },
-  "homepage": "git+https://bitbucket.org/hicarenet/rpm-package-library#readme",
+  "homepage": "https://bitbucket.org/hicarenet/rpm-package-library#readme",
   "scripts": {
     "artifacts": "napi artifacts",
     "build": "node bin/napiBuild.mjs",
@@ -46,13 +46,13 @@
     "version": "napi version"
   },
   "optionalDependencies": {
-    "@hicare/backend_napi-darwin-arm64": "0.0.32",
-    "@hicare/backend_napi-darwin-x64": "0.0.32",
-    "@hicare/backend_napi-linux-arm64-gnu": "0.0.32",
-    "@hicare/backend_napi-linux-arm64-musl": "0.0.32",
-    "@hicare/backend_napi-linux-x64-gnu": "0.0.32",
-    "@hicare/backend_napi-linux-x64-musl": "0.0.32",
-    "@hicare/backend_napi-win32-x64-msvc": "0.0.32"
+    "@hicare/backend_napi-linux-x64-gnu": "0.0.33",
+    "@hicare/backend_napi-linux-x64-musl": "0.0.33",
+    "@hicare/backend_napi-linux-arm64-gnu": "0.0.33",
+    "@hicare/backend_napi-linux-arm64-musl": "0.0.33",
+    "@hicare/backend_napi-win32-x64-msvc": "0.0.33",
+    "@hicare/backend_napi-darwin-x64": "0.0.33",
+    "@hicare/backend_napi-darwin-arm64": "0.0.33"
   },
-  "gitHead": "233d68ea2fabdc623e925e47cdfde08662a1c6e6"
+  "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c"
 }
