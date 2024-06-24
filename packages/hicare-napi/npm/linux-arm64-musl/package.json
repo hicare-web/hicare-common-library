@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi-linux-arm64-musl",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "os": [
     "linux"
   ],
