@@ -21,7 +21,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://bitbucket.org/hicarenet/rpm-package-library"
+        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library"
     },
     "devDependencies": {
         "commander": "12.1.0",

@@ -18,7 +18,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://bitbucket.org/hicarenet/rpm-package-library"
+        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library"
     },
     "scripts": {
         "dev": "vite --host",
@@ -27,9 +27,9 @@
         "test:coverage": "vitest --coverage"
     },
     "bugs": {
-        "url": "https://bitbucket.org/hicarenet/rpm-package-library/issues"
+        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library/issues"
     },
-    "homepage": "https://bitbucket.org/hicarenet/rpm-package-library#readme",
+    "homepage": "git+https://bitbucket.org/hicarenet/rpm-package-library#readme",
     "exports": {
         ".": {
             "import": "./dist/hicare-common-library.js",
@@ -44,5 +44,5 @@
     "devDependencies": {
         "root": "file:../../"
     },
-    "gitHead": "63f3465b844091549b15619f40319a4fc9fd9acf"
+    "gitHead": "75c0d9734f68d0d63fbbdff33f17720b1c5fd63f"
 }
