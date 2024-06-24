@@ -1,6 +1,6 @@
 {
   "name": "@hicare/backend_napi-win32-x64-msvc",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "os": [
     "win32"
   ],
@@ -21,6 +21,6 @@
   "homepage": "git+https://bitbucket.org/hicarenet/rpm-package-library#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/hicarenet/rpm-package-library.git"
+    "url": "git+https://github.com/buYoung/hicare-test.git"
   }
 }
