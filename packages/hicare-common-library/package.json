@@ -27,9 +27,9 @@
         "test:coverage": "vitest --coverage"
     },
     "bugs": {
-        "url": "git+https://bitbucket.org/hicarenet/rpm-package-library/issues"
+        "url": "https://github.com/buYoung/hicare-test/issues"
     },
-    "homepage": "git+https://bitbucket.org/hicarenet/rpm-package-library#readme",
+    "homepage": "https://github.com/buYoung/hicare-test#readme",
     "exports": {
         ".": {
             "import": "./dist/hicare-common-library.js",
@@ -44,5 +44,5 @@
     "devDependencies": {
         "root": "file:../../"
     },
-    "gitHead": "233d68ea2fabdc623e925e47cdfde08662a1c6e6"
+    "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c"
 }
