@@ -1,6 +1,6 @@
 {
   "name": "@hicare-web/backend_napi-win32-x64-msvc",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "os": [
     "win32"
   ],
