@@ -63,7 +63,7 @@ export function isEmpty<T extends EmptyCheckable>(
         return true;
     }
     if (typeof data === 'string') {
-        return data.length === 0;
+        return data === '';
     }
     if (Array.isArray(data)) {
         return data.length === 0;
