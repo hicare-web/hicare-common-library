@@ -12,6 +12,7 @@
  *  isNumber('string'); // => false
  * @category Guard
  */
-export function isNumber<T>(data: T | number): data is number {
+
+export function isNumber<T>(data: T): data is T & number {
     return typeof data === 'number' && !Number.isNaN(data);
 }
