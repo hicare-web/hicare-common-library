@@ -1,15 +1,15 @@
 {
   "name": "@hicare-web/backend_napi-linux-arm64-musl",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "os": [
     "linux"
   ],
   "cpu": [
     "arm64"
   ],
-  "main": "backend_napi.linux-arm64-musl.node",
+  "main": "hicare_napi.linux-arm64-musl.node",
   "files": [
-    "backend_napi.linux-arm64-musl.node"
+    "hicare_napi.linux-arm64-musl.node"
   ],
   "license": "MIT",
   "engines": {

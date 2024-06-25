@@ -1,15 +1,15 @@
 {
   "name": "@hicare-web/backend_napi-linux-x64-gnu",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "os": [
     "linux"
   ],
   "cpu": [
     "x64"
   ],
-  "main": "backend_napi.linux-x64-gnu.node",
+  "main": "hicare_napi.linux-x64-gnu.node",
   "files": [
-    "backend_napi.linux-x64-gnu.node"
+    "hicare_napi.linux-x64-gnu.node"
   ],
   "license": "MIT",
   "engines": {
