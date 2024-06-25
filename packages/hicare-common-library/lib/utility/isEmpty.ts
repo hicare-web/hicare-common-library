@@ -29,7 +29,17 @@
  * @category Guard
  */
 
-type EmptyCheckable = string | undefined | unknown[] | Record<PropertyKey, unknown> | null | number | boolean;
+type EmptyCheckable =
+    | string
+    | number
+    | null
+    | boolean
+    | undefined
+    | unknown[]
+    | Record<PropertyKey, unknown>
+    | Map<unknown, unknown>
+    | Set<unknown>
+    | Buffer;
 
 export function isEmpty<T extends EmptyCheckable>(
     data: T,
@@ -40,9 +50,15 @@ export function isEmpty<T extends EmptyCheckable>(
           ? undefined
           : T extends unknown[]
             ? []
-            : T extends Record<PropertyKey, unknown>
-              ? Record<keyof T, never>
-              : never) {
+            : T extends Map<unknown, unknown>
+              ? Map<never, never>
+              : T extends Set<unknown>
+                ? Set<never>
+                : T extends Buffer
+                  ? Buffer & { length: 0 }
+                  : T extends Record<PropertyKey, unknown>
+                    ? Record<keyof T, never>
+                    : never) {
     if (data === undefined || data === null) {
         return true;
     }
@@ -50,6 +66,12 @@ export function isEmpty<T extends EmptyCheckable>(
         return data.length === 0;
     }
     if (Array.isArray(data)) {
+        return data.length === 0;
+    }
+    if (data instanceof Map || data instanceof Set) {
+        return data.size === 0;
+    }
+    if (Buffer.isBuffer(data)) {
         return data.length === 0;
     }
     if (typeof data === 'object' && data !== null) {
