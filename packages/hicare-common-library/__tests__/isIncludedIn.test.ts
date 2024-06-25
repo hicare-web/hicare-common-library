@@ -1,4 +1,4 @@
-import { isIncludedIn } from 'lib/utility/isIncludeedIn';
+import { isIncludedIn } from 'lib/utility/isIncludedIn';
 import { describe, expect, it } from 'vitest';
 
 describe('isIncludedIn', () => {
