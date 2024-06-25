@@ -1,8 +1,8 @@
 /**
- * 전달된 데이터가 Error인지 확인하는 함수
+ * 받은 데이터가 Error인지 확인하는 함수
  *
- * @param data - 확인할 데이터
- * @returns 데이터가 Error인 경우 true, 아니면 false.
+ * @param data - 확인할 변수
+ * @returns 데이터가 Error인 경우 true, 아니면 false 반환
  * @signature
  *  isError(data)
  * @example
@@ -19,8 +19,6 @@
  * @category Guard
  */
 
-type DefinitelyError<T> = Extract<T, Error> extends never ? Error : Extract<T, Error>;
-
-export function isError<T>(data: Error | T): data is DefinitelyError<T> {
+export function isError<T>(data: Error | T): data is Error {
     return data instanceof Error;
 }
