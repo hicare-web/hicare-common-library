@@ -5,6 +5,8 @@ COPY . /app
 
 WORKDIR /app
 
+RUN apt-get install -y llvm clang
+
 # Install dependencies
 RUN export NVM_DIR="$HOME/.nvm" && \
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  && \

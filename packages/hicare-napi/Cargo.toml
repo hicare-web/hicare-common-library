@@ -41,9 +41,6 @@ json = { version = "0.12.4"}
 jsonwebtoken = { version = "9.3.0" }
 #jsonwebtoken
 
-#alloc
-mimalloc = { version = "0.1.43", features = ["override", "debug_in_debug" ], default-features = false }
-#concurr
 [build-dependencies]
 napi-build = { version = "2.1.3" }
 

@@ -147,3 +147,4 @@ coverage/
 /.idea/vcs.xml
 /packages/hicare-napi/index.d.ts
 /packages/hicare-napi/index.js
+.idea/

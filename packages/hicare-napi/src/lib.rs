@@ -17,12 +17,6 @@ const DEFAULT_ITERATIONS: u32 = 1000;
 const DEFAULT_KEY_LENGTH: usize = 64;
 
 
-// AesDecryptor와 관련 코드는 여기에 위치합니다 (제공된 코드 그대로 사용)
-use mimalloc::MiMalloc;
-
-#[global_allocator]
-static GLOBAL: MiMalloc = MiMalloc;
-
 #[napi(object)]
 pub struct KDFOption {
   pub iterations: Option<u32>,
