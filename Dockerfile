@@ -5,10 +5,11 @@ COPY . /app
 
 WORKDIR /app
 
-RUN apt-get install -y llvm clang
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 
 # Install dependencies
-RUN export NVM_DIR="$HOME/.nvm" && \
+RUN --mount=type=cache,id=pnpm_cache,target=/pnpm/store export NVM_DIR="$HOME/.nvm" && \
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  && \
         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  && \
     corepack enable && \
