@@ -17,6 +17,6 @@
  * @category Guard
  */
 
-export function isArray<T>(data: T): data is T extends any[] ? T : T & unknown[] {
+export function isArray<T>(data: T): boolean {
     return Array.isArray(data);
 }

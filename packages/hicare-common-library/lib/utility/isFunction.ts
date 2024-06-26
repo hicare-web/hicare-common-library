@@ -20,6 +20,6 @@
  * @category Guard
  */
 
-export function isFunction<T>(data: T): data is T & Function {
+export function isFunction<T>(data: T): boolean {
     return typeof data === 'function';
 }
