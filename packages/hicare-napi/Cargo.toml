@@ -23,20 +23,6 @@ md5 = { version = "0.7.0" }
 block-padding = { version = "0.3.3" }
 # aes256cbc
 
-#base64
-base64-simd = { version = "0.8.0" }
-#base64
-
-#json
-serde = { version = "1.0.203", features = ['derive'] }
-serde_json = { version = "1.0.117" }
-once_cell = "1.19.0"
-
-simd-json = { version = "0.13.10", features = ["runtime-detection", "serde_impl", "swar-number-parsing"] }
-sonic-rs = { version = "0.3.7" }
-json = { version = "0.12.4"}
-#json
-
 #jsonwebtoken
 jsonwebtoken = { version = "9.3.0" }
 #jsonwebtoken
