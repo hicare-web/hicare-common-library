@@ -29,7 +29,7 @@
  * @category Guard
  */
 
-type EmptyCheckable =
+type EmptyValue =
     | string
     | number
     | null
@@ -41,7 +41,7 @@ type EmptyCheckable =
     | Set<unknown>
     | Buffer;
 
-export function isEmpty<T extends EmptyCheckable>(
+export function isEmpty<T extends EmptyValue>(
     data: T,
 ): data is T &
     (T extends string
