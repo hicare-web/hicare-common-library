@@ -14,8 +14,6 @@
  * @category Guard
  */
 
-export type NarrowedTo<T, U> = T extends U ? T : never;
-
-export function isBoolean<T>(data: T | boolean): data is NarrowedTo<T, boolean> {
+export function isBoolean<T>(data: T | boolean): data is boolean {
     return typeof data === 'boolean';
 }
