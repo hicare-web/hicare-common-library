@@ -7,9 +7,12 @@
  *  isNumber(data)
  * @example
  *  isNumber(1); // => true
- *  isNumber(1n); // => false
+ *  isNumber(2*82163); // => true
  *  isNumber(Infinity); // => true
+ *  isNumber(-123); // => true
+ *
  *  isNumber('string'); // => false
+ *  isNumber(1n); // => false
  * @category Guard
  */
 

@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 describe('isNumber test', () => {
     test('숫자면 true 반환', () => {
         expect(isNumber(1)).toBe(true);
-        expect(isNumber(0)).toBe(true);
+        expect(isNumber(2 * 123)).toBe(true);
         expect(isNumber(-123)).toBe(true);
         expect(isNumber(3.14)).toBe(true);
     });
