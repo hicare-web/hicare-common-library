@@ -17,6 +17,11 @@ const DEFAULT_ITERATIONS: u32 = 1000;
 const DEFAULT_KEY_LENGTH: usize = 64;
 
 
+use mimalloc::MiMalloc;
+
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
+
 #[napi(object)]
 pub struct KDFOption {
   pub iterations: Option<u32>,

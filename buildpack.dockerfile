@@ -18,10 +18,12 @@ RUN tar -zxvf /zig.tar.gz && \
     ln -s /usr/local/bin/zig_llvm/zig /usr/local/bin/zig && \
     rm /zig.tar.gz
 
-RUN mkdir -p /macos-sdk && \
-    curl -L https://github.com/roblabla/MacOSX-SDKs/releases/download/13.3/MacOSX13.3.sdk.tar.xz | tar xJ
+RUN mkdir -p /macos-sdk/MacOSX14.0.sdk/ && \
+    curl -L -O https://github.com/roblabla/MacOSX-SDKs/releases/download/macosx14.0/MacOSX14.0.sdk.tar.xz && \
+    tar -xvf MacOSX14.0.sdk.tar.xz -C /macos-sdk/ && \
+    export SDKROOT=/macos-sdk/MacOSX14.0.sdk/
 
-ENV SDKROOT=/macos-sdk/MacOSX13.3.sdk/
+ENV SDKROOT=/macos-sdk/MacOSX14.0.sdk/
 
 # install rust
 RUN wget https://static.rust-lang.org/rustup/archive/1.27.1/x86_64-unknown-linux-gnu/rustup-init && \
@@ -37,11 +39,6 @@ RUN wget https://static.rust-lang.org/rustup/archive/1.27.1/x86_64-unknown-linux
     rustup target add aarch64-apple-darwin && \
     cargo install cargo-xwin && \
     cargo install cargo-zigbuild
-
-RUN curl -L https://github.com/roblabla/MacOSX-SDKs/releases/download/13.3/MacOSX13.3.sdk.tar.xz | tar xJ && \
-    export SDKROOT=$(pwd)/MacOSX13.3.sdk/ && \
-    export PATH=$PATH:/root/.rustup/toolchains/1.79.0-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/bin/
-
 
 # install nvm
 RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && \

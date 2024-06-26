@@ -41,6 +41,8 @@ json = { version = "0.12.4"}
 jsonwebtoken = { version = "9.3.0" }
 #jsonwebtoken
 
+mimalloc = { version = "0.1.43" }
+
 [build-dependencies]
 napi-build = { version = "2.1.3" }
 
