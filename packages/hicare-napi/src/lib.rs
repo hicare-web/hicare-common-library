@@ -3,7 +3,7 @@
 mod crypto;
 mod guard;
 
-use napi::{CallContext, JsObject, JsString, JsUnknown, Result};
+use napi::{CallContext, JsObject, JsString, JsUnknown, Result, module_init, Env};
 use serde_json::Value;
 use base64_simd::{STANDARD, URL_SAFE};
 use pbkdf2::pbkdf2_hmac;
@@ -16,11 +16,13 @@ use crate::guard::is_url::is_url;
 
 use napi::bindgen_prelude::create_custom_tokio_runtime;
 
+#[macro_use]
+extern crate napi_derive;
 
 const DEFAULT_ITERATIONS: u32 = 1000;
 const DEFAULT_KEY_LENGTH: usize = 64;
 
-#[napi::module_init]
+#[module_init]
 fn init() {
     let rt = tokio::runtime::Builder::new_multi_thread()
         .enable_all()
@@ -31,6 +33,7 @@ fn init() {
         .unwrap();
     create_custom_tokio_runtime(rt);
 }
+
 #[global_allocator]
 static ALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
@@ -40,106 +43,118 @@ pub struct KDFOption {
     pub key_size: Option<u32>,
 }
 
-#[macro_use]
-extern crate napi_derive;
-
-#[js_function(1)]
-pub fn parse(ctx: CallContext) -> Result<JsUnknown> {
-    let str = ctx_to_js_string(&ctx);
+#[napi(js_name = "parse")]
+pub fn parse(env:Env, js_string: JsString) -> Result<JsUnknown> {
+    let str = js_string.into_utf8().map_err(|e| napi::Error::from_reason(e.to_string()))
+        .unwrap().as_str().map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
 
     let de_serialize: Value = serde_json::from_str(&str).map_err(|e| napi::Error::from_reason(e.to_string()))
         .map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
-    ctx.env.to_js_value(&de_serialize)
+
+    env.to_js_value(&de_serialize)
 }
 
-#[js_function(1)]
-pub fn stringify(ctx: CallContext) -> Result<JsString> {
-    let serialize = ctx_to_js_object(&ctx);
+#[napi(js_name = "stringify")]
+pub fn stringify(env:Env, js_object: JsObject) -> Result<JsString> {
+    let serialize:Value = env.from_js_value(&js_object)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
     let str = serde_json::to_string(&serialize).map_err(|e| napi::Error::from_reason(e.to_string()))
         .map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
-    ctx.env.create_string_from_std(str)
+
+    env.create_string(&str)
 }
 
-#[js_function(1)]
-pub fn parse_simd(ctx: CallContext) -> Result<JsUnknown> {
-    let str = ctx_to_js_string(&ctx);
+#[napi(js_name = "parseSimd")]
+pub fn parse_simd(env:Env, js_string: JsString) -> Result<JsUnknown> {
+    let str = js_string
+        .into_utf8()
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?
+        .as_str()
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
+
     let mut string = String::from(str);
     let bytes = unsafe { string.as_bytes_mut() };
 
     let de_serialize: Value = simd_json::from_slice(bytes).map_err(|e| napi::Error::from_reason(e.to_string()))
         .map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
 
-    ctx.env.to_js_value(&de_serialize)
+    env.to_js_value(&de_serialize)
 }
 
-#[js_function(1)]
-pub fn stringify_simd(ctx: CallContext) -> Result<JsString> {
-    let serialize = ctx_to_js_object(&ctx);
+#[napi(js_name = "stringifySimd")]
+pub fn stringify_simd(env:Env, js_object: JsObject) -> Result<JsString> {
+    let serialize:Value = env.from_js_value(&js_object)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
     let str = simd_json::to_string(&serialize).map_err(|e| napi::Error::from_reason(e.to_string()))
         .map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
 
-    ctx.env.create_string_from_std(str)
+    env.create_string(&str)
 }
 
-#[js_function(1)]
-pub fn parse_sonic(ctx: CallContext) -> Result<JsUnknown> {
-    let str = ctx_to_js_string(&ctx);
+#[napi(js_name = "parseSonic")]
+pub fn parse_sonic(env:Env, js_string: JsString) -> Result<JsUnknown> {
+    let str = js_string
+        .into_utf8()
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?
+        .as_str()
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
     let de_serialize: Value = sonic_rs::from_str(&str).map_err(|e| napi::Error::from_reason(e.to_string()))
         .map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
 
-    ctx.env.to_js_value(&de_serialize)
+    env.to_js_value(&de_serialize)
 }
 
-#[js_function(1)]
-pub fn stringify_sonic(ctx: CallContext) -> Result<JsString> {
-    let serialize = ctx_to_js_object(&ctx);
+#[napi(js_name = "stringifySonic")]
+pub fn stringify_sonic(env:Env, js_object: JsObject) -> Result<JsString> {
+    let serialize:Value = env.from_js_value(&js_object)
+        .map_err(|e| napi::Error::from_reason(e.to_string()))
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
     let str = sonic_rs::to_string(&serialize).map_err(|e| napi::Error::from_reason(e.to_string()))
         .map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
 
-    ctx.env.create_string_from_std(str)
+    env.create_string(&str)
 }
 
 
-#[js_function(1)]
-pub fn to_base64(ctx: CallContext) -> Result<JsString> {
-    let input = ctx.get::<JsString>(0)
-        .map_err(|e| napi::Error::from_reason(e.to_string()))
-        .unwrap().into_utf8().map_err(|e| napi::Error::from_reason(e.to_string()))
-        .unwrap();
-
-    let input = input.as_str().map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
+#[napi(js_name = "toBase64")]
+pub fn to_base64(env:Env, js_string: JsString) -> Result<JsString> {
+    let input = js_string
+        .into_utf8()
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?
+        .as_str()
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
     if is_url(&input) {
         let encoded = URL_SAFE.encode_to_string(input.as_bytes());
 
-        ctx.env.create_string_from_std(encoded)
+        env.create_string(&encoded)
     } else {
         let encoded = STANDARD.encode_to_string(input.as_bytes());
 
-        ctx.env.create_string_from_std(encoded)
+        env.create_string(&encoded)
     }
 }
 
-#[js_function(1)]
-pub fn from_base64(ctx: CallContext) -> Result<JsString> {
-    let input = ctx.get::<JsString>(0)
-        .map_err(|e| napi::Error::from_reason(e.to_string()))
-        .unwrap().into_utf8().map_err(|e| napi::Error::from_reason(e.to_string()))
-        .unwrap();
-
-    let input = input.as_str().map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
-
+#[napi(js_name = "fromBase64")]
+pub fn from_base64(env:Env, js_string: JsString) -> Result<JsString> {
+    let input = js_string
+        .into_utf8()
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?
+        .as_str()
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
 
     let decoded = STANDARD.decode_to_vec(input.as_bytes())
         .map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
 
     let decoded = String::from_utf8(decoded).map_err(|e| napi::Error::from_reason(e.to_string())).unwrap();
 
-    ctx.env.create_string_from_std(decoded)
+    env.create_string(&decoded)
 }
 
 #[napi(js_name = "PBKDF2")]
@@ -178,19 +193,6 @@ pub fn decrypt_aes(sym_key: String, text: String) -> napi::Result<String> {
 
     String::from_utf8(decrypted.to_vec())
         .map_err(|e| napi::Error::from_reason(e.to_string()))
-}
-
-pub fn register_js(exports: &mut napi::JsObject) -> napi::Result<()> {
-    exports.create_named_method("parse", parse)?;
-    exports.create_named_method("stringify", stringify)?;
-    exports.create_named_method("parseSimd", parse_simd)?;
-    exports.create_named_method("stringifySimd", stringify_simd)?;
-    exports.create_named_method("parseSonic", parse_sonic)?;
-    exports.create_named_method("stringifySonic", stringify_sonic)?;
-    exports.create_named_method("toBase64", to_base64)?;
-    exports.create_named_method("fromBase64", from_base64)?;
-
-    Ok(())
 }
 
 
