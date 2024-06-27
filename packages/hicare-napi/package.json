@@ -1,58 +1,60 @@
 {
-  "name": "@hicare-web/backend_napi",
-  "version": "0.0.39",
-  "main": "./index.js",
-  "types": "./index.d.ts",
-  "typings": "./index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
-  "napi": {
-    "binaryName": "hicare_napi",
-    "targets": [
-      "x86_64-unknown-linux-gnu",
-      "x86_64-unknown-linux-musl",
-      "aarch64-unknown-linux-gnu",
-      "aarch64-unknown-linux-musl",
-      "x86_64-pc-windows-msvc",
-      "x86_64-apple-darwin",
-      "aarch64-apple-darwin"
-    ]
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@napi-rs/cli": "3.0.0-alpha.55",
-    "ava": "^6.0.1",
-    "root": "file:../../"
-  },
-  "ava": {
-    "timeout": "3m"
-  },
-  "engines": {
-    "node": ">= 10"
-  },
-  "homepage": "https://bitbucket.org/hicarenet/rpm-package-library#readme",
-  "scripts": {
-    "artifacts": "napi artifacts",
-    "build": "node bin/napiBuild.mjs",
-    "build:debug": "napi build --platform",
-    "prepublishOnly": "napi prepublish",
-    "test": "ava",
-    "universal": "napi universal",
-    "version": "napi version"
-  },
-  "optionalDependencies": {
-    "@hicare/backend_napi-darwin-arm64": "0.0.33",
-    "@hicare/backend_napi-darwin-x64": "0.0.33",
-    "@hicare/backend_napi-linux-arm64-gnu": "0.0.33",
-    "@hicare/backend_napi-linux-arm64-musl": "0.0.33",
-    "@hicare/backend_napi-linux-x64-gnu": "0.0.33",
-    "@hicare/backend_napi-linux-x64-musl": "0.0.33",
-    "@hicare/backend_napi-win32-x64-msvc": "0.0.33"
-  },
-  "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c"
+    "name": "@hicare-web/backend_napi",
+    "version": "0.0.39",
+    "main": "./index.js",
+    "types": "./index.d.ts",
+    "typings": "./index.d.ts",
+    "files": [
+        "index.js",
+        "index.d.ts"
+    ],
+    "napi": {
+        "binaryName": "hicare_napi",
+        "targets": [
+            "x86_64-unknown-linux-gnu",
+            "x86_64-unknown-linux-musl",
+            "aarch64-unknown-linux-gnu",
+            "aarch64-unknown-linux-musl",
+            "x86_64-pc-windows-msvc",
+            "x86_64-apple-darwin",
+            "aarch64-apple-darwin"
+        ]
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "@napi-rs/cli": "3.0.0-alpha.55",
+        "ava": "^6.0.1",
+        "root": "file:../../"
+    },
+    "ava": {
+        "timeout": "3m"
+    },
+    "engines": {
+        "node": ">= 10"
+    },
+    "homepage": "https://bitbucket.org/hicarenet/rpm-package-library#readme",
+    "scripts": {
+        "artifacts": "napi artifacts",
+        "build": "node bin/napiBuild.mjs",
+        "build:debug": "napi build --platform",
+        "prepublishOnly": "napi prepublish",
+        "test": "ava",
+        "universal": "napi universal",
+        "version": "napi version",
+        "zip": "tar -zcvf hicare_napi.tar.gz index.js index.d.ts npm/"
+
+    },
+    "optionalDependencies": {
+        "@hicare/backend_napi-darwin-arm64": "0.0.33",
+        "@hicare/backend_napi-darwin-x64": "0.0.33",
+        "@hicare/backend_napi-linux-arm64-gnu": "0.0.33",
+        "@hicare/backend_napi-linux-arm64-musl": "0.0.33",
+        "@hicare/backend_napi-linux-x64-gnu": "0.0.33",
+        "@hicare/backend_napi-linux-x64-musl": "0.0.33",
+        "@hicare/backend_napi-win32-x64-msvc": "0.0.33"
+    },
+    "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c"
 }
