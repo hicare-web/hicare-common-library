@@ -15,6 +15,6 @@
  * @category Array
  */
 
-export function allPass(data: unknown, fns: Array<(data: unknown) => boolean>): boolean {
+export function allPass<T>(data: T, fns: Array<(data: T) => boolean>): boolean {
     return fns.every((fn) => fn(data));
 }

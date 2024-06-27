@@ -21,6 +21,6 @@
 * @category Guard
 */
 
-export function isString<T>(data: T): data is Extract<T, string> {
+export function isString<T>(data: T): boolean {
     return typeof data === 'string';
 }

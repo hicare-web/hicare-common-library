@@ -19,6 +19,6 @@
  * @category Guard
  */
 
-export function isError<T>(data: Error | T): data is Error {
+export function isError<T>(data: T): boolean {
     return data instanceof Error;
 }
