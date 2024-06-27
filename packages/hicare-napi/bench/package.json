@@ -1,0 +1,26 @@
+{
+    "name": "rpm_test1",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "bench": "pnpm dlx vitest bench"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "vitest": "^1.6.0",
+        "crypto-js": "4.0.0",
+        "pkcs7": "^1.0.4",
+        "vite": "^5.3.1",
+        "uuid": "^10.0.0",
+        "@hicare-web/backend_napi": "file:.."
+    },
+    "devDependencies": {
+        "@types/crypto-js": "^4.0.1",
+        "@types/uuid": "^10.0.0"
+    }
+}
