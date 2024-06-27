@@ -12,6 +12,7 @@
  *  isNumeric(-123); // => true
  *  isNumeric(1n); // => true
  *  isNumeric(10e3); // => true
+ *  isNumeric('2e5'); // => true
  *
  *  isNumeric('string'); // => false
  * @category Guard
@@ -24,18 +25,15 @@ export function isNumeric<T>(value: T): boolean {
     if (typeof value === 'number' && !Number.isNaN(value)) {
         return true;
     }
-
     // BigInt 타입 처리
     if (typeof value === 'bigint') {
         return true;
     }
-
     // 문자열 처리
     if (typeof value === 'string' && value.trim() !== '') {
         // 정규표현식을 사용하여 숫자 형식 검사
         const numericRegex = /^[-+]?(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?n?$/;
         return numericRegex.test(value.trim());
     }
-
     return false;
 }
