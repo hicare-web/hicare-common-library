@@ -1,9 +1,9 @@
 use napi::{Env, JsString, Result};
-use uuid::Uuid;
-use std::sync::Arc;
-use parking_lot::Mutex;
 use once_cell::sync::Lazy;
+use parking_lot::Mutex;
 use std::collections::VecDeque;
+use std::sync::Arc;
+use uuid::Uuid;
 const POOL_SIZE: usize = 20;
 
 struct UuidPool {
@@ -31,15 +31,15 @@ impl UuidPool {
     }
 }
 
-static UUID_POOL: Lazy<Arc<Mutex<UuidPool>>> = Lazy::new(|| {
-    Arc::new(Mutex::new(UuidPool::new()))
-});
+static UUID_POOL: Lazy<Arc<Mutex<UuidPool>>> = Lazy::new(|| Arc::new(Mutex::new(UuidPool::new())));
 
 #[napi(js_name = "getUuid")]
+#[inline(always)]
 pub fn get_uuid() -> String {
     UUID_POOL.lock().get_uuid()
 }
 #[napi(js_name = "uuidV4")]
+#[inline(always)]
 pub fn uuid_v4(env: Env) -> Result<JsString> {
     let uuid = Uuid::new_v4();
 
@@ -47,13 +47,14 @@ pub fn uuid_v4(env: Env) -> Result<JsString> {
 }
 
 #[napi(js_name = "uuidV4Pure")]
+#[inline(always)]
 pub fn uuid_v4_pure() -> Result<String> {
     Ok(Uuid::new_v4().to_string())
 }
 #[napi(js_name = "uuidV4Pure1")]
+#[inline(always)]
 pub fn uuid_v4_pure1() -> String {
-    let uuid = Uuid::new_v4();
-    uuid.as_simple().to_string()
+    uuid::Uuid::new_v4().to_string()
 }
 
 // #[napi(js_name = "uuidV4BufferTokio")]

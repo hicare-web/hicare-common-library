@@ -1,8 +1,8 @@
-use napi_derive::napi;
-use napi::{Error, Result};
-use napi::bindgen_prelude::*;
 use crate::guard::is_url::is_url;
 use base64_simd::{STANDARD, URL_SAFE_NO_PAD};
+use napi::bindgen_prelude::*;
+use napi::{Error, Result};
+use napi_derive::napi;
 #[napi(js_name = "toBase64")]
 pub fn to_base64(input: Buffer) -> Result<String> {
     let input_ref = input.as_ref();
@@ -26,7 +26,7 @@ pub fn from_base64(input: String) -> Result<Buffer> {
         Ok(decoded_vec) => {
             // 디코딩된 데이터를 Buffer로 변환하여 반환
             Ok(Buffer::from(decoded_vec))
-        },
+        }
         Err(e) => Err(Error::from_reason(format!("Invalid base64: {:?}", e))),
     }
 }
