@@ -17,16 +17,11 @@ pub fn to_base64(input: Buffer) -> Result<String> {
 }
 
 #[napi(js_name = "fromBase64")]
-pub fn from_base64(input: String) -> Result<Buffer> {
-    // String을 바이트 슬라이스로 변환
-    let input_bytes = input.as_bytes();
-
-    // Base64 디코딩 수행
-    match STANDARD.decode_to_vec(input_bytes) {
-        Ok(decoded_vec) => {
-            // 디코딩된 데이터를 Buffer로 변환하여 반환
-            Ok(Buffer::from(decoded_vec))
-        }
-        Err(e) => Err(Error::from_reason(format!("Invalid base64: {:?}", e))),
-    }
+pub fn from_base64(input: Buffer) -> Result<Buffer> {
+    STANDARD.decode_to_vec(input.as_ref()).map_err(|e| Error::from_reason(e.to_string())).map(|v| {
+        let mut buffer = input.as_ref().to_vec();
+        buffer.clear();
+        buffer.extend_from_slice(&v);
+        buffer.into()
+    })
 }
