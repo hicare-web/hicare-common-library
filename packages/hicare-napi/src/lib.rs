@@ -1,15 +1,15 @@
 #![deny(clippy::all)]
 
+mod base64;
 mod crypto;
 mod guard;
-mod base64;
+mod jwt;
 mod utils;
 mod uuid;
-mod jwt;
 
-use napi::{module_init};
+use napi::module_init;
 
-use napi::bindgen_prelude::{create_custom_tokio_runtime};
+use napi::bindgen_prelude::create_custom_tokio_runtime;
 
 #[macro_use]
 extern crate napi_derive;

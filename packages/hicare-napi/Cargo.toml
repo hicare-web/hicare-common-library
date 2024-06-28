@@ -11,7 +11,7 @@ crate-type = ["cdylib"]
 napi = { version = "2.16.6", default-features = false, features = ["napi9", "serde", "serde-json", "object_indexmap", "async", "tokio_rt", "tokio_fs", "tokio_io_util", "tokio_macros"] }
 tokio = { version = "1.38.0", default-features = false, features = ["rt", "time"] }
 indexmap = { version = "2.2.6" }
-napi-derive = { version = "2.16.5" }
+napi-derive = { version = "2.16.5", default-features = false, features = ["type-def"] }
 
 # pbkdf2
 pbkdf2 = { version = "0.13.0-pre.0", features = ["sha1", "simple"] }
@@ -30,7 +30,7 @@ base64-simd = { version = "0.8.0", features = ["detect", "alloc"], default-featu
 #base64
 
 #uuid
-uuid = { version = "1.9.1", features = ["zerocopy", "fast-rng", "v4"] }
+uuid = { version = "1.9.1", default-features = false ,features = ["v4", "fast-rng"]}
 uuid-simd = { version = "0.8.0" }
 nanoid = { version = "0.4.0" }
 #uuid
