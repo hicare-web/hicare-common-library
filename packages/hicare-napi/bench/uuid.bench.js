@@ -1,32 +1,25 @@
-import { v4 } from 'uuid';
+import * as uuid from 'uuid';
 import rustFn from '@hicare-web/backend_napi';
 import { bench } from 'vitest';
-function bufferToUuidString(buffer) {
-    return [
-        buffer.toString('hex', 0, 4),
-        buffer.toString('hex', 4, 6),
-        buffer.toString('hex', 6, 8),
-        buffer.toString('hex', 8, 10),
-        buffer.toString('hex', 10, 16),
-    ].join('-');
-}
+import { uuidBenchOption } from "./benchOption.js";
+
 
 bench('nodeJS uuid', () => {
-    v4();
-});
+    uuid.v4();
+}, uuidBenchOption);
 
 bench('RUST NAPI uuid', () => {
     rustFn.uuidV4();
-});
+}, uuidBenchOption);
 
 bench('RUST NAPI uuid pure', () => {
     rustFn.uuidV4Pure();
-});
+}, uuidBenchOption);
 
-bench('RUST NAPI uuid pure1', () => {
-    rustFn.uuidV4Pure1();
-});
+bench('RUST NAPI uuid Queue', () => {
+    rustFn.uuidV4Queue();
+}, uuidBenchOption);
 
-bench('RUST NAPI uuid pure5', () => {
-    rustFn.getUuid();
-});
+bench('RUST NAPI uuid Queue2', () => {
+    rustFn.uuidV4Queue2();
+}, uuidBenchOption);

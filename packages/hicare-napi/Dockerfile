@@ -1,7 +1,7 @@
 FROM hub.docker.rpm.hicare.net/napi-builder
 
 # Copy the source code
-COPY . /app
+COPY ../.. /app
 
 WORKDIR /app
 

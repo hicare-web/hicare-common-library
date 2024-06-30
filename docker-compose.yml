@@ -1,0 +1,31 @@
+version: '3.8'
+
+x-environment:
+  &default-environment
+    RUSTUP_HOME: /workspace/.rustup
+    CARGO_HOME: /workspace/.cargo
+
+services:
+    rust-dev:
+        build:
+            context: .
+            dockerfile: .devcontainer/Dockerfile
+        environment:
+            <<: *default-environment
+        volumes:
+            - .:/workspace/hicare:cached
+            - root_node_modules:/workspace/hicare/node_modules:delegated
+            - common_node_modules:/workspace/hicare/packages/hicare-common-library/node_modules:delegated
+            - napi_node_modules:/workspace/hicare/packages/hicare-napi/node_modules:delegated
+            - napi_cargo_target:/workspace/hicare/packages/hicare-napi/target:delegated
+            - bench_node_modules:/workspace/hicare/packages/hicare-napi/bench/node_modules:delegated
+            - rust_cache:/workspace/.cache/rust:delegated
+        command: sleep infinity
+
+volumes:
+    root_node_modules:
+    common_node_modules:
+    napi_node_modules:
+    napi_cargo_target:
+    bench_node_modules:
+    rust_cache:

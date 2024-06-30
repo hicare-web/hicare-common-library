@@ -1,43 +1,131 @@
+use std::collections::VecDeque;
+use std::sync::{Mutex};
+use crossbeam_queue::ArrayQueue;
+use lazy_static::lazy_static;
 use napi::{Env, JsString, Result};
 use once_cell::sync::Lazy;
-use parking_lot::Mutex;
-use std::collections::VecDeque;
-use std::sync::Arc;
-use uuid::Uuid;
-const POOL_SIZE: usize = 20;
+use uuid::{Uuid};
 
-struct UuidPool {
-    pool: VecDeque<String>,
+const DEFAULT_UUID_SIZE: usize = 1024;
+
+
+
+static CACHED_UUID_STRING: Lazy<String> = Lazy::new(|| {
+    Uuid::new_v4().to_string()
+});
+
+lazy_static! {
+    static ref CACHED_UUID: Mutex<Uuid> = Mutex::new(Uuid::new_v4());
 }
 
-impl UuidPool {
+struct UuidQueue {
+    queue: ArrayQueue<String>,
+}
+impl UuidQueue {
     fn new() -> Self {
-        let mut pool = VecDeque::with_capacity(POOL_SIZE);
-        for _ in 0..POOL_SIZE {
-            pool.push_back(Uuid::new_v4().to_string());
+        let queue = ArrayQueue::new(DEFAULT_UUID_SIZE);
+        for _ in 0..DEFAULT_UUID_SIZE {
+            queue.push(Uuid::new_v4().to_string()).unwrap();
         }
-        UuidPool { pool }
+        UuidQueue { queue }
+    }
+
+    fn is_full(&self) -> bool {
+        self.queue.is_full()
+    }
+
+    fn add_uuid(&mut self) {
+        if self.queue.is_full() {
+            return;
+        } else {
+            while !self.queue.is_full() {
+                self.queue.push(Uuid::new_v4().to_string()).map_err(|e| {
+                    eprintln!("Failed to push uuid to queue: {:?}", e);
+                }).unwrap();
+            }
+        }
     }
 
     fn get_uuid(&mut self) -> String {
-        if let Some(uuid) = self.pool.pop_front() {
-            // UUID를 하나 꺼내고 새로운 UUID를 생성하여 뒤에 추가
-            self.pool.push_back(Uuid::new_v4().to_string());
-            uuid
+        if let Some(uuid) = self.queue.pop() {
+            return uuid;
         } else {
-            // 만약 풀이 비어있다면 (이런 경우는 없어야 하지만) 새로운 UUID 생성
-            Uuid::new_v4().to_string()
+            return Uuid::new_v4().to_string();
         }
     }
 }
 
-static UUID_POOL: Lazy<Arc<Mutex<UuidPool>>> = Lazy::new(|| Arc::new(Mutex::new(UuidPool::new())));
-
-#[napi(js_name = "getUuid")]
-#[inline(always)]
-pub fn get_uuid() -> String {
-    UUID_POOL.lock().get_uuid()
+struct UuidQueue2 {
+    queue: VecDeque<String>,
 }
+impl UuidQueue2 {
+    fn new() -> Self {
+        let mut queue = VecDeque::with_capacity(DEFAULT_UUID_SIZE);
+        for _ in 0..DEFAULT_UUID_SIZE {
+            queue.push_back(Uuid::new_v4().to_string());
+        }
+        UuidQueue2 { queue }
+    }
+
+    fn is_full(&self) -> bool {
+        self.queue.len() == DEFAULT_UUID_SIZE
+    }
+
+    fn add_uuid(&mut self) {
+        if self.is_full() {
+            return;
+        } else {
+            while !self.is_full() {
+                self.queue.push_back(Uuid::new_v4().to_string());
+            }
+        }
+    }
+
+    fn get_uuid(&mut self) -> String {
+        if let Some(uuid) = self.queue.pop_front() {
+            return uuid;
+        } else {
+            return Uuid::new_v4().to_string();
+        }
+    }
+}
+
+lazy_static! {
+    static ref UUID_QUEUE: Mutex<UuidQueue> = Mutex::new(UuidQueue::new());
+    static ref UUID_QUEUE2: Mutex<UuidQueue2> = Mutex::new(UuidQueue2::new());
+}
+
+pub fn init_queue() {
+    std::thread::spawn(|| {
+        loop {
+            std::thread::sleep(std::time::Duration::from_millis(10));
+
+            if let Ok(mut uuid) = UUID_QUEUE.lock() {
+                if uuid.is_full() {
+                    continue;
+                } else {
+                    uuid.add_uuid();
+                }
+            }
+        }
+    });
+
+    std::thread::spawn(|| {
+        loop {
+            std::thread::sleep(std::time::Duration::from_millis(10));
+
+            if let Ok(mut uuid) = UUID_QUEUE2.lock() {
+                if uuid.is_full() {
+                    continue;
+                } else {
+                    uuid.add_uuid();
+                }
+            }
+        }
+    });
+    return;
+}
+
 #[napi(js_name = "uuidV4")]
 #[inline(always)]
 pub fn uuid_v4(env: Env) -> Result<JsString> {
@@ -51,17 +139,31 @@ pub fn uuid_v4(env: Env) -> Result<JsString> {
 pub fn uuid_v4_pure() -> Result<String> {
     Ok(Uuid::new_v4().to_string())
 }
-#[napi(js_name = "uuidV4Pure1")]
+
+
+#[napi(js_name = "uuidV4Cached")]
 #[inline(always)]
-pub fn uuid_v4_pure1() -> String {
-    uuid::Uuid::new_v4().to_string()
+pub fn uuid_v4_pure_cached() -> Result<String> {
+    Ok(CACHED_UUID_STRING.clone())
 }
 
-// #[napi(js_name = "uuidV4BufferTokio")]
-// pub async fn uuid_v4_buffer_tokio() -> Result<Buffer> {
-//     task::spawn_blocking(|| {
-//         let uuid = Uuid::new_v4();
-//         uuid.as_bytes().to_vec();
-//     }).await
-//         .map_err(|e| napi::Error::from_reason(e.to_string()))?
-// }
+#[napi(js_name = "uuidV4Queue")]
+#[inline(always)]
+pub fn uuid_v4_queue() -> String {
+    if let Ok(mut uuid) = UUID_QUEUE.lock() {
+        uuid.get_uuid()
+    } else {
+        Uuid::new_v4().to_string()
+    }
+}
+
+#[napi(js_name = "uuidV4Queue2")]
+#[inline(always)]
+pub fn uuid_v4_queue2() -> String {
+    if let Ok(mut uuid) = UUID_QUEUE2.lock() {
+        uuid.get_uuid()
+    } else {
+        Uuid::new_v4().to_string()
+    }
+
+}

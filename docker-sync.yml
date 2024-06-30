@@ -1,0 +1,8 @@
+version: "2"
+syncs:
+    rpm-package-sync:
+        src: 'G:\work\librarys\rpm-package-library'
+        sync_strategy: 'unison'
+        sync_excludes: ['node_modules', '.git', '.idea']
+        unison_image: 'eugenmayer/unison:2.51.3'
+        watch_strategy: 'fswatch'

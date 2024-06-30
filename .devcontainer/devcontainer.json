@@ -1,0 +1,17 @@
+{
+    "name": "Rust Development Environment",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "rust-dev",
+    "workspaceFolder": "/workspace",
+    "dev.containers.dockerPath": "podman",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "serayuzgur.crates",
+                "vadimcn.vscode-lldb"
+            ]
+        }
+    },
+    "remoteUser": "vscode"
+}

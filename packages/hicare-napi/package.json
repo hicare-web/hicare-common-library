@@ -55,5 +55,6 @@
         "@hicare/backend_napi-linux-x64-musl": "0.0.33",
         "@hicare/backend_napi-win32-x64-msvc": "0.0.33"
     },
-    "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c"
+    "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c",
+    "packageManager": "pnpm@9.1.0+sha512.67f5879916a9293e5cf059c23853d571beaf4f753c707f40cb22bed5fb1578c6aad3b6c4107ccb3ba0b35be003eb621a16471ac836c87beb53f9d54bb4612724"
 }

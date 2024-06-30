@@ -168,13 +168,14 @@ async function napiBuild(target) {
             buildCommand.push("--cross-compile");
         }
 
-        child_process.exec(buildCommand.join(" "),(error, stdout, stderr) => {
-            if (error) {
-                console.log("error", error);
-                reject(error);
-            } else {
-                resolve(true);
-            }
-        });
+        console.log(buildCommand.join(" "));
+        // child_process.exec(buildCommand.join(" "),(error, stdout, stderr) => {
+        //     if (error) {
+        //         console.log("error", error);
+        //         reject(error);
+        //     } else {
+        //         resolve(true);
+        //     }
+        // });
     });
 }
