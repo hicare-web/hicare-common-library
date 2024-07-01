@@ -57,6 +57,7 @@ export function debounce<F extends (...args: any) => any>(
     let result: ReturnType<F> | undefined;
     let lastCallTime: number | null = null;
 
+    // 주어진 인자로 함수 호출하고 호출 시간과 호출결과 저장
     function invokeFunc(args: Parameters<F>): ReturnType<F> {
         lastCallTime = Date.now();
         lastArgs = null;
@@ -64,6 +65,7 @@ export function debounce<F extends (...args: any) => any>(
         return result as ReturnType<F>;
     }
 
+    // 타이머가 완료된 후 호출 - 마지막 인자가 있으면 함수 호출
     function trailingEdge(time: number) {
         timeoutId = null;
 
@@ -72,25 +74,28 @@ export function debounce<F extends (...args: any) => any>(
         }
     }
 
+    // 현재 시간 기준으로 남은 시간 계산
     function remainingWait(time: number) {
-        const timeSinceLastCall = time - (lastCallTime ?? 0);
-        const remainingWaitMs = waitMs - timeSinceLastCall;
-        return maxWaitMs !== undefined ? Math.min(remainingWaitMs, maxWaitMs - timeSinceLastCall) : remainingWaitMs;
+        const timeSinceLastCall = time - (lastCallTime ?? 0); // 마지막 호출 이후 경과시간
+        const remainingWaitMs = waitMs - timeSinceLastCall; // 대기시간(waitMs) - 경과시간 = 남은 대기시간
+        return maxWaitMs ? Math.min(remainingWaitMs, maxWaitMs - timeSinceLastCall) : remainingWaitMs;
+        //maxWaitMs가 있으면 ( maxWaitMs - 경과한 시간 )과 남은 대기시간 중 더 작은 값 반환
+        // maxWaitMs가 없으면 남은 대기시간 반환
     }
 
     function debounced(...args: Parameters<F>): ReturnType<F> | undefined {
         const time = Date.now();
-        const isInvoking = shouldInvoke(time);
+        const isInvoking = shouldInvoke(time); // 함수를 호출해야 하는지 확인
 
         lastArgs = args;
-        lastCallTime = time;
+        lastCallTime = time; // 마지막 호출시간을 현재시간으로
 
         if (isInvoking) {
             if (timeoutId === null && (timing === 'leading' || timing === 'trailing')) {
                 result = invokeFunc(lastArgs);
             }
-            if (maxWaitMs !== undefined) {
-                maxTimeoutId = setTimeout(timerExpired, maxWaitMs);
+            if (maxWaitMs) {
+                maxTimeoutId = setTimeout(timerExpired, maxWaitMs); // maxWaitMs를 넘지 않도록 타이머 설정
             }
         }
 
@@ -101,39 +106,45 @@ export function debounce<F extends (...args: any) => any>(
         return result;
     }
 
+    // 지연된 함수 호출 취소
     function cancel() {
-        if (timeoutId !== null) {
-            clearTimeout(timeoutId);
+        if (timeoutId) {
+            clearTimeout(timeoutId); // 설정된 타이머가 있으면 취소
         }
-        if (maxTimeoutId !== null) {
-            clearTimeout(maxTimeoutId);
+        if (maxTimeoutId) {
+            clearTimeout(maxTimeoutId); // 설정된 최대대기시간이 있으면 취소
         }
-        // lastInvokeTime = 0;
+        // 모든 관련상태 초기화
         lastCallTime = null;
         timeoutId = null;
         maxTimeoutId = null;
         lastArgs = null;
     }
 
+    // 지연된 함수 즉시 실행
     function flush(): ReturnType<F> | undefined {
-        return timeoutId === null ? result : trailingEdge(Date.now());
+        return timeoutId ? trailingEdge(Date.now()) : result;
+        // 타이머가 설정되어 있으면 현재시간으로 즉시 함수실행하고 그 결과 반환 / 타이머가 없으면 이미 실행된 이전 값 반환
     }
 
+    // time을 기준으로 함수를 호출해야 하는지 확인
     function shouldInvoke(time: number): boolean {
         const timeSinceLastCall = lastCallTime === null ? 0 : time - lastCallTime;
         return (
-            lastCallTime === null ||
-            timeSinceLastCall >= waitMs ||
-            (maxWaitMs !== undefined && timeSinceLastCall >= maxWaitMs)
+            lastCallTime === null || // 처음 함수가 호출됐을 때 - 즉시 함수 호출 필요
+            timeSinceLastCall >= waitMs || // waitMs 이후에 호출됐을 때 - 마지막 호출 이후 waitMs 이상 지났을 때 함수 호출 필요
+            (maxWaitMs !== undefined && timeSinceLastCall >= maxWaitMs) // 최대 대기시간을 초과했을 때 - maxWaitMs가 있고 마지막 호출 이후 maxWaitMs 이상 경과했을 때 함수 호출 필요
         );
     }
 
+    // 타이머가 만료되었을 때 호출되는 함수
     function timerExpired() {
         const time = Date.now();
         if (shouldInvoke(time)) {
-            return trailingEdge(time);
+            // 현재 시각이 함수를 호출해야 하는 시간인지 확인
+            return trailingEdge(time); // 맞으면 함수 호출
         }
-        timeoutId = setTimeout(timerExpired, remainingWait(time));
+        timeoutId = setTimeout(timerExpired, remainingWait(time)); // 아니면 남은 시간만큼 다시 타이머 설정
     }
 
     return {
