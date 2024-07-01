@@ -1,2 +1,4 @@
 packages:
     - "packages/*"
+    - "!packages/hicare-common-library/bench/*"
+    - "!packages/hicare-napi/bench/*"
