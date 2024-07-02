@@ -2,7 +2,7 @@ const config = {
     entries: [
         {
             filePath: './lib/index.ts',
-            outFile: './build/dist/index.d.ts',
+            outFile: './dist/hicare-common-library.d.ts',
             noCheck: false,
         },
     ],

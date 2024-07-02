@@ -5,7 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import packageJson from './package.json';
 
 const getPackageName = () => {
-    return packageJson.name;
+    return packageJson.name.split('/')[1];
 };
 
 const getPackageNameCamelCase = () => {
@@ -22,12 +22,14 @@ const fileName = {
     iife: `${getPackageName()}.iife.js`,
 };
 
+console.log(getPackageName());
+
 const formats = Object.keys(fileName) as Array<keyof typeof fileName>;
 
 export default defineConfig({
     base: './',
     build: {
-        outDir: './build/dist',
+        outDir: './dist',
         rollupOptions: {
             output: {
                 extend: true,
