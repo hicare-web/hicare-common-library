@@ -1,5 +1,5 @@
 // isNumber.test.ts
-import { isNumber } from 'lib/utility/isNumber';
+import { isNumber } from 'lib/utility/guard/isNumber';
 import { describe, expect, test } from 'vitest';
 
 describe('isNumber test', () => {

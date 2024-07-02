@@ -1,4 +1,4 @@
-import { isBoolean } from 'lib/utility/isBoolean';
+import { isBoolean } from 'lib/utility/guard/isBoolean';
 import { describe, expect, test } from 'vitest';
 
 describe('isBoolean 함수 테스트', () => {

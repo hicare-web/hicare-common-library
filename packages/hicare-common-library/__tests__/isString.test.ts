@@ -1,4 +1,4 @@
-import { isString } from 'lib/utility/isString';
+import { isString } from 'lib/utility/guard/isString';
 import { describe, expect, it } from 'vitest';
 
 describe('isString', () => {

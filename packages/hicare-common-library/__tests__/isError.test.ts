@@ -1,4 +1,4 @@
-import { isError } from 'lib/utility/isError';
+import { isError } from 'lib/utility/guard/isError';
 import { describe, expect, it } from 'vitest';
 
 describe('isError', () => {

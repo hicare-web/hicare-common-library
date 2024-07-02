@@ -1,4 +1,4 @@
-import { isFunction as _isFunction } from 'lib/utility/isFunction';
+import { isFunction as _isFunction } from 'lib/utility/guard/isFunction';
 import { describe, expect, test } from 'vitest';
 
 describe('_isFunction', () => {

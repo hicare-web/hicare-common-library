@@ -1,3 +1,4 @@
+import { throttle as LodashThrottle } from 'lodash-es';
 /**
  *  'limit' 밀리초마다 최대 한 번만 `func`를 호출하는 스로틀링 함수
  *  func는 스로틀링 함수에 제공된 마지막 인수로 호출됩니다.
@@ -16,34 +17,4 @@
  * jQuery(element).on('click', throttled)
  */
 
-export function throttle<T extends any[]>(func: (...args: T) => void, limit: number): (...args: T) => void {
-    let lastFunc: ReturnType<typeof setTimeout> | null = null; // setTimeout 반환값 (예약된 함수 실행)
-    let lastRun: number = 0; // 함수 마지막 실행 시간
-
-    return (...args: T) => {
-        const now = Date.now();
-
-        if (now - lastRun >= limit || lastRun === 0) {
-            // 제한 시간이 지났거나 첫 호출이면 함수 실행
-            if (lastFunc) {
-                // 기존에 예약된 실행이 있으면 취소
-                clearTimeout(lastFunc);
-                lastFunc = null;
-            }
-            func(...args);
-            lastRun = now;
-        } else if (!lastFunc) {
-            // 기존에 예약된 실행이 없고
-            // 제한 시간 내에 호출되었다면 함수 실행 새로 예약
-            lastFunc = setTimeout(
-                () => {
-                    func(...args);
-                    lastRun = now;
-                    lastFunc = null;
-                },
-                limit - (now - lastRun),
-            );
-        }
-        // 기존에 예약된 실행이 있으면 함수를 실행하거나 실행 예약하지 않음 / 아무것도 안 함
-    };
-}
+export const throttle = LodashThrottle;
