@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 import path from 'path';
 import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import packageJson from './package.json';
 
 const getPackageName = () => {
@@ -25,7 +26,6 @@ const formats = Object.keys(fileName) as Array<keyof typeof fileName>;
 
 export default defineConfig({
     base: './',
-
     build: {
         outDir: './build/dist',
         rollupOptions: {
@@ -43,4 +43,5 @@ export default defineConfig({
         },
     },
     test: {},
+    plugins: [tsconfigPaths()],
 });

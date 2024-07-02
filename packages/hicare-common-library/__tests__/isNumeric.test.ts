@@ -1,4 +1,4 @@
-import { isNumeric, isNumericExponential } from 'lib/utility/isNumeric';
+import { isNumeric, isNumericExponential } from 'lib/utility/guard/isNumeric';
 import { describe, expect, it } from 'vitest';
 
 describe('isNumeric', () => {

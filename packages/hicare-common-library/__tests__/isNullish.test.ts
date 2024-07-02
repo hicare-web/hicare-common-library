@@ -1,4 +1,4 @@
-import { isNullish as _isNullish } from 'lib/utility/isNullish';
+import { isNullish as _isNullish } from 'lib/utility/guard/isNullish';
 import { describe, expect, it } from 'vitest';
 
 describe('isNull', () => {

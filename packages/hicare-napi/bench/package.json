@@ -18,7 +18,7 @@
         "pkcs7": "^1.0.4",
         "vite": "^5.3.1",
         "uuid": "^10.0.0",
-        "@hicare-web/backend_napi": "0.0.41",
+        "@hicare-web/backend_napi": "0.0.42",
         "tinybench": "^2.8.0",
         "@node-rs/jsonwebtoken": "0.5.6",
         "jsonwebtoken": "^9.0.2"

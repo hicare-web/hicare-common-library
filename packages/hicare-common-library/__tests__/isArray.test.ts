@@ -1,4 +1,4 @@
-import { isArray as _isArray } from 'lib/utility/isArray';
+import { isArray as _isArray } from 'lib/utility/guard/isArray';
 import { describe, expect, test } from 'vitest';
 
 describe('_isArray 함수 테스트', () => {

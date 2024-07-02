@@ -1,3 +1,4 @@
+import { once as RemedaOnce } from 'remeda';
 /**
  * 함수를 한 번만 호출하도록 제한하는 함수입니다
  * 이후 호출 시에는 `undefined`를 반환합니다
@@ -13,13 +14,4 @@
  *  @category Function
  */
 
-export function once<T>(fn: () => T): () => T | undefined {
-    let result = false;
-    return () => {
-        if (result) {
-            return;
-        }
-        result = true;
-        return fn();
-    };
-}
+export const once = RemedaOnce;

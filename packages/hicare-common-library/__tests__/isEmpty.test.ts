@@ -1,4 +1,4 @@
-import { isEmpty } from 'lib/utility/isEmpty';
+import { isEmpty } from 'lib/utility/guard/isEmpty';
 import { describe, expect, it } from 'vitest';
 
 describe('isEmpty', () => {

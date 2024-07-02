@@ -25,9 +25,6 @@ export function isNumeric<T>(data: T): boolean {
     // 내부 공백이 있는지 확인
     if (data.includes(' ')) return false;
 
-    // 앞뒤 공백이 있는 경우 false 반환
-    if (data.trim() !== data) return false;
-
     const trimData = data.trim();
     if (trimData === '') return false;
 
