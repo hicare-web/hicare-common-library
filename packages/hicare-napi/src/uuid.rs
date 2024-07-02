@@ -98,7 +98,7 @@ lazy_static! {
 pub fn init_queue() {
     std::thread::spawn(|| {
         loop {
-            std::thread::sleep(std::time::Duration::from_millis(10));
+            std::thread::sleep(std::time::Duration::from_millis(512));
 
             if let Ok(mut uuid) = UUID_QUEUE.lock() {
                 if uuid.is_full() {
@@ -107,12 +107,6 @@ pub fn init_queue() {
                     uuid.add_uuid();
                 }
             }
-        }
-    });
-
-    std::thread::spawn(|| {
-        loop {
-            std::thread::sleep(std::time::Duration::from_millis(10));
 
             if let Ok(mut uuid) = UUID_QUEUE2.lock() {
                 if uuid.is_full() {
