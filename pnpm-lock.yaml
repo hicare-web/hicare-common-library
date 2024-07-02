@@ -73,7 +73,26 @@ importers:
         version: 1.6.0(@types/node@20.14.8)
 
   packages/hicare-common-library:
+    dependencies:
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
+      glob:
+        specifier: ^10.4.2
+        version: 10.4.2
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      remeda:
+        specifier: ^2.2.1
+        version: 2.2.2
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
     devDependencies:
+      axios:
+        specifier: ^1.7.2
+        version: 1.7.2
       root:
         specifier: file:../../
         version: 'file:'
@@ -1910,6 +1929,9 @@ packages:
 
   dateformat@3.0.3:
     resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
+
+  dayjs@1.11.11:
+    resolution: {integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==}
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -4099,6 +4121,9 @@ packages:
     resolution: {integrity: sha512-o/3ikDxtXaA59BmZuZrJZDJv8NMDGSj+6j6XaeBmHw8eY1i1qd9+6H+LjVvQXx3HN6aRCGa1cUdJ9RaJZUugnQ==}
     engines: {node: '>=14'}
 
+  remeda@2.2.2:
+    resolution: {integrity: sha512-mPVhqJ39G+Yb6fljuNjdcUMY+leZ9Jz+3KUnvVTysIz4HSpKsBgoiEsNnYzmFPNjTRRNqL+Uhia0tCgKuRL6jw==}
+
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -4960,6 +4985,9 @@ packages:
   yoctocolors@2.0.2:
     resolution: {integrity: sha512-Ct97huExsu7cWeEjmrXlofevF8CvzUglJ4iGUet5B8xn1oumtAZBpHU4GzYuoE6PVqcZ5hghtBrSlhwHuR1Jmw==}
     engines: {node: '>=18'}
+
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
 snapshots:
 
@@ -6957,6 +6985,8 @@ snapshots:
       time-zone: 1.0.0
 
   dateformat@3.0.3: {}
+
+  dayjs@1.11.11: {}
 
   debug@3.2.7:
     dependencies:
@@ -9399,6 +9429,10 @@ snapshots:
     dependencies:
       '@pnpm/npm-conf': 2.2.2
 
+  remeda@2.2.2:
+    dependencies:
+      type-fest: 4.20.1
+
   require-directory@2.1.1: {}
 
   require-relative@0.8.7: {}
@@ -10316,3 +10350,5 @@ snapshots:
   yocto-queue@1.0.0: {}
 
   yoctocolors@2.0.2: {}
+
+  zod@3.23.8: {}
