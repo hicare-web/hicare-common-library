@@ -23,7 +23,7 @@
     },
     "scripts": {
         "dev": "vite --host",
-        "build": "del-cli build/**/* && tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts && copyfiles ./package.json build",
+        "build": "del-cli build/**/* && tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts && copyfiles ./package.json dist",
         "test": "vitest",
         "test:coverage": "vitest --coverage"
     },

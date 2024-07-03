@@ -1,5 +1,5 @@
-export { Code } from './constant/code';
-export { CodeValue } from './constant/codeValue';
+export { Code, code } from './constant/code';
+export { CodeValue, codeValue } from './constant/codeValue';
 export { ConsentCodeText } from './constant/text';
 export { DateSortType } from './constant/type';
 export {
