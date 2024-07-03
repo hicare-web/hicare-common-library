@@ -21,6 +21,42 @@ describe('CloneDeep', () => {
         mapBenchOption,
     );
 
+    bench('js JSON', () => {
+        objectList.map((obj) => {
+            return JSON.parse(JSON.stringify(obj));
+        });
+    });
+
+    bench('js Object.assign', () => {
+        objectList.map((obj) => {
+            return Object.assign({}, obj);
+        });
+    });
+
+    bench('js spread operator', () => {
+        objectList.map((obj) => {
+            return { ...obj };
+        });
+    });
+
+    bench('js fromEntries', () => {
+        objectList.map((obj) => {
+            return Object.fromEntries(Object.entries(obj));
+        });
+    });
+
+    bench('js Object.create', () => {
+        objectList.map((obj) => {
+            return Object.create(obj);
+        });
+    });
+
+    bench('js Object.create(obj, Object.getOwnPropertyDescriptors(obj))', () => {
+        return objectList.map((obj) => {
+            return Object.create(obj, Object.getOwnPropertyDescriptors(obj));
+        });
+    });
+
     bench(
         'remeda clone',
         () => {
