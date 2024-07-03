@@ -3,6 +3,7 @@ import { generatorRandomObject } from './internal/createObject';
 import { mapBenchOption } from './option/benchOption';
 import { clone as remedaClone } from 'remeda';
 import { cloneDeep as lodashCloneDeep, isEqual } from 'lodash-es';
+import { cloneDeep as cloneDeepJs } from '../lib/utility/cloneDeep';
 
 /** 일반적인 100개의 객체 생성 */
 const objectList = [];
@@ -14,9 +15,7 @@ describe('CloneDeep', () => {
     bench(
         'native js clone',
         () => {
-            objectList.map((obj) => {
-                return structuredClone(obj);
-            });
+            cloneDeepJs(objectList);
         },
         mapBenchOption,
     );
@@ -24,12 +23,6 @@ describe('CloneDeep', () => {
     bench('js JSON', () => {
         objectList.map((obj) => {
             return JSON.parse(JSON.stringify(obj));
-        });
-    });
-
-    bench('js Object.assign', () => {
-        objectList.map((obj) => {
-            return Object.assign({}, obj);
         });
     });
 
@@ -67,3 +60,14 @@ describe('CloneDeep', () => {
         mapBenchOption,
     );
 });
+
+const javascriptCloneObjectListCopy = [...objectList];
+const remedaCloneObjectListCopy = [...objectList];
+const lodashCloneObjectListCopy = [...objectList];
+
+const javascriptCloneList = cloneDeepJs(javascriptCloneObjectListCopy);
+const remedaCloneList = remedaClone(remedaCloneObjectListCopy);
+const lodashCloneList = lodashCloneDeep(lodashCloneObjectListCopy);
+
+console.log(isEqual(javascriptCloneList, remedaCloneList));
+console.log(isEqual(javascriptCloneList, lodashCloneList));
