@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest';
+import { bench, describe, test, expect } from 'vitest';
 import { generatorRandomObject } from './internal/createObject';
 import { mapBenchOption } from './option/benchOption';
 import { clone as remedaClone } from 'remeda';
@@ -45,12 +45,6 @@ describe('CloneDeep', () => {
         });
     });
 
-    bench('js Object.create', () => {
-        objectList.map((obj) => {
-            return Object.create(obj);
-        });
-    });
-
     bench('js Object.create(obj, Object.getOwnPropertyDescriptors(obj))', () => {
         return objectList.map((obj) => {
             return Object.create(obj, Object.getOwnPropertyDescriptors(obj));
@@ -73,16 +67,3 @@ describe('CloneDeep', () => {
         mapBenchOption,
     );
 });
-
-const javascriptCloneObjectListCopy = [...objectList];
-const remedaCloneObjectListCopy = [...objectList];
-const lodashCloneObjectListCopy = [...objectList];
-
-const javascriptCloneList = javascriptCloneObjectListCopy.map((obj) => {
-    return structuredClone(obj);
-});
-const remedaCloneList = remedaClone(remedaCloneObjectListCopy);
-const lodashCloneList = lodashCloneDeep(lodashCloneObjectListCopy);
-
-console.log(isEqual(javascriptCloneList, remedaCloneList));
-console.log(isEqual(javascriptCloneList, lodashCloneList));

@@ -1,5 +1,13 @@
 import { bench, describe } from 'vitest';
 import { isEqual } from 'lodash-es';
+import { generatorRandomObject } from './internal/createObject';
+import { sortBenchOption } from './option/benchOption';
+
+/** 일반적인 100개의 객체 생성 */
+const objectList = [];
+for (let i = 0; i < 100; i++) {
+    objectList.push(generatorRandomObject(10));
+}
 
 function quickSort(array, key) {
     if (array.length <= 1) {
