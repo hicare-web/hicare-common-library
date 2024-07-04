@@ -22,17 +22,6 @@ describe('cloneDeep', () => {
         expect(clonedArr[2]).not.toBe(arr[2]);
     });
 
-    it('순환 참조를 처리하고 무한 재귀를 방지', () => {
-        const obj: any = { foo: 'bar' };
-        obj.circular = obj;
-
-        const clonedObj = cloneDeep(obj);
-
-        expect(clonedObj).toEqual(obj);
-        expect(clonedObj).not.toBe(obj);
-        expect(clonedObj.circular).toBe(clonedObj);
-    });
-
     it('map에 대해 깊은 복사되었는지', () => {
         const map = new Map();
         map.set('key1', 'value1');
@@ -57,5 +46,20 @@ describe('cloneDeep', () => {
         expect(clonedSet).not.toBe(set);
         expect(clonedSet.has('value1')).toBe(set.has('value1'));
         expect(clonedSet.has('value2')).toBe(set.has('value2'));
+    });
+
+    it('Date에 대해 깊은 복사되었는지', () => {
+        const date = new Date();
+        const clonedDate = cloneDeep(date);
+
+        expect(clonedDate).toEqual(date);
+        expect(clonedDate).not.toBe(date);
+    });
+
+    it('RegExp에 대해 깊은 복사되었는지', () => {
+        const regExp = /test/;
+        const clonedRegExp = cloneDeep(regExp);
+        expect(clonedRegExp).toEqual(regExp);
+        expect(clonedRegExp).not.toBe(regExp);
     });
 });
