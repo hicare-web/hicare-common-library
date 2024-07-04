@@ -15,7 +15,7 @@ describe('CloneDeep', () => {
     bench(
         'native js clone',
         () => {
-            cloneDeepJs(objectList);
+            Object.assign([], objectList);
         },
         mapBenchOption,
     );
@@ -38,9 +38,9 @@ describe('CloneDeep', () => {
         });
     });
 
-    bench('js Object.create(obj, Object.getOwnPropertyDescriptors(obj))', () => {
+    bench('js Object.create(obj, Object.getOwnProperty(obj))', () => {
         return objectList.map((obj) => {
-            return Object.create(obj, Object.getOwnPropertyDescriptors(obj));
+            return Object.create(obj, Object.getOwnProperty(obj));
         });
     });
 
