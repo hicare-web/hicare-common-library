@@ -1,3 +1,5 @@
+import { cloneNestedArrays } from 'lib/utility/internal/cloneNestedArrays';
+
 /**
  *
  * 받은 값의 깊은복사를 하기 위한 함수
@@ -31,11 +33,7 @@ export function cloneDeep<T>(value: T): T {
     }
     // 배열 처리
     if (Array.isArray(value)) {
-        const clonedArr: any[] = [];
-        value.forEach((item, index) => {
-            clonedArr[index] = cloneDeep(item);
-        });
-        return Object.assign([], clonedArr) as T;
+        return Object.assign([], cloneNestedArrays(value)) as T;
     }
 
     // Map ,Set 처리
@@ -50,10 +48,5 @@ export function cloneDeep<T>(value: T): T {
     }
 
     // 일반 객체 처리
-    const clonedObj = Object.create(Object.getPrototypeOf(value)) as T & { [key: string]: any };
-
-    return Object.assign(
-        clonedObj,
-        ...Object.entries(value as { [key: string]: any }).map(([k, v]) => ({ [k]: cloneDeep(v) })),
-    );
+    return Object.assign({}, value);
 }

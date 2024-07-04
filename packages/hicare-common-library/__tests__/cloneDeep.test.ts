@@ -1,15 +1,23 @@
 import { describe, it, expect } from 'vitest';
 import { cloneDeep } from '../lib/utility/cloneDeep';
+import { generatorRandomObject } from '../bench/internal/createObject';
+import { isEqual } from 'lodash-es';
+
+/** 일반적인 100개의 객체 생성 */
+const objectList = [] as any[];
+for (let i = 0; i < 100; i++) {
+    objectList.push(generatorRandomObject(10));
+}
 
 describe('cloneDeep', () => {
     it('객체에 대해 깊은 복사되었는지', () => {
         const obj = { foo: 'bar', nested: { baz: 'qux' } };
         const clonedObj = cloneDeep(obj);
 
-        expect(clonedObj).toEqual(obj);
+        expect(clonedObj).toStrictEqual(obj);
         expect(clonedObj).not.toBe(obj);
-        expect(clonedObj.nested).toEqual(obj.nested);
-        expect(clonedObj.nested).not.toBe(obj.nested);
+        expect(clonedObj.nested).toStrictEqual(obj.nested);
+        expect(isEqual(clonedObj.nested, obj.nested)).not.toEqual(false);
     });
 
     it('배열에 대해 깊은 복사되었는지', () => {
@@ -61,5 +69,33 @@ describe('cloneDeep', () => {
         const clonedRegExp = cloneDeep(regExp);
         expect(clonedRegExp).toEqual(regExp);
         expect(clonedRegExp).not.toBe(regExp);
+    });
+
+    /* lodash test */
+    it('`_.cloneDeep` should deep clone objects with circular references', () => {
+        const object = {
+            foo: { b: { c: { d: {} } } },
+            bar: { b: {} },
+        };
+
+        object.foo.b.c.d = object;
+        object.bar.b = object.foo.b;
+
+        const actual = cloneDeep(object);
+        expect(actual).toEqual(object);
+    });
+
+    it('`_.cloneDeep` should deep clone objects with lots of circular references', () => {
+        const object = {
+            foo: { b: { c: { d: {} } } },
+            bar: { b: {} },
+        };
+
+        object.foo.b.c.d = object;
+        object.bar.b = object.foo.b;
+
+        const actual = cloneDeep(object);
+        const clone = cloneDeep(objectList);
+        expect(object).toStrictEqual(actual);
     });
 });
