@@ -1,3 +1,9 @@
+/**
+ * '시작'에서 '끝'까지의 '배열' 조각을 생성합니다(단, '끝'은 포함하지 않음).
+ * @param array
+ * @param start
+ * @param end
+ */
 export function slice<T>(array: T[], start: number, end: number): T[] {
     let length = array == null ? 0 : array.length;
     if (!length) {
