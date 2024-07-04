@@ -19,7 +19,7 @@ export function cloneDeep<T>(value: T, visited = new WeakMap<object, T>()): T {
         return value;
     }
 
-    // 순환 참조 처리
+    // 순환 참조 처리 / 무한 재귀 방지
     if (visited.has(value as object)) {
         return visited.get(value as object) as T;
     }
@@ -28,30 +28,29 @@ export function cloneDeep<T>(value: T, visited = new WeakMap<object, T>()): T {
     if (typeof value === 'symbol') {
         return Symbol((value as symbol).description) as T;
     }
-
     if (value instanceof Date) {
         return new Date(value.getTime()) as T;
     }
-
     if (value instanceof RegExp) {
         return new RegExp(value.source, value.flags) as T;
     }
-
     // 배열 처리
     if (Array.isArray(value)) {
         const clonedArr: T[] = [] as unknown as T[];
         visited.set(value, clonedArr as T);
-        return clonedArr.concat(value.map((item) => cloneDeep(item, visited))) as T;
+        return Object.assign(
+            clonedArr,
+            value.map((item) => cloneDeep(item, visited)),
+        ) as T;
     }
 
-    // Map 처리
+    // Map ,Set 처리
     if (value instanceof Map) {
         const clonedMap = new Map() as T & Map<any, any>;
         visited.set(value, clonedMap as T);
         (value as Map<any, any>).forEach((v, k) => clonedMap.set(cloneDeep(k, visited), cloneDeep(v, visited)));
         return clonedMap as T;
     }
-
     if (value instanceof Set) {
         const clonedSet = new Set() as T & Set<any>;
         visited.set(value, clonedSet as T);
