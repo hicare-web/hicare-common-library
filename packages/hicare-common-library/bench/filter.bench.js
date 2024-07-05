@@ -10,13 +10,73 @@ for (let i = 0; i < 100; i++) {
     objectList.push(generatorRandomObject(10));
 }
 
+function nativeWhileFilter(list, callback) {
+    const length = list.length;
+
+    const result = new Array(length);
+    let resultIndex = 0;
+    let i = 0;
+
+    while (i < length) {
+        const value = list[i];
+        if (callback(value, i, list)) {
+            result[resultIndex++] = value;
+        }
+        i++;
+    }
+
+    return result;
+}
+
+function nativeForFilter(list, callback) { // WIN!!
+    const length = list.length;
+    const result = new Array(length);
+    let resultIndex = 0;
+    let i = 0;
+
+    for (i = 0; i < length; i++) {
+        const value = list[i];
+        if (callback(value, i, list)) {
+            result[resultIndex++] = value;
+        }
+    }
+
+    return result;
+}
+
+const a = nativeWhileFilter(objectList, (obj) => obj.id.value > 5);
+const b = objectList.filter((obj) => obj.id.value > 5);
+const c = remedaFilter(objectList, (obj) => obj.id.value > 5);
+const d = lodashFilter(objectList, (obj) => obj.id.value > 5);
+const e = nativeForFilter(objectList, (obj) => obj.id.value > 5);
+
+console.log(`js filer : while loop filter : ${isEqual(a, b)}`);
+console.log(`js filer : remeda filter : ${isEqual(a, c)}`);
+console.log(`js filer : lodash filter : ${isEqual(a, d)}`);
+console.log(`js filer : for loop filter : ${isEqual(a, e)}`);
+
+
 describe('Filter', () => {
     bench(
         'native js filter',
         () => {
-            objectList.filter((obj) => {
-                return obj.id.value > 5;
-            });
+            objectList.filter((obj) => obj.id.value > 5);
+        },
+        mapBenchOption,
+    );
+
+    bench(
+        'while loop filter',
+        () => {
+            nativeWhileFilter(objectList, (obj) => obj.id.value > 5);
+        },
+        mapBenchOption,
+    );
+
+    bench(
+        'for loop filter',
+        () => {
+            nativeForFilter(objectList, (obj) => obj.id.value > 5);
         },
         mapBenchOption,
     );
@@ -41,20 +101,3 @@ describe('Filter', () => {
         mapBenchOption,
     );
 });
-
-const javascriptFilterObjectListCopy = [...objectList];
-const remedaFilterObjectListCopy = [...objectList];
-const lodashFilterObjectListCopy = [...objectList];
-
-const javascriptFilterList = javascriptFilterObjectListCopy.filter((obj) => {
-    return obj.id.value > 5;
-});
-const remedaFilterList = remedaFilter(remedaFilterObjectListCopy, (obj) => {
-    return obj.id.value > 5;
-});
-const lodashFilterList = lodashFilter(lodashFilterObjectListCopy, (obj) => {
-    return obj.id.value > 5;
-});
-
-console.log(isEqual(javascriptFilterList, remedaFilterList));
-console.log(isEqual(javascriptFilterList, lodashFilterList));

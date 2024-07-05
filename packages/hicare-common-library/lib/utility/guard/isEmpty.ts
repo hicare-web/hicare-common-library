@@ -28,37 +28,7 @@
  *
  * @category Guard
  */
-
-type EmptyValue =
-    | string
-    | number
-    | null
-    | boolean
-    | undefined
-    | unknown[]
-    | Record<PropertyKey, unknown>
-    | Map<unknown, unknown>
-    | Set<unknown>
-    | Buffer;
-
-export function isEmpty<T extends EmptyValue>(
-    data: T,
-): data is T &
-    (T extends string
-        ? ''
-        : T extends undefined
-          ? undefined
-          : T extends unknown[]
-            ? []
-            : T extends Map<unknown, unknown>
-              ? Map<never, never>
-              : T extends Set<unknown>
-                ? Set<never>
-                : T extends Buffer
-                  ? Buffer & { length: 0 }
-                  : T extends Record<PropertyKey, unknown>
-                    ? Record<keyof T, never>
-                    : never) {
+export function isEmpty<T>(data: T): boolean {
     if (data === undefined || data === null) {
         return true;
     }
