@@ -47,22 +47,16 @@ function nativeWhileUniqBy(array, keyFunction) {
     return result;
 }
 
-const a = objectList.filter((obj) => obj.id.value);
-const b = nativeForUniqBy(objectList, (obj) => obj.id.value);
-const c = nativeWhileUniqBy(objectList, (obj) => obj.id.value);
-const d = remedaUniqueBy(objectList, (obj) => obj.id.value);
-const e = lodashUniqBy(objectList, (obj) => obj.id.value);
+const a = nativeForUniqBy(objectList, (obj) => obj.id.value);
+const b = nativeWhileUniqBy(objectList, (obj) => obj.id.value);
+const c = remedaUniqueBy(objectList, (obj) => obj.id.value);
+const d = lodashUniqBy(objectList, (obj) => obj.id.value);
 
-console.log(`js uniqBy : native for : ${JSON.stringify(a) === JSON.stringify(b)}`);
-console.log(`js uniqBy : native while : ${JSON.stringify(a) === JSON.stringify(c)}`);
-console.log(`js uniqBy : remeda : ${JSON.stringify(a) === JSON.stringify(d)}`);
-console.log(`js uniqBy : lodash : ${JSON.stringify(a) === JSON.stringify(e)}`);
+console.log(`js native for  : native while : ${JSON.stringify(a) === JSON.stringify(b)}`);
+console.log(`js native for : remeda : ${JSON.stringify(a) === JSON.stringify(c)}`);
+console.log(`js native for : lodash : ${JSON.stringify(a) === JSON.stringify(d)}`);
 
 describe('UniqueBy', () => {
-    bench('js filter uniqBy', () => {
-        objectList.filter((obj) => obj.id.value);
-    });
-
     bench('native for uniqBy', () => {
         nativeForUniqBy(objectList, (obj) => obj.id.value);
     });
