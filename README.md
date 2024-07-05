@@ -12,3 +12,6 @@ pw : hicare228@@
 pnpm whoami 입력 후 hicare 가 나오면 로그인 성공
 
 
+## License
+
+stringCase 참조 : https://github.com/blakeembrey/change-case
