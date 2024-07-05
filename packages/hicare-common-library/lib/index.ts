@@ -39,3 +39,4 @@ export { inRange } from 'lib/utility/inRange';
 export { sleep as delay, sleep as sleep } from 'lib/utility/sleep';
 export { chunk } from 'lib/utility/chunk';
 export { slice } from 'lib/utility/slice';
+
