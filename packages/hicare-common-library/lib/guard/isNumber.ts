@@ -16,6 +16,6 @@
  * @category Guard
  */
 
-export function isNumber<T>(data: T): boolean {
+export function isNumber(data: unknown): data is number {
     return typeof data === 'number' && !Number.isNaN(data);
 }

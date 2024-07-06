@@ -3,7 +3,29 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import { debounce as RemedaDebounce, isObjectType, once as RemedaOnce } from 'remeda';
+import { IsNumericLiteral } from 'type-fest';
 
+export type IterableContainer<T = unknown> = ReadonlyArray<T> | readonly [
+];
+export type Mapped<T extends IterableContainer, K> = {
+	-readonly [P in keyof T]: K;
+};
+export type FormatArgs = (string | number | boolean | null | undefined)[];
+export interface PersonName {
+	lastName?: string;
+	firstName?: string;
+	middleName?: string;
+}
+export interface CodeItem {
+	codeId: string;
+	codeParentId: string | null;
+	codeText?: string | null;
+	[key: string]: any;
+}
+export interface TreeNode extends CodeItem {
+	children: TreeNode[];
+}
+export type GroupByKey = string | number | symbol;
 export declare const enum Code {
 	CLAIM_STATUS = "ca6e8e56-0d72-11ed-a226-06a78b1c250a",
 	CONDITION = "056d5ca9-7734-11ec-a226-06a78b1c250a",
@@ -440,12 +462,12 @@ export declare function isArray<T>(data: T): boolean;
  *  ...
  * @category Guard
  */
-export declare function isBoolean<T>(data: T): boolean;
+export declare function isBoolean(data: unknown): data is boolean;
 /**
  * 받은 데이터가 빈값인지 확인하는 함수
  *  > undefined, null, '', [], {}를 빈값으로 판단
  *  > 객체가 문자열 키 속성을 가지고 있지 않으면 빈값으로 판단
- *  > 배열, arguments 객체, buffer, string, jQuery 등은 length가 0이면 빈값으로 판단
+ *  > 배열, arguments 객체, buffer, string등은 length가 0이면 빈값으로 판단
  *  > map, sets는 size가 0이면 빈값으로 판단
  *
  *
@@ -456,26 +478,26 @@ export declare function isBoolean<T>(data: T): boolean;
  * @signature
  *  isEmpty(data)
  * @example
- *  isEmpty(undefined) //=> true
- *  isEmpty('') //=> true
- *  isEmpty([]) //=> true
- *  isEmpty({}) //=> true
- *  isEmpty(null) //=> true
+ * isEmpty(undefined);  // true
+ * isEmpty(null);       // true
+ * isEmpty('');         // true
+ * isEmpty('  ');       // true
+ * isEmpty([]);         // true
+ * isEmpty({});         // true
+ * isEmpty(new Set());  // true
+ * isEmpty(new Map());  // true
+ * isEmpty(NaN);        // true
+ * isEmpty(new Date('Invalid Date')); // true
  *
- *  isEmpty('test') //=> false
- *  isEmpty([1, 2, 3]) //=> false
- *  isEmpty({ length: 0 }) //=> false
- *  isEmpty({ key: 'value' }) //=> false
- *  isEmpty(0) //=> false
- *  isEmpty(false) //=> false
+ * isEmpty('hello');    // false
+ * isEmpty([1, 2, 3]);  // false
+ * isEmpty({ a: 1 });   // false
+ * isEmpty(0);          // false
+ * isEmpty(false);      // false
  *
  * @category Guard
  */
-export type EmptyValue = string | number | null | boolean | undefined | unknown[] | Record<PropertyKey, unknown> | Map<unknown, unknown> | Set<unknown> | Buffer;
-export declare function isEmpty<T extends EmptyValue>(data: T): data is T & (T extends string ? "" : T extends undefined ? undefined : T extends unknown[] ? [
-] : T extends Map<unknown, unknown> ? Map<never, never> : T extends Set<unknown> ? Set<never> : T extends Buffer ? Buffer & {
-	length: 0;
-} : T extends Record<PropertyKey, unknown> ? Record<keyof T, never> : never);
+export declare function isEmpty(data: unknown): boolean;
 /**
  * 받은 데이터가 Error인지 확인하는 함수
  *
@@ -552,7 +574,7 @@ export declare function isNullish<T>(data: T): boolean;
  *  isNumber(1n); // => false
  * @category Guard
  */
-export declare function isNumber<T>(data: T): boolean;
+export declare function isNumber(data: unknown): data is number;
 /**
  * 주어진 데이터가 숫자 형태를 가진 문자열인지 확인하는 함수
  *
@@ -596,7 +618,7 @@ export declare function isNumeric<T>(data: T): boolean;
 
 * @category Guard
 */
-export declare function isString<T>(data: T): boolean;
+export declare function isString(data: unknown): data is string;
 /**
  *  첫 번째 인자가 두 번째 인자에 포함되는지 확인하는 함수
  *  이 함수는 ``Array.prototype.includes`` 및 ``Set.prototype.has``를 감싸는 래퍼이므로
@@ -729,30 +751,240 @@ export declare const throttle: any;
  */
 export declare const once: typeof RemedaOnce;
 /**
- *  `start`와 `end` 사이에 value가 있는지 확인하지만 `end`는 포함하지 않습니다
- *  'end'가 undefined일 경우, 0부터 'start'까지의 범위로 간주합니다
- *  'start'가 'end'보다 큰 경우 'end'에서 'start'사이의 범위로 변경됩니다
+ * `start`와 `end` 사이에 value가 있는지 확인하지만 `end`의 값이 없는경우는 포함하지 않습니다.
+ * 'end'가 undefined일 경우, 숫자는 0부터 'start'까지, 날짜는 1970년 1월 1일부터 'start'까지의 범위로 간주합니다.
+ * 'start'가 'end'보다 큰 경우 'end'에서 'start'사이의 범위로 변경됩니다.
  *
- * @param value 확인할 변수
- * @param start 시작 변수
- * @param end 끝 변수
- * @returns {boolean} start =<value <end 이라면 true, 아니면 false 반환
+ * @template T
+ * @param {T} value 확인할 변수 (숫자 또는 Date 객체)
+ * @param {T} start 시작 변수 (숫자 또는 Date 객체)
+ * @param {T} [end] 끝 변수 (숫자 또는 Date 객체, 옵션)
+ * @returns {boolean} start <= value < end 이라면 true, 아니면 false 반환
+ * @throws {Error} value의 타입과 start, end의 타입이 일치하지 않을 경우 에러를 발생시킵니다.
+ *
  * @example
+ * // 숫자 사용 예시
+ * inRange(3, 2, 4) // => true
+ * inRange(4, 8) // => true
+ * inRange(1.2, 2) // => true
+ * inRange(-3, -2, -6) // => true
+ * inRange(4, 2) // => false
+ * inRange(2, 2) // => false
  *
- *  inRange(3, 2, 4) // => true
- *  inRange(4, 8) // => true
- *  inRange(1.2, 2) // => true
- *  inRange(-3, -2, -6) // => true
- *
- *  inRange(4, 2) // => false
- *  inRange(2, 2) // => false
- *
+ * @example
+ * // Date 객체 사용 예시
+ * inRange(new Date('2023-01-15'), new Date('2023-01-01'), new Date('2023-01-31')) // => true
+ * inRange(new Date('2023-02-01'), new Date('2023-01-01')) // => false
  */
 export declare function inRange<T>(value: T, start: number, end?: number): boolean;
 export declare function inRange<T>(value: T, start: Date, end?: Date): boolean;
+/**
+ * 지정된 초 만큼 대기합니다. 소수점을 사용하여 밀리초까지 지정할 수 있습니다.
+ * @param {number} seconds
+ * @returns {Promise<void>}
+ */
+export declare function sleep(seconds: number): Promise<unknown>;
+/**
+ * 크기의 길이만큼 그룹으로 분할된 요소 배열을 생성합니다. 배열을 균등하게 분할할 수 없는 경우 최종 청크는 나머지 요소가 됩니다.
+ * @param array
+ * @param size
+ */
+export declare function chunk<T>(array: T[], size: number): T[][];
+/**
+ * '시작'에서 '끝'까지의 '배열' 조각을 생성합니다(단, '끝'은 포함하지 않음).
+ * @param array
+ * @param start
+ * @param end
+ */
+export declare function slice<T>(array: T[], start: number, end: number): T[];
+/**
+ *
+ * 받은 값의 깊은복사를 하기 위한 함수
+ *
+ * @param value - 깊은복사를 할 값
+ * @signature cloneDeep(value)
+ * @example cloneDeep({foo: 'bar'}) // {foo: 'bar'}
+ */
+export declare function cloneDeep<T>(value: T): T;
+/**
+ * array filter를 구현한 함수이며 filter 함수를 통해 조건에 맞는 값을 반환한다.
+ * array가 아닌 경우 array를 반환하고 filter가 함수가 아닌 경우 array를 반환한다.
+ * array가 비어있는 경우 array를 반환한다.
+ * @param array
+ * @param filter
+ */
+export declare function filter<T extends IterableContainer>(array: ReadonlyArray<T>, filter: (item: T, index?: number, list?: T[]) => boolean): T[];
+/**
+ * array map을 구현한 함수이며 map 함수를 통해 값을 변환한다.
+ * array가 아닌 경우 array를 반환하고 map이 함수가 아닌 경우 array를 반환한다.
+ * array가 비어있는 경우 array를 반환한다.
+ * @param array
+ * @param map
+ */
+export declare function map<T extends IterableContainer, R>(array: ReadonlyArray<T>, map: (item: T, index?: number, list?: ReadonlyArray<T>) => R): Mapped<T, R>;
+export declare function reduce<T, U>(data: ReadonlyArray<T>, callbackfn: (previousValue: U, currentValue: T, currentIndex: number, data: ReadonlyArray<T>) => U, initialValue: U): U;
+/**
+ * array find를 구현한 함수이며 find 함수를 통해 조건에 맞는 값을 반환한다.
+ * @param arr
+ * @param predicate
+ */
+export declare function find<T extends IterableContainer>(arr: ReadonlyArray<T>, predicate: (item: T) => boolean): T | undefined;
+/**
+ * array findIndex를 구현한 함수이며 findIndex 함수를 통해 조건에 맞는 값을 반환한다.
+ * @param array
+ * @param predicate
+ */
+export declare function findIndex<T extends IterableContainer>(array: ReadonlyArray<T>, predicate: (item: T) => boolean): number;
+export declare function flatMap<T extends IterableContainer, R>(data: ReadonlyArray<T>, callbackfn: (value: T, index: number, data: ReadonlyArray<T>) => ReadonlyArray<R> | R): Array<R>;
+declare const DEFAULT_DEPTH = 1;
+export declare function flatten<T extends IterableContainer, Depth extends number = typeof DEFAULT_DEPTH>(data: ReadonlyArray<T>, depth?: IsNumericLiteral<Depth> extends true ? Depth : never): Array<T>;
+/**
+ * 주어진 키 함수를 기반으로 배열의 요소들을 그룹화합니다.
+ *
+ * @template T 입력 배열의 요소 타입
+ * @template {string | number | symbol} K 키 함수가 반환하는 키의 타입
+ *
+ * @param {T[]} array 그룹화할 입력 배열
+ * @param {function(T): K} keyFn 배열의 요소를 받아 그룹화 키를 반환하는 함수
+ *
+ * @throws {TypeError} 첫 번째 인자가 배열이 아니거나 두 번째 인자가 함수가 아닌 경우 발생
+ * @throws {TypeError} 키 함수가 문자열, 숫자, 심볼이 아닌 값을 반환할 경우 발생
+ *
+ * @returns {Object.<K, T[]>} 키 함수의 결과를 키로 하고, 해당 키를 생성한 요소들의 배열을 값으로 하는 객체
+ *
+ * @example
+ * const 사람들 = [
+ *   { 이름: "Alice", 나이: 25 },
+ *   { 이름: "Bob", 나이: 30 },
+ *   { 이름: "Charlie", 나이: 25 },
+ *   { 이름: "David", 나이: 30 }
+ * ];
+ * const 나이별그룹 = optimizedGroupBy(사람들, 사람 => 사람.나이);
+ * // 결과:
+ * // {
+ * //   "25": [{ 이름: "Alice", 나이: 25 }, { 이름: "Charlie", 나이: 25 }],
+ * //   "30": [{ 이름: "Bob", 나이: 30 }, { 이름: "David", 나이: 30 }]
+ * // }
+ */
+export declare function groupBy<T, K extends GroupByKey>(array: T[], keyFn: (item: T) => K): Record<K, T[]>;
+export declare function listToTree(list: CodeItem[]): TreeNode[];
+export declare function parseCustomText(node: TreeNode): void;
+export type IterateeFunction<T> = (value: T) => any;
+export type IterateeShorthand<T> = keyof T;
+export type Order = "asc" | "desc";
+export declare function orderBy<T extends object>(collection: readonly T[], iteratees: ReadonlyArray<IterateeFunction<T> | IterateeShorthand<T>>, orders?: ReadonlyArray<Order>): T[];
+/**
+ * 주어진 템플릿 문자열의 플레이스홀더를 인자로 대체합니다.
+ *
+ * @param {string} template - 플레이스홀더 '{:}'를 포함한 템플릿 문자열
+ * @param {...(string|number|boolean|null|undefined)} args - 플레이스홀더를 대체할 값들
+ * @returns {string} 플레이스홀더가 대체된 결과 문자열
+ * @throws {Error} 인자의 수가 플레이스홀더의 수보다 적을 경우 에러를 발생시킵니다.
+ *
+ * @example
+ * // 기본 사용법
+ * format("Hello, {:}!", "world") // 반환값: "Hello, world!"
+ *
+ * @example
+ * // 여러 플레이스홀더 사용
+ * format("Name: {:}, Age: {:}", "John", 30) // 반환값: "Name: John, Age: 30"
+ *
+ * @example
+ * // 이스케이프 처리
+ * format("This is a \\{:} placeholder") // 반환값: "This is a {:} placeholder"
+ *
+ * @example
+ * // 다양한 타입 사용
+ * format("Boolean: {:}, Null: {:}, Undefined: {:}", true, null, undefined)
+ * // 반환값: "Boolean: true, Null: , Undefined: "
+ */
+export declare function format(template: string, ...args: FormatArgs): string;
+export interface Options {
+	locale?: string | string[];
+	sentenceCase?: boolean;
+	sentenceTerminators?: Set<string>;
+	smallWords?: Set<string>;
+	titleTerminators?: Set<string>;
+	wordSeparators?: Set<string>;
+}
+declare function titleCase(input: string, options?: Options | string[] | string): string;
+/**
+ * Supported locale values. Use `false` to ignore locale.
+ * Defaults to `undefined`, which uses the host environment.
+ */
+export type Locale = string[] | string | false | undefined;
+/**
+ * Options used for converting strings to pascal/camel case.
+ */
+export interface PascalCaseOptions extends Options$1 {
+	mergeAmbiguousCharacters?: boolean;
+}
+interface Options$1 {
+	locale?: Locale;
+	split?: (value: string) => string[];
+	/** @deprecated Pass `split: splitSeparateNumbers` instead. */
+	separateNumbers?: boolean;
+	delimiter?: string;
+	prefixCharacters?: string;
+	suffixCharacters?: string;
+}
+declare function noCase(input: string, options?: Options$1): string;
+declare function camelCase(input: string, options?: PascalCaseOptions): string;
+declare function pascalCase(input: string, options?: PascalCaseOptions): string;
+declare function pascalSnakeCase(input: string, options?: Options$1): string;
+declare function capitalCase(input: string, options?: Options$1): string;
+declare function constantCase(input: string, options?: Options$1): string;
+declare function dotCase(input: string, options?: Options$1): string;
+declare function kebabCase(input: string, options?: Options$1): string;
+declare function pathCase(input: string, options?: Options$1): string;
+declare function sentenceCase(input: string, options?: Options$1): string;
+declare function snakeCase(input: string, options?: Options$1): string;
+declare function trainCase(input: string, options?: Options$1): string;
+/**
+ * 주어진 이름 정보를 바탕으로 전체 이름을 형식화하여 반환합니다.
+ * 이름은 "성, 이름 중간이름" 형식으로 반환되며, 중간이름은 선택적입니다.
+ * lastName 또는 firstName이 없는 경우 해당 부분은 빈 문자열로 처리됩니다.
+ *
+ * @param {string | PersonName} nameOrLastName - 성(lastName) 또는 전체 이름 정보를 담은 객체
+ * @param {string} [firstName] - 이름 (nameOrLastName이 객체가 아닐 경우)
+ * @param {string} [middleName] - 중간 이름 (선택적)
+ *
+ * @returns {string} 형식화된 전체 이름
+ *
+ * @example
+ * // 개별 문자열로 사용
+ * getPersonFullName('Doe', 'John'); // 반환값: "Doe, John"
+ * getPersonFullName('Doe', 'John', 'Michael'); // 반환값: "Doe, John Michael"
+ * getPersonFullName('', 'John'); // 반환값: ", John"
+ * getPersonFullName('Doe'); // 반환값: "Doe, "
+ *
+ * @example
+ * // 객체로 사용
+ * getPersonFullName({ lastName: 'Doe', firstName: 'Jane' }); // 반환값: "Doe, Jane"
+ * getPersonFullName({ lastName: 'Doe', firstName: 'Jane', middleName: 'Elizabeth' }); // 반환값: "Doe, Jane Elizabeth"
+ * getPersonFullName({ firstName: 'Jane' }); // 반환값: ", Jane"
+ * getPersonFullName({}); // 반환값: ", "
+ */
+export declare function getPersonFullName(nameOrLastName: string | PersonName, firstName?: string, middleName?: string): string;
+export declare const stringCase: {
+	camelCase: typeof camelCase;
+	capitalCase: typeof capitalCase;
+	constantCase: typeof constantCase;
+	dotCase: typeof dotCase;
+	kebabCase: typeof kebabCase;
+	noCase: typeof noCase;
+	pascalCase: typeof pascalCase;
+	pascalSnakeCase: typeof pascalSnakeCase;
+	pathCase: typeof pathCase;
+	sentenceCase: typeof sentenceCase;
+	snakeCase: typeof snakeCase;
+	titleCase: typeof titleCase;
+	trainCase: typeof trainCase;
+};
 
 export {
 	isObjectType,
+	sleep as delay,
 };
 
 export {};

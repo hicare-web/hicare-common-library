@@ -95,7 +95,6 @@ describe('cloneDeep', () => {
         object.bar.b = object.foo.b;
 
         const actual = cloneDeep(object);
-        const clone = cloneDeep(objectList);
         expect(object).toStrictEqual(actual);
     });
 });

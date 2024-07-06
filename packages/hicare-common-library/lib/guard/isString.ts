@@ -8,7 +8,7 @@
 * @example
 * isString('string') //=> true
 * isString('') //=> true
-* 
+*
 * isString(1) //=> false
 * isString(null) //=> false
 * isString(undefined) //=> false
@@ -21,6 +21,6 @@
 * @category Guard
 */
 
-export function isString<T>(data: T): boolean {
+export function isString(data: unknown): data is string {
     return typeof data === 'string';
 }

@@ -14,6 +14,6 @@
  * @category Guard
  */
 
-export function isBoolean<T>(data: T): boolean {
+export function isBoolean(data: unknown): data is boolean {
     return typeof data === 'boolean';
 }

@@ -1,4 +1,4 @@
-import { isArray, isEmpty, isFunction } from 'lib/utility/guard';
+import { isArray, isEmpty, isFunction } from 'lib/guard';
 
 export function reduce<T, U>(
     data: ReadonlyArray<T>,

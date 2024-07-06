@@ -1,5 +1,5 @@
 import type { IterableContainer } from 'lib/types';
-import { isArray, isEmpty, isFunction } from 'lib/utility/guard';
+import { isArray, isEmpty, isFunction } from 'lib/guard';
 
 export function flatMap<T extends IterableContainer, R>(
     data: ReadonlyArray<T>,

@@ -1,4 +1,4 @@
-import { isArray, isEmpty, isFunction } from 'lib/utility/guard';
+import { isArray, isEmpty, isFunction } from 'lib/guard';
 import type { IterableContainer } from 'lib/types';
 
 /**

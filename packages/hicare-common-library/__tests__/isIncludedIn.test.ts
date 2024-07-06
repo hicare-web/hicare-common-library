@@ -1,4 +1,4 @@
-import { isIncludedIn } from 'lib/utility/guard/isIncludedIn';
+import { isIncludedIn } from 'lib/guard/isIncludedIn';
 import { describe, expect, it } from 'vitest';
 
 describe('isIncludedIn', () => {
