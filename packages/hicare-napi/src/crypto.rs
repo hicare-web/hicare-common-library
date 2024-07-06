@@ -105,7 +105,7 @@ pub fn pbkdf2(password: String, salt: String, cfg: Option<KDFOption>) -> napi::R
         .and_then(|c| c.key_size)
         .unwrap_or(DEFAULT_KEY_LENGTH as u32) as usize;
 
-    let mut result = vec![0u8; key_size];
+    let mut result = vec![0u8; key_size * 4];
     pbkdf2_hmac::<Sha1>(
         password.as_bytes(),
         salt.as_bytes(),

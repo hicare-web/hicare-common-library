@@ -15,16 +15,16 @@ use napi::bindgen_prelude::create_custom_tokio_runtime;
 extern crate napi_derive;
 
 const DEFAULT_ITERATIONS: u32 = 1000;
-const DEFAULT_KEY_LENGTH: usize = 64;
+const DEFAULT_KEY_LENGTH: usize = 16;
 
 #[module_init]
 fn init() {
     let rt = tokio::runtime::Builder::new_multi_thread()
         .worker_threads(1)
         .enable_all()
-        .on_thread_start(|| {
-            println!("tokio thread started");
-        })
+        // .on_thread_start(|| {
+        //     println!("tokio thread started");
+        // })
         .build()
         .unwrap();
 
