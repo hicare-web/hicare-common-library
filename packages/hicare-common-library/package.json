@@ -1,6 +1,6 @@
 {
     "name": "@hicare-web/hicare-common-library",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "Now I’m the model of a modern major general / The venerated Virginian veteran whose men are all / Lining up, to put me up on a pedestal / Writin’ letters to relatives / Embellishin’ my elegance and eloquence / But the elephant is in the room / The truth is in ya face when ya hear the British cannons go / BOOM",
     "keywords": [],
     "author": "JIHOON LEE <jihoon7705@gmail.com>",
@@ -56,10 +56,10 @@
         "zod": "3.23.8"
     },
     "devDependencies": {
-        "axios": "^1.7.2",
-        "vite-plugin-commonjs": "^0.10.1",
         "@vitejs/plugin-legacy": "^5.4.1",
-        "root": "file:../../"
+        "axios": "^1.7.2",
+        "root": "file:../../",
+        "vite-plugin-commonjs": "^0.10.1"
     },
     "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c"
 }
