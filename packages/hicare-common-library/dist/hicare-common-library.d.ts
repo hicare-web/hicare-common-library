@@ -839,18 +839,19 @@ export declare function flatMap<T extends IterableContainer, R>(data: ReadonlyAr
 declare const DEFAULT_DEPTH = 1;
 export declare function flatten<T extends IterableContainer, Depth extends number = typeof DEFAULT_DEPTH>(data: ReadonlyArray<T>, depth?: IsNumericLiteral<Depth> extends true ? Depth : never): Array<T>;
 /**
- * 주어진 키 함수를 기반으로 배열의 요소들을 그룹화합니다.
+ * 주어진 키 함수 또는 속성 이름을 기반으로 배열의 요소들을 그룹화합니다.
  *
  * @template T 입력 배열의 요소 타입
- * @template {string | number | symbol} K 키 함수가 반환하는 키의 타입
+ * @template K 키 함수가 반환하는 키의 타입 또는 객체의 속성 키 타입
  *
  * @param {T[]} array 그룹화할 입력 배열
- * @param {function(T): K} keyFn 배열의 요소를 받아 그룹화 키를 반환하는 함수
+ * @param {((item: T) => K) | keyof T} keyFn 배열의 요소를 받아 그룹화 키를 반환하는 함수 또는 객체의 속성 이름
  *
- * @throws {TypeError} 첫 번째 인자가 배열이 아니거나 두 번째 인자가 함수가 아닌 경우 발생
+ * @throws {TypeError} 첫 번째 인자가 배열이 아닌 경우 발생
+ * @throws {TypeError} 두 번째 인자가 함수도 아니고 문자열도 아닌 경우 발생
  * @throws {TypeError} 키 함수가 문자열, 숫자, 심볼이 아닌 값을 반환할 경우 발생
  *
- * @returns {Object.<K, T[]>} 키 함수의 결과를 키로 하고, 해당 키를 생성한 요소들의 배열을 값으로 하는 객체
+ * @returns {Record<K & GroupByKey, T[]>} 키 함수의 결과 또는 속성 값을 키로 하고, 해당 키를 생성한 요소들의 배열을 값으로 하는 객체
  *
  * @example
  * const 사람들 = [
@@ -859,14 +860,16 @@ export declare function flatten<T extends IterableContainer, Depth extends numbe
  *   { 이름: "Charlie", 나이: 25 },
  *   { 이름: "David", 나이: 30 }
  * ];
- * const 나이별그룹 = optimizedGroupBy(사람들, 사람 => 사람.나이);
+ * const 나이별그룹 = groupBy(사람들, '나이');
+ * // 또는
+ * const 나이별그룹 = groupBy(사람들, 사람 => 사람.나이);
  * // 결과:
  * // {
  * //   "25": [{ 이름: "Alice", 나이: 25 }, { 이름: "Charlie", 나이: 25 }],
  * //   "30": [{ 이름: "Bob", 나이: 30 }, { 이름: "David", 나이: 30 }]
  * // }
  */
-export declare function groupBy<T, K extends GroupByKey>(array: T[], keyFn: (item: T) => K): Record<K, T[]>;
+export declare function groupBy<T, K extends keyof T | GroupByKey>(array: T[], keyFn: ((item: T) => K) | keyof T): Record<K & GroupByKey, T[]>;
 export declare function listToTree(list: CodeItem[]): TreeNode[];
 export declare function parseCustomText(node: TreeNode): void;
 export type IterateeFunction<T> = (value: T) => any;
