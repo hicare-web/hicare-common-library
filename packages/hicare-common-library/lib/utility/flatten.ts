@@ -1,4 +1,4 @@
-import { isArray, isEmpty } from 'lib/utility/guard';
+import { isArray, isEmpty } from 'lib/guard';
 import type { IterableContainer } from 'lib/types';
 import type { IsNumericLiteral } from 'type-fest';
 

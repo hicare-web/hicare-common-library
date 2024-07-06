@@ -1,4 +1,4 @@
-type FormatArgs = (string | number | boolean | null | undefined)[];
+import { FormatArgs } from "lib/types";
 
 /**
  * 주어진 템플릿 문자열의 플레이스홀더를 인자로 대체합니다.
@@ -25,7 +25,7 @@ type FormatArgs = (string | number | boolean | null | undefined)[];
  * format("Boolean: {:}, Null: {:}, Undefined: {:}", true, null, undefined)
  * // 반환값: "Boolean: true, Null: , Undefined: "
  */
-function format(template: string, ...args: FormatArgs): string {
+export function format(template: string, ...args: FormatArgs): string {
     const parts: string[] = [];
     let lastIndex = 0;
     let argIndex = 0;

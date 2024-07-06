@@ -1,7 +1,9 @@
-export { Code, code } from './constant/code';
-export { CodeValue, codeValue } from './constant/codeValue';
-export { ConsentCodeText } from './constant/text';
-export { DateSortType } from './constant/type';
+import type { FormatArgs } from 'lib/types';
+
+export { Code, code } from 'lib/constant/code';
+export { CodeValue, codeValue } from 'lib/constant/codeValue';
+export { ConsentCodeText } from 'lib/constant/text';
+export { DateSortType } from 'lib/constant/type';
 export {
     DateFormatUnit,
     CcmStatusUnit,
@@ -11,7 +13,7 @@ export {
     TimeUnit,
     SignatureUnit,
     ServiceTypeUnit,
-} from './constant/units';
+} from 'lib/constant/units';
 
 export {
     allPass,
@@ -26,28 +28,44 @@ export {
     isString,
     isIncludedIn,
     isObjectType,
-} from 'lib/utility/guard';
+} from 'lib/guard';
 
-export { HicareDate } from 'lib/utility/date';
+export {
+    HicareDate,
+    debounce,
+    throttle,
+    once,
+    inRange,
+    delay,
+    sleep,
+    chunk,
+    slice,
+    cloneDeep,
+    filter,
+    map,
+    reduce,
+    find,
+    findIndex,
+    flatMap,
+    flatten,
+    groupBy,
+    listToTree,
+    parseCustomText,
+    orderBy,
+} from 'lib/utility';
 
-export { debounce } from 'lib/utility/debounce';
-export { throttle } from 'lib/utility/throttle';
-export { once } from 'lib/utility/once';
+// 문자열 포멧팅을 위한 전역 확장
+import { format } from 'lib/string/format';
 
-export { inRange } from 'lib/utility/inRange';
+declare global {
+    interface Number {
+        toFormat(template: string, ...args: FormatArgs): string;
+    }
+}
 
-export { sleep as delay, sleep as sleep } from 'lib/utility/sleep';
-export { chunk } from 'lib/utility/chunk';
-export { slice } from 'lib/utility/slice';
-export { cloneDeep } from 'lib/utility/cloneDeep';
+Number.prototype.toFormat = function (this: number, template: string, ...args: FormatArgs): string {
+    return format(template, this, ...args);
+};
 
-export { stringCase } from 'lib/string';
-
-export { filter } from 'lib/utility/filter';
-
-export { map } from 'lib/utility/map';
-export { reduce } from 'lib/utility/reduce';
-export { find } from 'lib/utility/find';
-export { findIndex } from 'lib/utility/findIndex';
-export { flatMap } from 'lib/utility/flatMap';
-export { flatten } from 'lib/utility/flatten';
+export { format };
+export { stringCase, getPersonFullName } from 'lib/string';

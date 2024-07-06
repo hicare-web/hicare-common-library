@@ -30,3 +30,6 @@ export const stringCase = {
     titleCase,
     trainCase,
 };
+
+export { format } from './format';
+export { getPersonFullName } from './humanName';

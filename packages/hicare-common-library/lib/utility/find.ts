@@ -1,5 +1,5 @@
 import type { IterableContainer } from 'lib/types';
-import { isArray, isEmpty, isFunction } from 'lib/utility/guard';
+import { isArray, isEmpty, isFunction } from 'lib/guard';
 
 /**
  * array find를 구현한 함수이며 find 함수를 통해 조건에 맞는 값을 반환한다.

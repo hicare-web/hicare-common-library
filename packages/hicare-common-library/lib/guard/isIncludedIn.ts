@@ -1,4 +1,4 @@
-import { isObjectType } from 'remeda';
+import { isObjectType } from 'lib/guard/isObject';
 
 /**
  *  첫 번째 인자가 두 번째 인자에 포함되는지 확인하는 함수
