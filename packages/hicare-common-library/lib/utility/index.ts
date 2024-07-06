@@ -1,4 +1,4 @@
-export { HicareDate } from 'lib/utility/date';
+import hicareDate, {HicareDate } from "lib/utility/date";
 export { debounce } from 'lib/utility/debounce';
 export { throttle } from 'lib/utility/throttle';
 export { once } from 'lib/utility/once';
@@ -15,5 +15,9 @@ export { findIndex } from 'lib/utility/findIndex';
 export { flatMap } from 'lib/utility/flatMap';
 export { flatten } from 'lib/utility/flatten';
 export { groupBy } from 'lib/utility/groupBy';
-export { listToTree, parseCustomText } from 'lib/utility/listToTree';
+export { listToTree } from 'lib/utility/listToTree';
 export { orderBy } from 'lib/utility/orderBy';
+export {
+    hicareDate,
+    HicareDate,
+}

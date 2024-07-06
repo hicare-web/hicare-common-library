@@ -32,11 +32,21 @@
     },
     "homepage": "https://bitbucket.org/hicarenet/rpm-package-library#readme",
     "exports": {
-        "import": "./dist/hicare-common-library.mjs",
-        "require": "./dist/hicare-common-library.cjs",
-        "browser": "./dist/hicare-common-library.iife.js"
+        ".": {
+            "types": {
+                "require": "./dist/hicare-common-library.d.ts",
+                "import": "./dist/hicare-common-library.d.ts"
+            },
+            "browser": {
+                "require": "./dist/hicare-common-library.js",
+                "import": "./dist/hicare-common-library.js"
+            },
+            "default": {
+                "require": "./dist/hicare-common-library.js",
+                "import": "./dist/hicare-common-library.js"
+            }
+        }
     },
-    "types": "./dist/hicare-common-library.d.ts",
     "dependencies": {
         "dayjs": "^1.11.11",
         "glob": "^10.4.2",
@@ -47,6 +57,8 @@
     },
     "devDependencies": {
         "axios": "^1.7.2",
+        "vite-plugin-commonjs": "^0.10.1",
+        "@vitejs/plugin-legacy": "^5.4.1",
         "root": "file:../../"
     },
     "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c"

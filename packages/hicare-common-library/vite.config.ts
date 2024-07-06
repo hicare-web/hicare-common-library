@@ -3,6 +3,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import packageJson from './package.json';
+import commonjs from 'vite-plugin-commonjs';
 
 const getPackageName = () => {
     return packageJson.name.split('/')[1];
@@ -18,8 +19,7 @@ const getPackageNameCamelCase = () => {
 
 const fileName = {
     es: `${getPackageName()}.mjs`,
-    cjs: `${getPackageName()}.cjs`,
-    iife: `${getPackageName()}.iife.js`,
+    umd: `${getPackageName()}.js`,
 };
 
 console.log(getPackageName());
@@ -45,5 +45,8 @@ export default defineConfig({
         },
     },
     test: {},
-    plugins: [tsconfigPaths()],
+    plugins: [
+        tsconfigPaths(),
+        commonjs(),
+    ],
 });

@@ -2,12 +2,16 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import duration from 'dayjs/plugin/duration';
+import type { Duration, DurationUnitType, DurationUnitsObjectType } from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import arraySupport from 'dayjs/plugin/arraySupport';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import isBetween from 'dayjs/plugin/isBetween';
+
+// @ts-ignore
+import type plugin from 'dayjs/plugin/utc';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -24,9 +28,9 @@ const timezoneList = new Set<String>();
 
 try {
     // @ts-ignore
-    const timezoneList = Intl.supportedValuesOf('timeZone');
+    const _timezoneList = Intl.supportedValuesOf('timeZone');
 
-    for (const timezone of timezoneList) {
+    for (const timezone of _timezoneList) {
         timezoneList.add(timezone);
     }
 } catch (e) {
@@ -35,6 +39,11 @@ try {
     timezoneList.add('America/New_York');
     timezoneList.add('Asia/Korea');
 }
+
+type CreateDurationParameters =
+    | [units: DurationUnitsObjectType]
+    | [time: number, unit?: DurationUnitType]
+    | [ISO_8601: string];
 
 export class HicareDate {
     static timezone: string = 'America/Los_Angeles';
@@ -65,37 +74,56 @@ export class HicareDate {
 
     /**
      * 현재 시간을 가져옵니다.
+     * @param { dayjs.ConfigType } params
+     * @returns dayjs.Dayjs
      */
-    get now() {
-        return dayjs();
+    now(params?:  dayjs.ConfigType) {
+        return dayjs(params);
     }
 
     /**
      * 현재 시간을 타임존을 적용하여 가져옵니다.
+     * @param { dayjs.ConfigType } params
      */
-    get nowTz() {
-        return dayjs().tz(HicareDate.timezone);
+    nowTz(params?:  dayjs.ConfigType) {
+        return dayjs(params).tz(HicareDate.timezone);
     }
 
     /**
      * 현재 시간을 UTC로 가져옵니다.
+     * @param { dayjs.ConfigType } params
+     * @returns dayjs.Dayjs
      */
-    get nowUTC() {
-        return dayjs().utc();
+    nowUTC(params?:  dayjs.ConfigType) {
+        return dayjs(params).utc();
     }
 
     /**
      * 현재 시간을 타임존을 적용후 UTC를 재 적용하여 가져옵니다.
+     * @param { dayjs.ConfigType } params
+     *  @returns dayjs.Dayjs
      */
-    get nowTzUtc() {
-        return dayjs().tz(HicareDate.timezone).utc();
+    nowTzUtc(params?:  dayjs.ConfigType) {
+        return dayjs(params).tz(HicareDate.timezone).utc();
     }
 
     /**
      * duration 객체를 가져옵니다.
+     * @returns Duration
+     * @param { CreateDurationParameters } args
      */
-    get duration() {
-        return dayjs.duration;
+    duration(...args: CreateDurationParameters):Duration {
+        if (args.length === 1) {
+            if (typeof args[0] === 'object') {
+                return dayjs.duration(args[0]);
+            } else if (typeof args[0] === 'string') {
+                return dayjs.duration(args[0]);
+            } else {
+                return dayjs.duration(args[0]);
+            }
+        } else {
+            return dayjs.duration(args[0] as number, args[1] as DurationUnitType);
+        }
     }
 
     /**

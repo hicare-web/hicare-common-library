@@ -32,6 +32,7 @@ export {
 
 export {
     HicareDate,
+    hicareDate,
     debounce,
     throttle,
     once,
@@ -50,7 +51,6 @@ export {
     flatten,
     groupBy,
     listToTree,
-    parseCustomText,
     orderBy,
 } from 'lib/utility';
 
