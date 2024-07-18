@@ -61,9 +61,5 @@ export function isEmpty(data: unknown): boolean {
         return isNaN(data);
     }
 
-    if (typeof Buffer !== 'undefined' && Buffer.isBuffer(data)) {
-        return data.length === 0;
-    }
-
     return false;
 }
