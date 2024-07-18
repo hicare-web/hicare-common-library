@@ -17,6 +17,7 @@ export { flatten } from 'lib/utility/flatten';
 export { groupBy } from 'lib/utility/groupBy';
 export { listToTree } from 'lib/utility/listToTree';
 export { orderBy } from 'lib/utility/orderBy';
+export { uniqBy } from 'lib/utility/uniqBy';
 export {
     hicareDate,
     HicareDate,

@@ -22,8 +22,6 @@ const fileName = {
     umd: `${getPackageName()}.js`,
 };
 
-console.log(getPackageName());
-
 const formats = Object.keys(fileName) as Array<keyof typeof fileName>;
 
 export default defineConfig({

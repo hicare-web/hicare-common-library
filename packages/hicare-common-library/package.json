@@ -49,7 +49,6 @@
     },
     "dependencies": {
         "dayjs": "^1.11.11",
-        "glob": "^10.4.2",
         "lodash-es": "^4.17.21",
         "remeda": "^2.2.1",
         "type-fest": "4.21.0",

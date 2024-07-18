@@ -52,6 +52,7 @@ export {
     groupBy,
     listToTree,
     orderBy,
+    uniqBy,
 } from 'lib/utility';
 
 // 문자열 포멧팅을 위한 전역 확장
