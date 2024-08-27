@@ -34,7 +34,7 @@ import { isArray } from 'lib/guard';
  */
 export function groupBy<T, K extends keyof T | GroupByKey>(
     array: T[],
-    keyFn: ((item: T) => K) | keyof T
+    keyFn: ((item: T) => K) | keyof T,
 ): Record<K & GroupByKey, T[]> {
     if (!isArray(array)) {
         throw new TypeError('First argument must be an array');
@@ -47,9 +47,7 @@ export function groupBy<T, K extends keyof T | GroupByKey>(
     const result = Object.create(null) as Record<K & GroupByKey, T[]>;
     const length = array.length;
 
-    const getKey = typeof keyFn === 'function'
-        ? keyFn
-        : (item: T) => item[keyFn] as K;
+    const getKey = typeof keyFn === 'function' ? keyFn : (item: T) => item[keyFn] as K;
 
     for (let i = 0; i < length; i++) {
         const item = array[i];

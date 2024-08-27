@@ -6,76 +6,46 @@
  * @signature
  *  isNumeric(data)
  * @example
- *  isNumeric(1); // => true
- *  isNumeric(2*82163); // => true
- *  isNumeric(Infinity); // => true
- *  isNumeric(-123); // => true
- *  isNumeric(1n); // => true
- *  isNumeric(10e3); // => true
- *  isNumeric('2e5'); // => true
+ *  isNumeric(1) // => true
+ *  isNumeric('123') // => true
+ *  isNumeric('123.45') // => true
+ *  isNumeric('-123.45') // => true
+ *  isNumeric('123,456.78') // => true
+ *  isNumeric('1e10') // => true
+ *  isNumeric('0xff') // => true
  *
- *  isNumeric('string'); // => false
- *  isNumeric(' 45'); // => false
+ *  isNumeric('123abc') // => false
+ *  isNumeric('') // => false
+ *  isNumeric(' ') // => false
+ *  isNumeric('0x') // => false
+ *  isNumeric('x1') // => false
+ *  isNumeric('NaN') // => false
+ *  isNumeric('Infinity') // => false
+ *  isNumeric(null) // => false
+ *  isNumeric(undefined) // => false
+ *  isNumeric({}) // => false
+ *  isNumeric([]) // => false
  * @category Guard
  */
+export function isNumeric(data: unknown): boolean {
+    if (typeof data === 'number') return !isNaN(data) && isFinite(data);
+    if (typeof data !== 'string') return false;
 
-export function isNumeric<T>(data: T): boolean {
-    if (typeof data !== 'string' && typeof data !== 'number') return false;
+    const trimmed = data.trim();
+    if (trimmed === '') return false;
+    if (trimmed === 'NaN' || trimmed === 'Infinity' || trimmed === '-Infinity') return false;
 
-    // 문자열인 경우 내부 공백 확인
-    if (typeof data === 'string') {
-        if (data.includes(' ')) return false;
-
-        data = data.trim() as unknown as T;
-        if (data === '') return false;
+    // Check for hexadecimal strings
+    if (/^0x[0-9a-f]+$/i.test(trimmed)) {
+        return true;
     }
 
-    // bigInt 숫자 처리
-    if (typeof data === 'bigint') return true;
-
-    // 콤마가 있는 경우 처리
-    if (typeof data === 'string' && data.includes(',')) {
-        return isNumericWithCommas(data);
+    // Check for numbers with commas
+    if (trimmed.includes(',')) {
+        // This regex checks for correct comma placement and allows for decimal points
+        return /^-?(\d{1,3}(,\d{3})*(\.\d+)?|\d+(\.\d+)?)$/.test(trimmed);
     }
 
-    // 지수 표기법 처리
-    if (typeof data === 'string' && data.toLowerCase().includes('e')) {
-        return isNumericExponential(data);
-    }
-
-    // 일반적인 숫자 처리
-    const numericValue = Number(data);
-    return !isNaN(numericValue) && isFinite(numericValue);
-}
-
-function isNumericWithCommas(data: string): boolean {
-    const parts = data.split(',');
-
-    // 소수점 처리
-    const lastPart = parts[parts.length - 1];
-    const decimalIndex = lastPart.indexOf('.');
-    let decimalPart = '';
-    if (decimalIndex !== -1) {
-        decimalPart = lastPart.slice(decimalIndex + 1);
-        if (!/^\d+$/.test(decimalPart)) return false;
-        parts[parts.length - 1] = lastPart.slice(0, decimalIndex);
-    }
-
-    // 첫 부분을 제외한 나머지 부분이 모두 3자리인지 확인
-    if (!parts.slice(1).every((part) => part.length === 3)) return false;
-
-    // 콤마를 제거하고 일반 숫자로 확인
-    const numData = parts.join('') + (decimalIndex !== -1 ? '.' + decimalPart : '');
-    return !isNaN(parseFloat(numData)) && isFinite(Number(numData));
-}
-
-function isNumericExponential(data: string): boolean {
-    const parts = data.toLowerCase().split('e');
-    if (parts.length !== 2) return false;
-
-    const [base, exponent] = parts;
-
-    // 기수와 지수 모두 유효한 숫자인지 확인
-    // 음수 지수 허용
-    return isNumeric(base) && /^[+-]?\d+$/.test(exponent);
+    // Check for numbers in standard or scientific notation
+    return /^[-+]?(\d*\.?\d+|\d+\.?\d*)([eE][-+]?\d+)?$/.test(trimmed);
 }

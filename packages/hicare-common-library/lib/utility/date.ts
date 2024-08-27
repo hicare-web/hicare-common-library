@@ -77,7 +77,7 @@ export class HicareDate {
      * @param { dayjs.ConfigType } params
      * @returns dayjs.Dayjs
      */
-    now(params?:  dayjs.ConfigType) {
+    now(params?: dayjs.ConfigType) {
         return dayjs(params);
     }
 
@@ -85,7 +85,7 @@ export class HicareDate {
      * 현재 시간을 타임존을 적용하여 가져옵니다.
      * @param { dayjs.ConfigType } params
      */
-    nowTz(params?:  dayjs.ConfigType) {
+    nowTz(params?: dayjs.ConfigType) {
         return dayjs(params).tz(HicareDate.timezone);
     }
 
@@ -94,7 +94,7 @@ export class HicareDate {
      * @param { dayjs.ConfigType } params
      * @returns dayjs.Dayjs
      */
-    nowUTC(params?:  dayjs.ConfigType) {
+    nowUTC(params?: dayjs.ConfigType) {
         return dayjs(params).utc();
     }
 
@@ -103,7 +103,7 @@ export class HicareDate {
      * @param { dayjs.ConfigType } params
      *  @returns dayjs.Dayjs
      */
-    nowTzUtc(params?:  dayjs.ConfigType) {
+    nowTzUtc(params?: dayjs.ConfigType) {
         return dayjs(params).tz(HicareDate.timezone).utc();
     }
 
@@ -112,7 +112,7 @@ export class HicareDate {
      * @returns Duration
      * @param { CreateDurationParameters } args
      */
-    duration(...args: CreateDurationParameters):Duration {
+    duration(...args: CreateDurationParameters): Duration {
         if (args.length === 1) {
             if (typeof args[0] === 'object') {
                 return dayjs.duration(args[0]);
