@@ -13,6 +13,7 @@
  * ...
  * @category Guard
  */
-export function isNullish<T>(data: T): boolean {
-    return data === null || data === undefined;
+
+export function isNullish(data: unknown): data is null | undefined {
+    return data == null;
 }

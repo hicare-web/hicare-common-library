@@ -1,4 +1,4 @@
-import { FormatArgs } from "lib/types";
+import type { FormatArgs } from 'lib/types';
 
 /**
  * 주어진 템플릿 문자열의 플레이스홀더를 인자로 대체합니다.

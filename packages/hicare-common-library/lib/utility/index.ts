@@ -1,24 +1,23 @@
-import hicareDate, {HicareDate } from "lib/utility/date";
-export { debounce } from 'lib/utility/debounce';
-export { throttle } from 'lib/utility/throttle';
-export { once } from 'lib/utility/once';
-export { inRange } from 'lib/utility/inRange';
-export { sleep as delay, sleep as sleep } from 'lib/utility/sleep';
+import hicareDate, { HicareDate } from 'lib/utility/date';
+export { base64Encode, base64Decode, btoa, atob, stringToUint8Array, uint8ArrayToString } from 'lib/utility/base64';
 export { chunk } from 'lib/utility/chunk';
-export { slice } from 'lib/utility/slice';
+export { clone } from 'lib/utility/clone';
 export { cloneDeep } from 'lib/utility/cloneDeep';
+export { equal, shallowEqual, deepEqual } from 'lib/utility/equals';
 export { filter } from 'lib/utility/filter';
-export { map } from 'lib/utility/map';
-export { reduce } from 'lib/utility/reduce';
 export { find } from 'lib/utility/find';
 export { findIndex } from 'lib/utility/findIndex';
 export { flatMap } from 'lib/utility/flatMap';
 export { flatten } from 'lib/utility/flatten';
 export { groupBy } from 'lib/utility/groupBy';
+export { hicareDate, HicareDate };
 export { listToTree } from 'lib/utility/listToTree';
+export { map } from 'lib/utility/map';
+export { memoize } from 'lib/utility/memoized';
 export { orderBy } from 'lib/utility/orderBy';
-export { uniqBy } from 'lib/utility/uniqBy';
-export {
-    hicareDate,
-    HicareDate,
-}
+export { random } from 'lib/utility/random';
+export { reduce } from 'lib/utility/reduce';
+export { sleep as delay, sleep as sleep } from 'lib/utility/sleep';
+export { slice } from 'lib/utility/slice';
+export { uniqBy, uniqByGenerator } from 'lib/utility/uniqBy';
+export { uuidv4 } from 'lib/utility/uuidV4';
