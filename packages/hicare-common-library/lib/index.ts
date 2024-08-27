@@ -87,7 +87,7 @@ export {
     uuidv4,
 } from 'lib/utility';
 
-export { get, has, transform } from 'lib/object';
+export { get, has } from 'lib/object';
 
 // 문자열 포멧팅을 위한 전역 확장
 import { format } from 'lib/string/format';

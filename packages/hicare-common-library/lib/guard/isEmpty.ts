@@ -1,5 +1,3 @@
-import type { IsEmpty } from 'lib/types';
-
 /**
  * 받은 데이터가 빈값인지 확인하는 함수
  *
@@ -35,6 +33,29 @@ import type { IsEmpty } from 'lib/types';
  *  isEmpty(new Blob(['Hello'])) // => false (Browser environment)
  * @category Guard
  */
+
+type EmptyPrimitive = undefined | null | '';
+type EmptyObject = Record<string, never>;
+type EmptyArray = [];
+type EmptySet = Set<never>;
+type EmptyMap = Map<never, never>;
+type EmptyDate = Date & { getTime(): number };
+type EmptyRegExp = RegExp & { source: '(?:)' };
+type EmptyError = Error & { message: '' };
+type EmptyBuffer = Buffer & { length: 0 };
+type EmptyBlob = Blob & { size: 0 };
+
+export type IsEmpty =
+    | EmptyPrimitive
+    | EmptyObject
+    | EmptyArray
+    | EmptySet
+    | EmptyMap
+    | EmptyDate
+    | EmptyRegExp
+    | EmptyError
+    | EmptyBuffer
+    | EmptyBlob;
 
 export function isEmpty(data: unknown): data is IsEmpty {
     if (data == null) {

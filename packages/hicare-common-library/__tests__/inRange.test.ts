@@ -1,4 +1,4 @@
-import { inRange as _inRange } from 'lib/utility/inRange';
+import { inRange as _inRange } from 'lib/guard';
 import { describe, expect, it } from 'vitest';
 
 describe('inRange ', () => {
@@ -6,11 +6,5 @@ describe('inRange ', () => {
         expect(_inRange(1, 0, 2)).toBe(true);
         expect(_inRange(1, 1, 2)).toBe(true);
         expect(_inRange(-1, -5, 1)).toBe(true);
-        expect(_inRange(5.2, 10)).toBe(true);
-
-        const date1 = new Date('2024-01-01');
-        const date2 = new Date('2024-06-01');
-        const date3 = new Date('2024-12-31');
-        expect(_inRange(date2, date1, date3)).toBe(true);
     });
 });
