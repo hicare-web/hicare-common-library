@@ -21,3 +21,4 @@ export { sleep as delay, sleep as sleep } from 'lib/utility/sleep';
 export { slice } from 'lib/utility/slice';
 export { uniqBy, uniqByGenerator } from 'lib/utility/uniqBy';
 export { uuidv4 } from 'lib/utility/uuidV4';
+export { normalize } from 'lib/utility/normalize';

@@ -85,6 +85,7 @@ export {
     uint8ArrayToString,
     uniqBy,
     uuidv4,
+    normalize,
 } from 'lib/utility';
 
 export { get, has } from 'lib/object';
