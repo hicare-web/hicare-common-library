@@ -10,7 +10,8 @@
     "scripts": {
         "test": "lerna run test --stream",
         "build": "lerna run build",
-        "gen": "node ./bin/create.js"
+        "gen": "node ./bin/create.js",
+        "publish": "lerna publish"
     },
     "keywords": [],
     "author": "leebu18@hicare.net",
