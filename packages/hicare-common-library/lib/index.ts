@@ -86,6 +86,10 @@ export {
     uniqBy,
     uuidv4,
     normalize,
+    maxBy,
+    minBy,
+    meanBy,
+    sumBy,
 } from 'lib/utility';
 
 export { get, has } from 'lib/object';

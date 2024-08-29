@@ -22,3 +22,7 @@ export { slice } from 'lib/utility/slice';
 export { uniqBy, uniqByGenerator } from 'lib/utility/uniqBy';
 export { uuidv4 } from 'lib/utility/uuidV4';
 export { normalize } from 'lib/utility/normalize';
+export { sumBy } from 'lib/utility/sumBy';
+export { maxBy } from 'lib/utility/maxBy';
+export { minBy } from 'lib/utility/minBy';
+export { meanBy } from 'lib/utility/meanBy';
