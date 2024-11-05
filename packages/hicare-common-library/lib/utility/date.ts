@@ -16,8 +16,8 @@ import type plugin from 'dayjs/plugin/utc';
 import type { ConfigType } from 'dayjs';
 
 interface DateRange {
-    from: string;
-    to: string;
+    startDate: string;
+    endDate: string;
 }
 
 dayjs.extend(utc);
@@ -145,8 +145,8 @@ export class HicareDate {
     getDayRange(date: ConfigType): DateRange {
         const utcDate = dayjs(date).utc();
         return {
-            from: utcDate.startOf('day').format('YYYY-MM-DD HH:mm:ss'),
-            to: utcDate.endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            startDate: utcDate.startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            endDate: utcDate.endOf('day').format('YYYY-MM-DD HH:mm:ss'),
         };
     }
 
@@ -158,8 +158,8 @@ export class HicareDate {
     getWeekRange(date: ConfigType): DateRange {
         const utcDate = dayjs(date).utc();
         return {
-            from: utcDate.startOf('week').format('YYYY-MM-DD HH:mm:ss'),
-            to: utcDate.endOf('week').format('YYYY-MM-DD HH:mm:ss'),
+            startDate: utcDate.startOf('week').format('YYYY-MM-DD HH:mm:ss'),
+            endDate: utcDate.endOf('week').format('YYYY-MM-DD HH:mm:ss'),
         };
     }
 
@@ -171,8 +171,8 @@ export class HicareDate {
     getMonthRange(date: ConfigType): DateRange {
         const utcDate = dayjs(date).utc();
         return {
-            from: utcDate.startOf('month').format('YYYY-MM-DD HH:mm:ss'),
-            to: utcDate.endOf('month').format('YYYY-MM-DD HH:mm:ss'),
+            startDate: utcDate.startOf('month').format('YYYY-MM-DD HH:mm:ss'),
+            endDate: utcDate.endOf('month').format('YYYY-MM-DD HH:mm:ss'),
         };
     }
 
