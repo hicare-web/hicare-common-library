@@ -49,15 +49,15 @@
     },
     "dependencies": {
         "dayjs": "^1.11.13",
-        "lodash-es": "^4.17.21",
-        "type-fest": "4.21.0",
+        "type-fest": "4.26.1",
         "zod": "3.23.8"
     },
     "devDependencies": {
         "@vitejs/plugin-legacy": "^5.4.1",
         "axios": "^1.7.2",
         "root": "file:../../",
-        "vite-plugin-commonjs": "^0.10.1"
+        "vite-plugin-commonjs": "^0.10.1",
+        "lodash-es": "^4.17.21"
     },
     "gitHead": "90e27fa4a5ddddbd1be56e8dc1326f269a66b26c"
 }

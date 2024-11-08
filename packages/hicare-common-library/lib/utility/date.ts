@@ -13,6 +13,13 @@ import isBetween from 'dayjs/plugin/isBetween';
 // @ts-ignore
 import type plugin from 'dayjs/plugin/utc';
 
+import type { ConfigType } from 'dayjs';
+
+interface DateRange {
+    startDate: string;
+    endDate: string;
+}
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(duration);
@@ -72,6 +79,20 @@ export class HicareDate {
     /** 년 (단위 밀리세컨드) */
     static years = dayjs.duration(1, 'year').asMilliseconds();
 
+    constructor(timezone?: string) {
+        try {
+            dayjs().tz(timezone); // 올바른 타임존인지 검증용
+            if (timezone) {
+                HicareDate.timezone = timezone;
+            }
+        } catch (e) {
+            HicareDate.timezone = 'America/Los_Angeles';
+        }
+    }
+
+    tz(): string {
+        return HicareDate.timezone;
+    }
     /**
      * 현재 시간을 가져옵니다.
      * @param { dayjs.ConfigType } params
@@ -108,6 +129,73 @@ export class HicareDate {
     }
 
     /**
+     * 입력된 날짜를 UTC 기준 형식화된 문자열로 변환합니다.
+     * @param date 변환할 날짜 (string | Date)
+     * @returns string 'YYYY-MM-DD HH:mm:ss' 형식
+     */
+    formatToUTC(date: ConfigType): string {
+        return dayjs(date).utc().format('YYYY-MM-DD HH:mm:ss');
+    }
+
+    /**
+     * 일 단위 범위를 계산합니다.
+     * @param date 기준 날짜
+     * @returns DateRange 해당 일의 시작과 끝
+     */
+    getDayRange(date: ConfigType): DateRange {
+        const utcDate = dayjs(date).utc();
+        return {
+            startDate: utcDate.startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            endDate: utcDate.endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+        };
+    }
+
+    /**
+     * 주 단위 범위를 계산합니다.
+     * @param date 기준 날짜
+     * @returns DateRange 해당 주의 시작과 끝
+     */
+    getWeekRange(date: ConfigType): DateRange {
+        const utcDate = dayjs(date).utc();
+        return {
+            startDate: utcDate.startOf('week').format('YYYY-MM-DD HH:mm:ss'),
+            endDate: utcDate.endOf('week').format('YYYY-MM-DD HH:mm:ss'),
+        };
+    }
+
+    /**
+     * 월 단위 범위를 계산합니다.
+     * @param date 기준 날짜
+     * @returns DateRange 해당 월의 시작과 끝
+     */
+    getMonthRange(date: ConfigType): DateRange {
+        const utcDate = dayjs(date).utc();
+        return {
+            startDate: utcDate.startOf('month').format('YYYY-MM-DD HH:mm:ss'),
+            endDate: utcDate.endOf('month').format('YYYY-MM-DD HH:mm:ss'),
+        };
+    }
+
+    /**
+     * 커스텀 범위를 계산합니다.
+     * @param date 기준 날짜
+     * @param unit 단위 ('day' | 'week' | 'month')
+     * @returns DateRange 해당 단위의 시작과 끝
+     */
+    getDateRange(date: ConfigType, unit: 'day' | 'week' | 'month'): DateRange {
+        switch (unit) {
+            case 'day':
+                return this.getDayRange(date);
+            case 'week':
+                return this.getWeekRange(date);
+            case 'month':
+                return this.getMonthRange(date);
+            default:
+                throw new Error(`Invalid unit: ${unit}`);
+        }
+    }
+
+    /**
      * duration 객체를 가져옵니다.
      * @returns Duration
      * @param { CreateDurationParameters } args
@@ -137,6 +225,7 @@ export class HicareDate {
             throw new Error(`Invalid timezone ${timezone}`);
         }
 
+        HicareDate.timezone = timezone;
         return true;
     }
 }
