@@ -77,12 +77,9 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
       type-fest:
-        specifier: 4.21.0
-        version: 4.21.0
+        specifier: 4.26.1
+        version: 4.26.1
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -93,6 +90,9 @@ importers:
       axios:
         specifier: ^1.7.2
         version: 1.7.5
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       root:
         specifier: file:../../
         version: 'file:'
@@ -2847,6 +2847,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -5344,8 +5345,8 @@ packages:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
 
-  type-fest@4.21.0:
-    resolution: {integrity: sha512-ADn2w7hVPcK6w1I0uWnM//y1rLXZhzB9mr0a3OirzclKF1Wp6VzevUmzz/NRAWunOT6E8HrnpGY7xOfc6K57fA==}
+  type-fest@4.26.1:
+    resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
     engines: {node: '>=16'}
 
   typed-array-buffer@1.0.2:
@@ -10633,7 +10634,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.24.7
       index-to-position: 0.1.2
-      type-fest: 4.21.0
+      type-fest: 4.26.1
 
   parse-ms@4.0.0: {}
 
@@ -10823,7 +10824,7 @@ snapshots:
     dependencies:
       find-up-simple: 1.0.0
       read-pkg: 9.0.1
-      type-fest: 4.21.0
+      type-fest: 4.26.1
 
   read-pkg-up@3.0.0:
     dependencies:
@@ -10867,7 +10868,7 @@ snapshots:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
       parse-json: 8.1.0
-      type-fest: 4.21.0
+      type-fest: 4.26.1
       unicorn-magic: 0.1.0
 
   read@2.1.0:
@@ -11548,7 +11549,7 @@ snapshots:
 
   type-fest@2.19.0: {}
 
-  type-fest@4.21.0: {}
+  type-fest@4.26.1: {}
 
   typed-array-buffer@1.0.2:
     dependencies:
