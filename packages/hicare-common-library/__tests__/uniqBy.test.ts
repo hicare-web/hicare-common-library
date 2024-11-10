@@ -1,4 +1,4 @@
-import { uniqBy } from '../lib/utility/uniqBy';
+import { uniqBy } from 'lib/array/uniqBy';
 import { describe, expect, it } from 'vitest';
 
 describe('uniqBy', () => {

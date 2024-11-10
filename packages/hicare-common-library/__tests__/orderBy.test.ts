@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { orderBy } from 'lib/utility/orderBy';
+import { orderBy } from 'lib/array/orderBy';
 
 describe('orderBy', () => {
     it('array object 배열 정렬 order optional', () => {
