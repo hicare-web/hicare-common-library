@@ -13,7 +13,7 @@
  *   console.log('로그인된 사용자가 없습니다.');
  * }
  */
-export function getCookie(name:string) {
+export function getCookie(name: string): string | null {
     const cookies = document.cookie.split(';');
 
     for (let cookie of cookies) {
@@ -52,13 +52,17 @@ export function getCookie(name:string) {
  *   sameSite: 'strict'
  * });
  */
-export function setCookie(name: string, value: string, options: {
-    maxAge?: number;
-    path?: string;
-    domain?: string;
-    secure?: boolean;
-    sameSite?: 'strict' | 'lax' | 'none';
-} = {}) {
+export function setCookie(
+    name: string,
+    value: string,
+    options: {
+        maxAge?: number;
+        path?: string;
+        domain?: string;
+        secure?: boolean;
+        sameSite?: 'strict' | 'lax' | 'none';
+    } = {},
+) {
     let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
 
     if (options.maxAge) {
@@ -100,6 +104,6 @@ export function deleteCookie(name: string, path: string, domain: string) {
     setCookie(name, '', {
         maxAge: -1,
         path: path,
-        domain: domain
+        domain: domain,
     });
 }
