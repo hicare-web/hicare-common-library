@@ -90,6 +90,9 @@ export {
     minBy,
     meanBy,
     sumBy,
+    getCookie,
+    setCookie,
+    deleteCookie,
 } from 'lib/utility';
 
 export { get, has } from 'lib/object';

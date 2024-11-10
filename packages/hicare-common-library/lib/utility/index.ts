@@ -26,3 +26,4 @@ export { sumBy } from 'lib/array/sumBy';
 export { maxBy } from 'lib/array/maxBy';
 export { minBy } from 'lib/array/minBy';
 export { meanBy } from 'lib/array/meanBy';
+export { getCookie, setCookie, deleteCookie } from 'lib/utility/cookie';
