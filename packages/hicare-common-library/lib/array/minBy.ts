@@ -1,4 +1,4 @@
-import { IterateeFunction } from 'lib/types';
+import type { IterateeFunction } from 'lib/types';
 
 /**
  * 주어진 배열에서 iteratee 함수의 결과가 최소인 요소를 반환합니다.

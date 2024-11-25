@@ -14,8 +14,11 @@ export interface PersonName {
     middleName?: string;
 }
 
-export type NarrowedTo<T, Base> =
-    Extract<T, Base> extends never ? Base : IsAny<T> extends true ? Base : Extract<T, Base>;
+export type NarrowedTo<T, Base> = Extract<T, Base> extends never
+    ? Base
+    : IsAny<T> extends true
+      ? Base
+      : Extract<T, Base>;
 
 export interface CodeItem {
     codeId: string;

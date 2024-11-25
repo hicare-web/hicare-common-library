@@ -1,6 +1,6 @@
+import { isArray } from 'lib/guard';
 import type { CodeItem, TreeNode } from 'lib/types';
 import { cloneDeep } from 'lib/utility/cloneDeep';
-import { isArray } from 'lib/guard';
 
 export function listToTree(list: CodeItem[]): TreeNode[] {
     if (!isArray(list)) return [];

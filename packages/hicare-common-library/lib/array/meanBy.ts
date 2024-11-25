@@ -1,4 +1,4 @@
-import { IterateeFunction } from 'lib/types';
+import type { IterateeFunction } from 'lib/types';
 
 /**
  * 주어진 배열의 요소들에 대해 iteratee 함수를 적용한 결과의 평균을 계산합니다.

@@ -1,5 +1,5 @@
-import { format } from './format';
 import type { PersonName } from 'lib/types'; // format 함수를 import합니다.
+import { format } from './format';
 
 /**
  * 주어진 이름 정보를 바탕으로 전체 이름을 형식화하여 반환합니다.

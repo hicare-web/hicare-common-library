@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { cloneDeep } from '../lib/utility/cloneDeep';
-import { generatorRandomObject } from '../bench/internal/createObject';
 import { isEqual } from 'lodash-es';
+import { describe, expect, it } from 'vitest';
+import { generatorRandomObject } from '../bench/internal/createObject';
+import { cloneDeep } from '../lib/utility/cloneDeep';
 
 /** 일반적인 100개의 객체 생성 */
 const objectList = [] as any[];

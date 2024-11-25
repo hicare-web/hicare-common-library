@@ -1,8 +1,0 @@
-bin
-nginx
-node_modules
-public
-.env*
-*.txt
-**/*.svg
-.eslintrc.js

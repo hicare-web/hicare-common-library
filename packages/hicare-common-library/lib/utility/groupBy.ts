@@ -1,5 +1,5 @@
-import type { GroupByKey } from 'lib/types';
 import { isArray } from 'lib/guard';
+import type { GroupByKey } from 'lib/types';
 
 /**
  * 주어진 키 함수 또는 속성 이름을 기반으로 배열의 요소들을 그룹화합니다.

@@ -1,5 +1,5 @@
-import { isNaN } from 'lib/guard/isNaN';
 import { isFinite } from 'lib/guard/isFinite';
+import { isNaN } from 'lib/guard/isNaN';
 
 /**
  * 주어진 데이터가 숫자인지 확인하는 함수

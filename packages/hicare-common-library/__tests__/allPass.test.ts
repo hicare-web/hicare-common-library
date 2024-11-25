@@ -1,8 +1,8 @@
 import { allPass } from 'lib/guard/allPass';
-import { describe, expect, it } from 'vitest';
+import { isArray } from 'lib/guard/isArray';
 import { isNullish } from 'lib/guard/isNullish';
 import { isString } from 'lib/guard/isString';
-import { isArray } from 'lib/guard/isArray';
+import { describe, expect, it } from 'vitest';
 
 describe('allPass', () => {
     const isDivisibleBy3 = (x: number) => {

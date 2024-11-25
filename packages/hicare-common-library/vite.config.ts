@@ -1,9 +1,9 @@
 /// <reference types="vitest" />
 import path from 'path';
 import { defineConfig } from 'vite';
+import commonjs from 'vite-plugin-commonjs';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import packageJson from './package.json';
-import commonjs from 'vite-plugin-commonjs';
 
 const getPackageName = () => {
     return packageJson.name.split('/')[1];
@@ -43,8 +43,5 @@ export default defineConfig({
         },
     },
     test: {},
-    plugins: [
-        tsconfigPaths(),
-        commonjs(),
-    ],
+    plugins: [tsconfigPaths(), commonjs()],
 });
