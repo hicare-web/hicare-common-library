@@ -41,6 +41,7 @@ build/Release
 
 # Dependency directories
 node_modules/
+.pnpm-store/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -147,3 +148,11 @@ coverage/
 /packages/hicare-napi/index.d.ts
 /packages/hicare-napi/index.js
 .idea/
+/packages/hicare-napi/.intentionally-empty-file.o
+/packages/hicare-napi/bench/bench.tar.gz
+/packages/hicare-common-library/dist/hicare-common-library.d.ts
+/packages/hicare-common-library/dist/hicare-common-library.js
+/packages/hicare-common-library/dist/hicare-common-library.mjs
+/hicare_napi.tar.gz
+/packages/hicare-common-library/dist/package.json
+/packages/hicare-common-library/bench/pnpm-lock.yaml
