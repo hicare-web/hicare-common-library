@@ -266,11 +266,4 @@ export class HicareDate {
 
 const hicareDate = new HicareDate();
 
-console.log(hicareDate.setTimeZone('Asia/Seoul').getMonthRange('2022-02-01'));
-console.log(hicareDate.setTimeZone('Asia/Seoul').getMonthRange('2022-02-01 12:00:00'));
-console.log(hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-02-01'));
-console.log(hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-02-01 12:00:00'));
-console.log(hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-06-01'));
-console.log(hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-06-01 12:00:00'));
-
 export default hicareDate;
