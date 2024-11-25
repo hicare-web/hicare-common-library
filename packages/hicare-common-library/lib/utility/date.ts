@@ -90,6 +90,15 @@ export class HicareDate {
         }
     }
 
+    /**
+     * dayjs 객체를 가져옵니다.
+     * @param { dayjs.ConfigType } params
+     * @returns dayjs.Dayjs
+     */
+    dayjs(params?: dayjs.ConfigType) {
+        return dayjs(params);
+    }
+
     tz(): string {
         return HicareDate.timezone;
     }
