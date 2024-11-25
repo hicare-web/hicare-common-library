@@ -152,6 +152,13 @@ export class HicareDate {
      * 일 단위 범위를 계산합니다. date는 timezone 기준날짜입니다. utc기준의 시간이 아닙니다.
      * @param {ConfigType} date 기준 날짜
      * @returns {DateRange} DateRange 해당 일의 시작과 끝
+     *
+     * @Example 한국시간 1 - hicareDate.setTimeZone('Asia/Seoul').getDayRange('2022-02-01') - 2022-01-31 15:00:00 ~ 2022-02-01 14:59:59
+     * @Example 한국시간 2- hicareDate.setTimeZone('Asia/Seoul').getDayRange('2022-02-01 12:00:00') - 2022-01-31 15:00:00 ~ 2022-02-01 14:59:59
+     * @Example 미국시간 서머타임 전 1 - hicareDate.setTimeZone('America/Los_Angeles').getDayRange('2022-02-01') - 2022-01-31 08:00:00 ~ 2022-02-01 07:59:59
+     * @Example 미국시간 서머타임 전 2 - hicareDate.setTimeZone('America/Los_Angeles').getDayRange('2022-02-01 12:00:00') - 2022-01-31 08:00:00 ~ 2022-02-01 07:59:59
+     * @Example 미국시간 서머타임 후 1 - hicareDate.setTimeZone('America/Los_Angeles').getDayRange('2022-06-01') - 2022-05-31 07:00:00 ~ 2022-06-01 06:59:59
+     * @Example 미국시간 서머타임 후 2 - hicareDate.setTimeZone('America/Los_Angeles').getDayRange('2022-06-01 12:00:00') - 2022-05-31 07:00:00 ~ 2022-06-01 06:59:59
      */
     getDayRange(date: ConfigType): DateRange {
         const _date = dayjs.tz(date, HicareDate.timezone);
@@ -165,6 +172,12 @@ export class HicareDate {
      * 주 단위 범위를 계산합니다. date는 timezone 기준날짜입니다. utc기준의 시간이 아닙니다.
      * @param {ConfigType} date 기준 날짜
      * @returns {DateRange} DateRange 해당 주의 시작과 끝
+     * @Example 한국시간 1 - hicareDate.setTimeZone('Asia/Seoul').getWeekRange('2022-02-01') - 2022-01-29 15:00:00 ~ 2022-02-05 14:59:59
+     * @Example 한국시간 2 - hicareDate.setTimeZone('Asia/Seoul').getWeekRange('2022-02-01 12:00:00') - 2022-01-29 15:00:00 ~ 2022-02-05 14:59:59
+     * @Example 미국시간 서머타임 전 1 - hicareDate.setTimeZone('America/Los_Angeles').getWeekRange('2022-02-01') - 2022-01-30 08:00:00 ~ 2022-02-06 07:59:59
+     * @Example 미국시간 서머타임 전 2 - hicareDate.setTimeZone('America/Los_Angeles').getWeekRange('2022-02-01 12:00:00') - 2022-01-30 08:00:00 ~ 2022-02-06 07:59:59
+     * @Example 미국시간 서머타임 후 1 - hicareDate.setTimeZone('America/Los_Angeles').getWeekRange('2022-06-01') - 2022-05-29 07:00:00 ~ 2022-06-05 06:59:59
+     * @Example 미국시간 서머타임 후 2 - hicareDate.setTimeZone('America/Los_Angeles').getWeekRange('2022-06-01 12:00:00') - 2022-05-29 07:00:00 ~ 2022-06-05 06:59:59
      */
     getWeekRange(date: ConfigType): DateRange {
         const _date = dayjs.tz(date, HicareDate.timezone);
@@ -178,6 +191,12 @@ export class HicareDate {
      * 월 단위 범위를 계산합니다. date는 timezone 기준날짜입니다. utc기준의 시간이 아닙니다.
      * @param {ConfigType} date 기준 날짜
      * @returns {DateRange} DateRange 해당 월의 시작과 끝
+     * @Example 한국시간 1 - hicareDate.setTimeZone('Asia/Seoul').getMonthRange('2022-02-01') - 2022-01-31 15:00:00 ~ 2022-02-28 14:59:59
+     * @Example 한국시간 2 - hicareDate.setTimeZone('Asia/Seoul').getMonthRange('2022-02-01 12:00:00') - 2022-01-31 15:00:00 ~ 2022-02-28 14:59:59
+     * @Example 미국시간 서머타임 전 1 - hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-02-01') - 2022-02-01 08:00:00 ~ 2022-03-01 07:59:59
+     * @Example 미국시간 서머타임 전 2 - hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-02-01 12:00:00') - 2022-02-01 08:00:00 ~ 2022-03-01 07:59:59
+     * @Example 미국시간 서머타임 후 1 - hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-06-01') - 2022-06-01 07:00:00 ~ 2022-07-01 06:59:59
+     * @Example 미국시간 서머타임 후 2 - hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-06-01 12:00:00') - 2022-06-01 07:00:00 ~ 2022-07-01 06:59:59
      */
     getMonthRange(date: ConfigType): DateRange {
         const _date = dayjs.tz(date, HicareDate.timezone);
@@ -246,5 +265,12 @@ export class HicareDate {
 }
 
 const hicareDate = new HicareDate();
+
+console.log(hicareDate.setTimeZone('Asia/Seoul').getMonthRange('2022-02-01'));
+console.log(hicareDate.setTimeZone('Asia/Seoul').getMonthRange('2022-02-01 12:00:00'));
+console.log(hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-02-01'));
+console.log(hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-02-01 12:00:00'));
+console.log(hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-06-01'));
+console.log(hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-06-01 12:00:00'));
 
 export default hicareDate;
