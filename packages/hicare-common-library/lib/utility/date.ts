@@ -1,19 +1,18 @@
+import type { ConfigType } from 'dayjs';
 import dayjs from 'dayjs';
 import arraySupport from 'dayjs/plugin/arraySupport';
-import duration from 'dayjs/plugin/duration';
 import type { Duration, DurationUnitType, DurationUnitsObjectType } from 'dayjs/plugin/duration';
+import duration from 'dayjs/plugin/duration';
 import isBetween from 'dayjs/plugin/isBetween';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
-
 // @ts-ignore
 import type plugin from 'dayjs/plugin/utc';
-
-import type { ConfigType } from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import { DateComparisonResult } from 'lib/types';
 
 interface DateRange {
     startDate: string;
@@ -47,10 +46,12 @@ try {
     timezoneList.add('Asia/Seoul');
 }
 
-type CreateDurationParameters =
+export type CreateDurationParameters =
     | [units: DurationUnitsObjectType]
     | [time: number, unit?: DurationUnitType]
     | [ISO_8601: string];
+
+export type HicareDateType = dayjs.Dayjs;
 
 export class HicareDate {
     static timezone: string = 'America/Los_Angeles';
@@ -246,6 +247,21 @@ export class HicareDate {
         } else {
             return dayjs.duration(args[0] as number, args[1] as DurationUnitType);
         }
+    }
+
+    /**
+     * 두 날짜를 비교하여 정렬에 사용될 값을 반환합니다.
+     * @param {ConfigType} firstDate 첫 번째 날짜
+     * @param {ConfigType} secondDate 두 번째 날짜
+     * @returns {DateComparisonResult} 첫 번째 날짜가 더 늦으면 AFTER, 같으면 EQUAL, 더 이르면 BEFORE를 반환합니다.
+     */
+    compareDates(firstDate: ConfigType, secondDate: ConfigType): DateComparisonResult {
+        const diff = dayjs(firstDate).valueOf() - dayjs(secondDate).valueOf();
+        return diff > 0
+            ? DateComparisonResult.AFTER
+            : diff < 0
+              ? DateComparisonResult.BEFORE
+              : DateComparisonResult.EQUAL;
     }
 
     /**

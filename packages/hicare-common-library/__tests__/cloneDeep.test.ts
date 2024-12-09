@@ -97,4 +97,78 @@ describe('cloneDeep', () => {
         const actual = cloneDeep(object);
         expect(object).toStrictEqual(actual);
     });
+
+    it('should clone primitive values', () => {
+        expect(cloneDeep('hello')).toBe('hello');
+        expect(cloneDeep(42)).toBe(42);
+        expect(cloneDeep(true)).toBe(true);
+        expect(cloneDeep(null)).toBe(null);
+        expect(cloneDeep(undefined)).toBe(undefined);
+    });
+
+    it('should clone Date objects', () => {
+        const date = new Date('2024-01-01');
+        const clonedDate = cloneDeep(date);
+
+        expect(clonedDate).toEqual(date);
+        expect(clonedDate).not.toBe(date); // Should be a different instance
+    });
+
+    it('should clone arrays', () => {
+        const array = [1, 'two', { three: 3 }];
+        const clonedArray = cloneDeep(array);
+
+        expect(clonedArray).toEqual(array);
+        expect(clonedArray).not.toBe(array);
+        expect(clonedArray[2]).not.toBe(array[2]); // Nested objects should be cloned
+    });
+
+    it('should clone nested objects', () => {
+        const obj = {
+            a: 1,
+            b: {
+                c: 'hello',
+                d: {
+                    e: true,
+                    f: [1, 2, { g: 3 }],
+                },
+            },
+        };
+
+        const clonedObj = cloneDeep(obj);
+
+        expect(clonedObj).toEqual(obj);
+        expect(clonedObj).not.toBe(obj);
+        expect(clonedObj.b).not.toBe(obj.b);
+        expect(clonedObj.b.d).not.toBe(obj.b.d);
+        expect(clonedObj.b.d.f).not.toBe(obj.b.d.f);
+        expect(clonedObj.b.d.f[2]).not.toBe(obj.b.d.f[2]);
+    });
+
+    it('should clone complex nested structures', () => {
+        const complex = {
+            date: new Date('2024-01-01'),
+            numbers: [1, 2, 3],
+            nested: {
+                string: 'hello',
+                array: [{ a: 1 }, { b: 2 }],
+                deepNested: {
+                    boolean: true,
+                    date: new Date('2024-12-31'),
+                },
+            },
+        };
+
+        const clonedComplex = cloneDeep(complex);
+
+        expect(clonedComplex).toEqual(complex);
+        expect(clonedComplex).not.toBe(complex);
+        expect(clonedComplex.date).not.toBe(complex.date);
+        expect(clonedComplex.numbers).not.toBe(complex.numbers);
+        expect(clonedComplex.nested).not.toBe(complex.nested);
+        expect(clonedComplex.nested.array).not.toBe(complex.nested.array);
+        expect(clonedComplex.nested.array[0]).not.toBe(complex.nested.array[0]);
+        expect(clonedComplex.nested.deepNested).not.toBe(complex.nested.deepNested);
+        expect(clonedComplex.nested.deepNested.date).not.toBe(complex.nested.deepNested.date);
+    });
 });

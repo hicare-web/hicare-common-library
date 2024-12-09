@@ -35,3 +35,9 @@ export interface TreeNode extends CodeItem {
 export type GroupByKey = string | number | symbol;
 
 export type IterateeFunction<T> = (value: T) => any;
+
+export enum DateComparisonResult {
+    AFTER = 1,
+    EQUAL = 0,
+    BEFORE = -1,
+}
