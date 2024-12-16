@@ -1,4 +1,4 @@
-import type { ConfigType } from 'dayjs';
+import type { ConfigType, Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import arraySupport from 'dayjs/plugin/arraySupport';
 import type { Duration, DurationUnitType, DurationUnitsObjectType } from 'dayjs/plugin/duration';
@@ -51,7 +51,7 @@ export type CreateDurationParameters =
     | [time: number, unit?: DurationUnitType]
     | [ISO_8601: string];
 
-export type HicareDateType = dayjs.Dayjs;
+export type HicareDateType = Dayjs;
 export type HicareDuration = Duration;
 export type HicareConfigType = ConfigType;
 
@@ -96,9 +96,9 @@ export class HicareDate {
     /**
      * dayjs 객체를 가져옵니다.
      * @param { HicareConfigType } params
-     * @returns dayjs.Dayjs
+     * @returns HicareDateType
      */
-    dayjs(params?: HicareConfigType) {
+    dayjs(params?: HicareConfigType): HicareDateType {
         return dayjs(params);
     }
 
@@ -108,10 +108,10 @@ export class HicareDate {
     /**
      * 현재 시간을 가져옵니다.
      * @param { HicareConfigType } params
-     * @returns dayjs.Dayjs
+     * @returns HicareDateType
      * @deprecated 2.0.0 instead use hicareDate.dayjs()
      */
-    now(params?: HicareConfigType) {
+    now(params?: HicareConfigType): HicareDateType {
         return dayjs(params);
     }
 
@@ -119,26 +119,26 @@ export class HicareDate {
      * 현재 시간을 타임존을 적용하여 가져옵니다.
      * @param { HicareConfigType } params
      */
-    nowTz(params?: HicareConfigType) {
+    nowTz(params?: HicareConfigType): HicareDateType {
         return dayjs(params).tz(HicareDate.timezone);
     }
 
     /**
      * 현재 시간을 UTC로 가져옵니다.
      * @param { HicareConfigType } params
-     * @returns dayjs.Dayjs
+     * @returns HicareDateType
      */
-    nowUTC(params?: HicareConfigType) {
+    nowUTC(params?: HicareConfigType): HicareDateType {
         return dayjs(params).utc();
     }
 
     /**
      * 현재 시간을 타임존을 적용후 UTC를 재 적용하여 가져옵니다.
      * @param { HicareConfigType } params
-     *  @returns dayjs.Dayjs
+     *  @returns HicareDateType
      *  @deprecated 2.0.0 instead use nowTz
      */
-    nowTzUtc(params?: HicareConfigType) {
+    nowTzUtc(params?: HicareConfigType): HicareDateType {
         return dayjs(params).tz(HicareDate.timezone).utc();
     }
 
