@@ -52,6 +52,8 @@ export type CreateDurationParameters =
     | [ISO_8601: string];
 
 export type HicareDateType = dayjs.Dayjs;
+export type HicareDuration = Duration;
+export type HicareConfigType = ConfigType;
 
 export class HicareDate {
     static timezone: string = 'America/Los_Angeles';
@@ -93,10 +95,10 @@ export class HicareDate {
 
     /**
      * dayjs 객체를 가져옵니다.
-     * @param { dayjs.ConfigType } params
+     * @param { HicareConfigType } params
      * @returns dayjs.Dayjs
      */
-    dayjs(params?: dayjs.ConfigType) {
+    dayjs(params?: HicareConfigType) {
         return dayjs(params);
     }
 
@@ -105,53 +107,53 @@ export class HicareDate {
     }
     /**
      * 현재 시간을 가져옵니다.
-     * @param { dayjs.ConfigType } params
+     * @param { HicareConfigType } params
      * @returns dayjs.Dayjs
      * @deprecated 2.0.0 instead use hicareDate.dayjs()
      */
-    now(params?: dayjs.ConfigType) {
+    now(params?: HicareConfigType) {
         return dayjs(params);
     }
 
     /**
      * 현재 시간을 타임존을 적용하여 가져옵니다.
-     * @param { dayjs.ConfigType } params
+     * @param { HicareConfigType } params
      */
-    nowTz(params?: dayjs.ConfigType) {
+    nowTz(params?: HicareConfigType) {
         return dayjs(params).tz(HicareDate.timezone);
     }
 
     /**
      * 현재 시간을 UTC로 가져옵니다.
-     * @param { dayjs.ConfigType } params
+     * @param { HicareConfigType } params
      * @returns dayjs.Dayjs
      */
-    nowUTC(params?: dayjs.ConfigType) {
+    nowUTC(params?: HicareConfigType) {
         return dayjs(params).utc();
     }
 
     /**
      * 현재 시간을 타임존을 적용후 UTC를 재 적용하여 가져옵니다.
-     * @param { dayjs.ConfigType } params
+     * @param { HicareConfigType } params
      *  @returns dayjs.Dayjs
      *  @deprecated 2.0.0 instead use nowTz
      */
-    nowTzUtc(params?: dayjs.ConfigType) {
+    nowTzUtc(params?: HicareConfigType) {
         return dayjs(params).tz(HicareDate.timezone).utc();
     }
 
     /**
      * 입력된 날짜를 UTC 기준 형식화된 문자열로 변환합니다.
-     * @param {ConfigType} date 변환할 날짜 (string | Date)
+     * @param {HicareConfigType} date 변환할 날짜 (string | Date)
      * @returns {string} 'YYYY-MM-DD HH:mm:ss' 형식
      */
-    formatToUTC(date: ConfigType): string {
+    formatToUTC(date: HicareConfigType): string {
         return dayjs(date).utc().format('YYYY-MM-DD HH:mm:ss');
     }
 
     /**
      * 일 단위 범위를 계산합니다. date는 timezone 기준날짜입니다. utc기준의 시간이 아닙니다.
-     * @param {ConfigType} date 기준 날짜
+     * @param {HicareConfigType} date 기준 날짜
      * @returns {DateRange} DateRange 해당 일의 시작과 끝
      *
      * @Example 한국시간 1 - hicareDate.setTimeZone('Asia/Seoul').getDayRange('2022-02-01') - 2022-01-31 15:00:00 ~ 2022-02-01 14:59:59
@@ -161,7 +163,7 @@ export class HicareDate {
      * @Example 미국시간 서머타임 후 1 - hicareDate.setTimeZone('America/Los_Angeles').getDayRange('2022-06-01') - 2022-05-31 07:00:00 ~ 2022-06-01 06:59:59
      * @Example 미국시간 서머타임 후 2 - hicareDate.setTimeZone('America/Los_Angeles').getDayRange('2022-06-01 12:00:00') - 2022-05-31 07:00:00 ~ 2022-06-01 06:59:59
      */
-    getDayRange(date: ConfigType): DateRange {
+    getDayRange(date: HicareConfigType): DateRange {
         const _date = dayjs.tz(date, HicareDate.timezone);
         return {
             startDate: _date.startOf('day').utc().format('YYYY-MM-DD HH:mm:ss'),
@@ -171,7 +173,7 @@ export class HicareDate {
 
     /**
      * 주 단위 범위를 계산합니다. date는 timezone 기준날짜입니다. utc기준의 시간이 아닙니다.
-     * @param {ConfigType} date 기준 날짜
+     * @param {HicareConfigType} date 기준 날짜
      * @returns {DateRange} DateRange 해당 주의 시작과 끝
      * @Example 한국시간 1 - hicareDate.setTimeZone('Asia/Seoul').getWeekRange('2022-02-01') - 2022-01-29 15:00:00 ~ 2022-02-05 14:59:59
      * @Example 한국시간 2 - hicareDate.setTimeZone('Asia/Seoul').getWeekRange('2022-02-01 12:00:00') - 2022-01-29 15:00:00 ~ 2022-02-05 14:59:59
@@ -180,7 +182,7 @@ export class HicareDate {
      * @Example 미국시간 서머타임 후 1 - hicareDate.setTimeZone('America/Los_Angeles').getWeekRange('2022-06-01') - 2022-05-29 07:00:00 ~ 2022-06-05 06:59:59
      * @Example 미국시간 서머타임 후 2 - hicareDate.setTimeZone('America/Los_Angeles').getWeekRange('2022-06-01 12:00:00') - 2022-05-29 07:00:00 ~ 2022-06-05 06:59:59
      */
-    getWeekRange(date: ConfigType): DateRange {
+    getWeekRange(date: HicareConfigType): DateRange {
         const _date = dayjs.tz(date, HicareDate.timezone);
         return {
             startDate: _date.startOf('week').utc().format('YYYY-MM-DD HH:mm:ss'),
@@ -190,7 +192,7 @@ export class HicareDate {
 
     /**
      * 월 단위 범위를 계산합니다. date는 timezone 기준날짜입니다. utc기준의 시간이 아닙니다.
-     * @param {ConfigType} date 기준 날짜
+     * @param {HicareConfigType} date 기준 날짜
      * @returns {DateRange} DateRange 해당 월의 시작과 끝
      * @Example 한국시간 1 - hicareDate.setTimeZone('Asia/Seoul').getMonthRange('2022-02-01') - 2022-01-31 15:00:00 ~ 2022-02-28 14:59:59
      * @Example 한국시간 2 - hicareDate.setTimeZone('Asia/Seoul').getMonthRange('2022-02-01 12:00:00') - 2022-01-31 15:00:00 ~ 2022-02-28 14:59:59
@@ -199,7 +201,7 @@ export class HicareDate {
      * @Example 미국시간 서머타임 후 1 - hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-06-01') - 2022-06-01 07:00:00 ~ 2022-07-01 06:59:59
      * @Example 미국시간 서머타임 후 2 - hicareDate.setTimeZone('America/Los_Angeles').getMonthRange('2022-06-01 12:00:00') - 2022-06-01 07:00:00 ~ 2022-07-01 06:59:59
      */
-    getMonthRange(date: ConfigType): DateRange {
+    getMonthRange(date: HicareConfigType): DateRange {
         const _date = dayjs.tz(date, HicareDate.timezone);
         return {
             startDate: _date.startOf('month').utc().format('YYYY-MM-DD HH:mm:ss'),
@@ -209,11 +211,11 @@ export class HicareDate {
 
     /**
      * 커스텀 범위를 계산합니다.
-     * @param {ConfigType} date 기준 날짜
+     * @param {HicareConfigType} date 기준 날짜
      * @param {'day' | 'week' | 'month' } unit 단위 ('day' | 'week' | 'month')
      * @returns {DateRange} DateRange 해당 단위의 시작과 끝
      */
-    getDateRange(date: ConfigType, unit: 'day' | 'week' | 'month'): DateRange {
+    getDateRange(date: HicareConfigType, unit: 'day' | 'week' | 'month'): DateRange {
         switch (unit) {
             case 'day':
                 return this.getDayRange(date);
@@ -228,14 +230,14 @@ export class HicareDate {
 
     /**
      * duration 객체를 가져옵니다.
-     * @returns Duration
+     * @returns hicareDuration
      * @param { CreateDurationParameters } args
      *
      * example 1: hicareDate.duration(1, 'day')
      * example 2: hicareDate.duration(1, 'hour')
      * example 3 (get return seconds):  hicareDate.duration(1, 'hour').asSeconds()
      */
-    duration(...args: CreateDurationParameters): Duration {
+    duration(...args: CreateDurationParameters): HicareDuration {
         if (args.length === 1) {
             if (typeof args[0] === 'object') {
                 return dayjs.duration(args[0]);
@@ -251,11 +253,11 @@ export class HicareDate {
 
     /**
      * 두 날짜를 비교하여 정렬에 사용될 값을 반환합니다.
-     * @param {ConfigType} firstDate 첫 번째 날짜
-     * @param {ConfigType} secondDate 두 번째 날짜
+     * @param {HicareConfigType} firstDate 첫 번째 날짜
+     * @param {HicareConfigType} secondDate 두 번째 날짜
      * @returns {DateComparisonResult} 첫 번째 날짜가 더 늦으면 AFTER, 같으면 EQUAL, 더 이르면 BEFORE를 반환합니다.
      */
-    compareDates(firstDate: ConfigType, secondDate: ConfigType): DateComparisonResult {
+    compareDates(firstDate: HicareConfigType, secondDate: HicareConfigType): DateComparisonResult {
         const diff = dayjs(firstDate).valueOf() - dayjs(secondDate).valueOf();
         return diff > 0
             ? DateComparisonResult.AFTER
