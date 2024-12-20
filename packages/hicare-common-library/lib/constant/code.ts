@@ -50,6 +50,9 @@ export const enum Code {
     QHP_ROLE_HICARE_CT = '0754b33c-ef84-11ed-b2c5-020c1cf7a0c9',
     QHP_ROLE_CLINIC_CT = 'fb143db4-0988-11ee-a919-06a78b1c250a',
     QHP_ROLE_HICARE_RN = '11094071-7735-11ec-a226-06a78b1c250a',
+    QHP_ROLE_NP = '0ee71923-dafe-11ec-a226-06a78b1c250a',
+    QHR_ROLE_CLINIC_NP = 'a45eec4d-28f1-11ee-9a36-0ab35bc0c726',
+    QHR_ROLE_HICARE_DO = '315acf46-2206-11ef-858c-06fd0ed1919b',
 
     // Delivery Status
     DELIVERY_STATUS_DELIVERED = 'd42824be-7136-11ed-a919-06a78b1c250a',
@@ -153,6 +156,9 @@ const code = {
         HICARE_CT: Code.QHP_ROLE_HICARE_CT,
         CLINIC_CT: Code.QHP_ROLE_CLINIC_CT,
         HICARE_RN: Code.QHP_ROLE_HICARE_RN,
+        NP: Code.QHP_ROLE_NP,
+        CLINIC_NP: Code.QHR_ROLE_CLINIC_NP,
+        HICARE_DO: Code.QHR_ROLE_HICARE_DO,
     },
     DELIVERY_STATUS: {
         DELIVERED: Code.DELIVERY_STATUS_DELIVERED,
