@@ -29,6 +29,18 @@ dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isBetween);
 
+export type {
+    arraySupport,
+    duration,
+    isBetween,
+    isSameOrAfter,
+    isSameOrBefore,
+    objectSupport,
+    relativeTime,
+    timezone,
+    utc
+}
+
 // @ts-ignore
 const timezoneList = new Set<String>();
 

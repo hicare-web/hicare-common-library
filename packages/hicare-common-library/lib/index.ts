@@ -112,3 +112,15 @@ Number.prototype.toFormat = function (this: number, template: string, ...args: F
 
 export { format };
 export { stringCase, getPersonFullName } from 'lib/string';
+
+export type {
+    arraySupport,
+    duration,
+    isBetween,
+    isSameOrAfter,
+    isSameOrBefore,
+    objectSupport,
+    relativeTime,
+    timezone,
+    utc
+} from 'lib/utility/date'
