@@ -1,16 +1,13 @@
 import type { ConfigType, Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import arraySupport from 'dayjs/plugin/arraySupport';
-import type { Duration, DurationUnitType, DurationUnitsObjectType } from 'dayjs/plugin/duration';
-import duration from 'dayjs/plugin/duration';
+import duration, { type Duration, type DurationUnitsObjectType, type DurationUnitType } from 'dayjs/plugin/duration';
 import isBetween from 'dayjs/plugin/isBetween';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import timezone from 'dayjs/plugin/timezone';
-// @ts-ignore
-import type plugin from 'dayjs/plugin/utc';
 import utc from 'dayjs/plugin/utc';
 import { DateComparisonResult } from 'lib/types';
 
