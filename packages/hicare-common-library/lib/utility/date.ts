@@ -1,4 +1,4 @@
-import type { ConfigType, Dayjs } from 'dayjs';
+import type { ConfigType, Dayjs, OptionType } from 'dayjs';
 import dayjs from 'dayjs';
 import arraySupport from 'dayjs/plugin/arraySupport';
 import duration, { type Duration, type DurationUnitsObjectType, type DurationUnitType } from 'dayjs/plugin/duration';
@@ -35,8 +35,8 @@ export type {
     objectSupport,
     relativeTime,
     timezone,
-    utc
-}
+    utc,
+};
 
 // @ts-ignore
 const timezoneList = new Set<String>();
@@ -105,10 +105,13 @@ export class HicareDate {
     /**
      * dayjs 객체를 가져옵니다.
      * @param { HicareConfigType } params
+     * @param { OptionType } format
+     * @param { string } locale
+     * @param { boolean } strict
      * @returns HicareDateType
      */
-    dayjs(params?: HicareConfigType): HicareDateType {
-        return dayjs(params);
+    dayjs(params?: HicareConfigType, format?: OptionType, locale?: string, strict?: boolean): HicareDateType {
+        return dayjs(params, format, locale, strict);
     }
 
     tz(): string {
@@ -117,47 +120,62 @@ export class HicareDate {
     /**
      * 현재 시간을 가져옵니다.
      * @param { HicareConfigType } params
+     * @param { OptionType } format
+     * @param { string } locale
+     * @param { boolean } strict
      * @returns HicareDateType
      * @deprecated 2.0.0 instead use hicareDate.dayjs()
      */
-    now(params?: HicareConfigType): HicareDateType {
-        return dayjs(params);
+    now(params?: HicareConfigType, format?: OptionType, locale?: string, strict?: boolean): HicareDateType {
+        return dayjs(params, format, locale, strict);
     }
 
     /**
      * 현재 시간을 타임존을 적용하여 가져옵니다.
      * @param { HicareConfigType } params
+     * @param { OptionType } format
+     * @param { string } locale
+     * @param { boolean } strict
      */
-    nowTz(params?: HicareConfigType): HicareDateType {
-        return dayjs(params).tz(HicareDate.timezone);
+    nowTz(params?: HicareConfigType, format?: OptionType, locale?: string, strict?: boolean): HicareDateType {
+        return dayjs(params, format, locale, strict).tz(HicareDate.timezone);
     }
 
     /**
      * 현재 시간을 UTC로 가져옵니다.
      * @param { HicareConfigType } params
+     * @param { OptionType } format
+     * @param { string } locale
+     * @param { boolean } strict
      * @returns HicareDateType
      */
-    nowUTC(params?: HicareConfigType): HicareDateType {
-        return dayjs(params).utc();
+    nowUTC(params?: HicareConfigType, format?: OptionType, locale?: string, strict?: boolean): HicareDateType {
+        return dayjs(params, format, locale, strict).utc();
     }
 
     /**
      * 현재 시간을 타임존을 적용후 UTC를 재 적용하여 가져옵니다.
      * @param { HicareConfigType } params
+     * @param { OptionType } format
+     * @param { string } locale
+     * @param { boolean } strict
      *  @returns HicareDateType
      *  @deprecated 2.0.0 instead use nowTz
      */
-    nowTzUtc(params?: HicareConfigType): HicareDateType {
-        return dayjs(params).tz(HicareDate.timezone).utc();
+    nowTzUtc(params?: HicareConfigType, format?: OptionType, locale?: string, strict?: boolean): HicareDateType {
+        return dayjs(params, format, locale, strict).tz(HicareDate.timezone).utc();
     }
 
     /**
      * 입력된 날짜를 UTC 기준 형식화된 문자열로 변환합니다.
      * @param {HicareConfigType} date 변환할 날짜 (string | Date)
+     * @param { OptionType } format
+     * @param { string } locale
+     * @param { boolean } strict
      * @returns {string} 'YYYY-MM-DD HH:mm:ss' 형식
      */
-    formatToUTC(date: HicareConfigType): string {
-        return dayjs(date).utc().format('YYYY-MM-DD HH:mm:ss');
+    formatToUTC(date: HicareConfigType, format?: OptionType, locale?: string, strict?: boolean): string {
+        return dayjs(date, format, locale, strict).utc().format('YYYY-MM-DD HH:mm:ss');
     }
 
     /**
@@ -244,7 +262,7 @@ export class HicareDate {
      *
      * example 1: hicareDate.duration(1, 'day')
      * example 2: hicareDate.duration(1, 'hour')
-     * example 3 (get return seconds):  hicareDate.duration(1, 'hour').asSeconds()
+     * example 3 (get return seconds): hicareDate.duration(1, 'hour').asSeconds()
      */
     duration(...args: CreateDurationParameters): HicareDuration {
         if (args.length === 1) {
