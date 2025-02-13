@@ -11,7 +11,7 @@
         "test": "lerna run test --stream",
         "build": "lerna run build",
         "gen": "node ./bin/create.js",
-        "publish:rpm": "cd packages/hicare-common-library && pnpm build && lerna publish",
+        "publish:rpm": "cd packages/hicare-common-library && pnpm build && echo '빌드완료 lerna publish patch || minor || major 를 입력하세요.'",
         "publish:napi": "cd packages/hicare-napi"
     },
     "keywords": [],
